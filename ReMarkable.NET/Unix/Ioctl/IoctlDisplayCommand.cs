@@ -1,9 +1,11 @@
-﻿namespace ReMarkable.NET.IO
+﻿using ReMarkable.NET.Unix.Ioctl.Display;
+
+namespace ReMarkable.NET.Unix.Ioctl
 {
     /// <summary>
     /// Display driver commands, all OR'd with 0x40484600
     /// </summary>
-    public enum IoctlCommand : uint
+    public enum IoctlDisplayCommand : uint
     {
         /// <summary>
         /// Takes struct <see cref="WaveformModes"/>

@@ -1,4 +1,4 @@
-﻿namespace ReMarkable.NET.IO
+﻿namespace ReMarkable.NET.Unix.Ioctl.Display
 {
     public struct UpdateMarkerData
     {

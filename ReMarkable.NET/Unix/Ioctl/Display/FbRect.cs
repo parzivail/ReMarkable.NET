@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace ReMarkable.NET.IO
+namespace ReMarkable.NET.Unix.Ioctl.Display
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct FbRect

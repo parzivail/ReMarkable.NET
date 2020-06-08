@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
-using ReMarkable.NET.IO;
+using ReMarkable.NET.Unix.Ioctl;
+using ReMarkable.NET.Unix.Ioctl.Display;
 
 namespace ReMarkable.NET.Unix
 {
@@ -21,7 +22,7 @@ namespace ReMarkable.NET.Unix
         /// <param name="data"></param>
         /// <returns></returns>
         [DllImport("libc", EntryPoint = "ioctl", SetLastError = true)]
-        public static extern int Ioctl(SafeUnixHandle handle, IoctlCommand request, ref FbUpdateData data);
+        public static extern int Ioctl(SafeUnixHandle handle, IoctlDisplayCommand request, ref FbUpdateData data);
 
         [DllImport("libc", EntryPoint = "open", SetLastError = true)]
         public static extern SafeUnixHandle Open(string path, uint flag, UnixFileMode mode);

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
-using ReMarkable.NET.IO;
 using ReMarkable.NET.Unix;
+using ReMarkable.NET.Unix.Driver.Button;
+using ReMarkable.NET.Unix.Ioctl;
+using ReMarkable.NET.Unix.Ioctl.Display;
 
 namespace Sandbox
 {
@@ -17,26 +18,15 @@ namespace Sandbox
             const int width = 1404;
             const int height = 1872;
 
-            /*
-             * | Device                  | Description             |
-             * | /dev/input/event0       | Stylus events           |
-             * | /dev/input/event1       | Touch events            |
-             * | /dev/input/event2       | Physical button events  |
-             */
+            using var btnDriver = new PhysicalButtonDriver();
 
-//            using var fs = File.OpenRead("/dev/input/event0");
-//
-//            var buf = new byte[16];
-//
-//            while (true)
-//            {
-//                var numRead = fs.Read(buf, 0, 16);
-//                if (numRead != 16) Console.WriteLine("Read buffer underflow");
-//
-//                var e = FromBuffer<EvEvent>(buf);
-//
-//                Console.WriteLine($"[{e.TimeWholeSeconds}.{e.TimeFractionMicroseconds / 1000000f}] type={e.Type} code={e.Code}: {e.Value}");
-//            }
+            btnDriver.Pressed += (sender, code) => Console.WriteLine($"{code} pressed");
+            btnDriver.Released += (sender, code) => Console.WriteLine($"{code} released");
+
+            while (true)
+            {
+                
+            }
 
             using var bw = new BinaryWriter(File.Open("/dev/fb0", FileMode.Open));
 
@@ -65,39 +55,15 @@ namespace Sandbox
                 Flags = 0
             };
 
-            if (UnsafeNativeMethods.Ioctl(handle, IoctlCommand.SendUpdate, ref data) == -1)
+            if (UnsafeNativeMethods.Ioctl(handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
             {
                 throw new UnixIOException();
             }
-        }
-
-        static T FromBuffer<T>(byte[] buffer) where T : struct
-        {
-            var temp = new T();
-            var size = Marshal.SizeOf(temp);
-            var ptr = Marshal.AllocHGlobal(size);
-
-            Marshal.Copy(buffer, 0, ptr, size);
-
-            var ret = (T)Marshal.PtrToStructure(ptr, temp.GetType());
-            Marshal.FreeHGlobal(ptr);
-
-            return ret;
         }
 
         private static short Color(byte r, byte g, byte b)
         {
             return (short)(((r & 0xF8) << 8) + ((g & 0xFC) << 3) + (b >> 3));
         }
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct EvEvent
-    {
-        public uint TimeWholeSeconds;
-        public uint TimeFractionMicroseconds;
-        public ushort Type;
-        public ushort Code;
-        public int Value;
     }
 }
