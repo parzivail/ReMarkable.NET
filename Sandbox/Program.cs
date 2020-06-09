@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using ReMarkable.NET.Unix;
 using ReMarkable.NET.Unix.Driver.Button;
+using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Ioctl;
 using ReMarkable.NET.Unix.Ioctl.Display;
 
@@ -18,10 +19,12 @@ namespace Sandbox
             const int width = 1404;
             const int height = 1872;
 
-            using var btnDriver = new PhysicalButtonDriver();
+            using var digitizerDriver = new DigitizerDriver();
 
-            btnDriver.Pressed += (sender, code) => Console.WriteLine($"{code} pressed");
-            btnDriver.Released += (sender, code) => Console.WriteLine($"{code} released");
+            digitizerDriver.ToolChanged += (sender, tool) => Console.WriteLine($"Current tool: {tool}");
+            digitizerDriver.Pressed += (sender, code) => Console.WriteLine($"Pressed: {code}");
+            digitizerDriver.Released += (sender, code) => Console.WriteLine($"Released: {code}");
+            digitizerDriver.StylusUpdate += (sender, state) => Console.WriteLine($"Update: {state}");
 
             while (true)
             {

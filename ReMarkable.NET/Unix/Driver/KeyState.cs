@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver
 {
-    enum KeyState
+    public enum KeyState
     {
         Released = 0,
         Pressed = 1

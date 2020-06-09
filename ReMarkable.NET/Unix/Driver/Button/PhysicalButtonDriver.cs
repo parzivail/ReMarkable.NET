@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using ReMarkable.NET.Util;
 
@@ -9,8 +10,11 @@ namespace ReMarkable.NET.Unix.Driver.Button
         public event EventHandler<PhysicalButtonCode> Pressed;
         public event EventHandler<PhysicalButtonCode> Released;
 
+        public Dictionary<PhysicalButtonCode, KeyState> ButtonStates;
+
         public PhysicalButtonDriver() : base("/dev/input/event2")
         {
+            ButtonStates = new Dictionary<PhysicalButtonCode, KeyState>();
         }
 
         /// <inheritdoc />
@@ -27,6 +31,8 @@ namespace ReMarkable.NET.Unix.Driver.Button
                 case PhysicalButtonType.Key:
                     var button = (PhysicalButtonCode)data.Code;
                     var buttonState = (KeyState)data.Value;
+
+                    ButtonStates[button] = KeyState.Pressed;
 
                     switch (buttonState)
                     {
