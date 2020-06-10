@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using ReMarkable.NET.Unix;
+using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Unix.Driver.Button;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Ioctl;
@@ -19,7 +20,7 @@ namespace Sandbox
             const int width = 1404;
             const int height = 1872;
 
-            using var digitizerDriver = new DigitizerDriver();
+            using var digitizerDriver = InputDevices.Digitizer;
 
             digitizerDriver.ToolChanged += (sender, tool) => Console.WriteLine($"Current tool: {tool}");
             digitizerDriver.Pressed += (sender, code) => Console.WriteLine($"Pressed: {code}");
@@ -38,30 +39,30 @@ namespace Sandbox
                 bw.Write(Color(0xFF, 0xFF, 0xFF));
             }
 
-            using var handle = UnsafeNativeMethods.Open("/dev/fb0", 0, UnixFileMode.ReadWrite);
-
-            var data = new FbUpdateData
-            {
-                UpdateRegion = new FbRect
-                {
-                    X = 0,
-                    Y = 0,
-                    Width = width,
-                    Height = height
-                },
-                WaveformMode = WaveformMode.Du,
-                DisplayTemp = DisplayTemp.Papyrus,
-                UpdateMode = UpdateMode.Full,
-                UpdateMarker = (uint)DateTime.Now.Ticks,
-                DitherMode = 0,
-                QuantBit = 0,
-                Flags = 0
-            };
-
-            if (UnsafeNativeMethods.Ioctl(handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
-            {
-                throw new UnixIOException();
-            }
+            // using var handle = UnsafeNativeMethods.Open("/dev/fb0", 0, UnixFileMode.ReadWrite);
+            //
+            // var data = new FbUpdateData
+            // {
+            //     UpdateRegion = new FbRect
+            //     {
+            //         X = 0,
+            //         Y = 0,
+            //         Width = width,
+            //         Height = height
+            //     },
+            //     WaveformMode = WaveformMode.Du,
+            //     DisplayTemp = DisplayTemp.Papyrus,
+            //     UpdateMode = UpdateMode.Full,
+            //     UpdateMarker = (uint)DateTime.Now.Ticks,
+            //     DitherMode = 0,
+            //     QuantBit = 0,
+            //     Flags = 0
+            // };
+            //
+            // if (UnsafeNativeMethods.Ioctl(handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
+            // {
+            //     throw new UnixIOException();
+            // }
         }
 
         private static short Color(byte r, byte g, byte b)

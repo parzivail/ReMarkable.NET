@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using System.Text;
 
 namespace ReMarkable.NET.Unix
 {
     [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
     [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-    public sealed class SafeUnixHandle : SafeHandle
+    internal sealed class SafeUnixHandle : SafeHandle
     {
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         private SafeUnixHandle()
@@ -17,15 +15,12 @@ namespace ReMarkable.NET.Unix
         {
         }
 
-        public override bool IsInvalid
-        {
-            get { return this.handle == new IntPtr(-1); }
-        }
+        public override bool IsInvalid => handle == new IntPtr(-1);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         protected override bool ReleaseHandle()
         {
-            return UnsafeNativeMethods.Close(this.handle) != -1;
+            return UnsafeNativeMethods.Close(handle) != -1;
         }
     }
 }

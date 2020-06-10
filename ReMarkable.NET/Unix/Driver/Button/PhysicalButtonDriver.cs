@@ -12,7 +12,7 @@ namespace ReMarkable.NET.Unix.Driver.Button
 
         public Dictionary<PhysicalButtonCode, KeyState> ButtonStates;
 
-        public PhysicalButtonDriver() : base("/dev/input/event2")
+        internal PhysicalButtonDriver(string devicePath) : base(devicePath)
         {
             ButtonStates = new Dictionary<PhysicalButtonCode, KeyState>();
         }

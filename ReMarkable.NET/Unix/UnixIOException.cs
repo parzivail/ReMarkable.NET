@@ -1,72 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Text;
 
 namespace ReMarkable.NET.Unix
 {
     [Serializable]
-    public class UnixIOException : ExternalException
+    internal class UnixIoException : ExternalException
     {
-        private readonly int nativeErrorCode;
+        private readonly int _nativeErrorCode;
+
+        public int NativeErrorCode => _nativeErrorCode;
 
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-        public UnixIOException()
+        public UnixIoException()
             : this(Marshal.GetLastWin32Error())
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-        public UnixIOException(int error)
+        public UnixIoException(int error)
             : this(error, GetErrorMessage(error))
         {
         }
 
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-        public UnixIOException(string message)
+        public UnixIoException(string message)
             : this(Marshal.GetLastWin32Error(), message)
         {
         }
 
-        public UnixIOException(int error, string message)
+        public UnixIoException(int error, string message)
             : base(message)
         {
-            this.nativeErrorCode = error;
+            _nativeErrorCode = error;
         }
 
-        public UnixIOException(string message, Exception innerException)
+        public UnixIoException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected UnixIOException(SerializationInfo info, StreamingContext context)
+        protected UnixIoException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.nativeErrorCode = info.GetInt32("NativeErrorCode");
-        }
-
-        public int NativeErrorCode
-        {
-            get { return this.nativeErrorCode; }
+            _nativeErrorCode = info.GetInt32("NativeErrorCode");
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException(nameof(info));
             }
 
-            info.AddValue("NativeErrorCode", this.nativeErrorCode);
+            info.AddValue("NativeErrorCode", _nativeErrorCode);
             base.GetObjectData(info, context);
         }
 
         private static string GetErrorMessage(int error)
         {
             var errorDescription = UnsafeNativeMethods.Strerror(error);
-            return errorDescription ?? string.Format("Unknown error (0x{0:x})", error);
+            return errorDescription ?? $"Unknown error (0x{error:x})";
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         private int _currentDistance;
         private Point _currentTilt = Point.Empty;
 
-        public DigitizerDriver() : base("/dev/input/event0")
+        internal DigitizerDriver(string devicePath) : base(devicePath)
         {
             ButtonStates = new Dictionary<DigitizerKeyCode, KeyState>();
         }

@@ -86,6 +86,8 @@ Supported events:
 
 #### Cypress TrueTouch touchscreen (`/dev/input/event1`)
 
+Uses the [type B identifiable multi-touch event protocol](https://www.kernel.org/doc/html/v4.17/input/multi-touch-protocol.html)
+
 ```
 Select the device event number [0-2]: 1
 Input driver version is 1.0.1
