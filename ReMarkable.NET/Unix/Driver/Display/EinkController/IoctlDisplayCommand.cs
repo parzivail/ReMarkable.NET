@@ -1,9 +1,7 @@
-﻿using ReMarkable.NET.Unix.Ioctl.Display;
-
-namespace ReMarkable.NET.Unix.Ioctl
+﻿namespace ReMarkable.NET.Unix.Driver.Display.EinkController
 {
     /// <summary>
-    /// Display driver commands, all OR'd with 0x40484600
+    /// Display driver commands, many OR'd with 0x40484600
     /// </summary>
     public enum IoctlDisplayCommand : uint
     {
@@ -54,6 +52,13 @@ namespace ReMarkable.NET.Unix.Ioctl
         /// <summary>
         /// No params
         /// </summary>
-        EnableEpdcAccess = 0x40484636
+        EnableEpdcAccess = 0x40484636,
+        GetVariableScreenInfo = 0x4600,
+        PutVariableScreenInfo = 0x4601,
+        GetFixedScreenInfo = 0x4602,
+        GetCmap = 0x4604,
+        PutCmap = 0x4605,
+        PanDisplay = 0x4606,
+        Cursor = 0x4608
     }
 }

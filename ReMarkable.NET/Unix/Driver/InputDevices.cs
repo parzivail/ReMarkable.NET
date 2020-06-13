@@ -13,7 +13,7 @@ namespace ReMarkable.NET.Unix.Driver
 
         static InputDevices()
         {
-            var deviceMap = InputDeviceParser.GetDeviceEventHandlers();
+            var deviceMap = DeviceUtils.GetInputDeviceEventHandlers();
 
             PhysicalButtons = new PhysicalButtonDriver(deviceMap["gpio-keys"]);
             Digitizer = new DigitizerDriver(deviceMap["Wacom I2C Digitizer"]);

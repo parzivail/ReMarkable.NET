@@ -1,4 +1,4 @@
-﻿namespace ReMarkable.NET.Unix.Ioctl.Display
+﻿namespace ReMarkable.NET.Unix.Driver.Display.EinkController
 {
     public enum DisplayTemp
     {

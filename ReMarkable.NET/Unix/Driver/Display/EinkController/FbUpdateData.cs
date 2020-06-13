@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace ReMarkable.NET.Unix.Ioctl.Display
+namespace ReMarkable.NET.Unix.Driver.Display.EinkController
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct FbUpdateData

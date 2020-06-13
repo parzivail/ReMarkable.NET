@@ -10,8 +10,7 @@ namespace ReMarkable.NET.Unix
     internal sealed class SafeUnixHandle : SafeHandle
     {
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        private SafeUnixHandle()
-            : base(new IntPtr(-1), true)
+        private SafeUnixHandle() : base(new IntPtr(-1), true)
         {
         }
 
