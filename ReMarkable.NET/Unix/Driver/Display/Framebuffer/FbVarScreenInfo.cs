@@ -94,12 +94,12 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
         /// <summary>
         ///     see FB_SYNC_*
         /// </summary>
-        public uint Sync;
+        public FbSync Sync;
 
         /// <summary>
         ///     see FB_VMODE_*
         /// </summary>
-        public uint VMode;
+        public FbVMode VMode;
 
         /// <summary>
         ///     angle we rotate counter clockwise

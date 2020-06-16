@@ -63,6 +63,16 @@ namespace Sandbox {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] display_test {
+            get {
+                object obj = ResourceManager.GetObject("display_test", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Lato_Black {
             get {
                 object obj = ResourceManager.GetObject("Lato_Black", resourceCulture);

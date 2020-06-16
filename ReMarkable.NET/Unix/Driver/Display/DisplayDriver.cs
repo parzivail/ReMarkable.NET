@@ -15,6 +15,8 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
         public readonly int VisibleWidth;
         public readonly int VisibleHeight;
+        public readonly int VirtualWidth;
+        public readonly int VirtualHeight;
         public readonly Rgb565Framebuffer Framebuffer;
 
         public string DevicePath { get; }
@@ -30,7 +32,29 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
             VisibleWidth = (int)_vinfo.VisibleResolutionX;
             VisibleHeight = (int)_vinfo.VisibleResolutionY;
-            Framebuffer = new Rgb565Framebuffer(devicePath, (int)_vinfo.VirtualResolutionX, (int)_vinfo.VirtualResolutionY);
+            VirtualWidth = (int)_vinfo.VirtualResolutionX;
+            VirtualHeight = (int)_vinfo.VirtualResolutionY;
+            Framebuffer = new Rgb565Framebuffer(devicePath, (int)VisibleWidth, (int)VisibleHeight, (int)VirtualWidth, (int)VirtualHeight);
+
+            _vinfo.AccelFlags = 0x01;
+            _vinfo.Width = 0xFFFFFFFF;
+            _vinfo.Height  = 0xFFFFFFFF;
+            _vinfo.Rotate = 1;
+            _vinfo.PixClock = 160000000;
+            _vinfo.VisibleResolutionX = 1872;
+            _vinfo.VisibleResolutionY = 1404;
+            _vinfo.LeftMargin = 32;
+            _vinfo.RightMargin = 326;
+            _vinfo.UpperMargin = 4;
+            _vinfo.LowerMargin = 12;
+            _vinfo.HSyncLen = 44;
+            _vinfo.VSyncLen = 1;
+            _vinfo.Sync = FbSync.None;
+            _vinfo.VMode = FbVMode.NonInterlaced;
+            _vinfo.BitsPerPixel = sizeof(short) * 8;
+            _vinfo.AccelFlags = 0;
+
+            PutVarScreenInfo(_vinfo);
         }
 
         public void Refresh(Rectangle rectangle, WaveformMode mode)
@@ -53,22 +77,28 @@ namespace ReMarkable.NET.Unix.Driver.Display
                 Flags = 0
             };
 
-            if (UnsafeNativeMethods.Ioctl(_handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
+            if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
                 throw new UnixException();
         }
 
         private FbVarScreenInfo GetVarScreenInfo()
         {
             var vinfo = new FbVarScreenInfo();
-            if (UnsafeNativeMethods.Ioctl(_handle, IoctlDisplayCommand.GetVariableScreenInfo, ref vinfo) == -1)
+            if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.GetVariableScreenInfo, ref vinfo) == -1)
                 throw new UnixException();
             return vinfo;
+        }
+
+        private void PutVarScreenInfo(FbVarScreenInfo vinfo)
+        {
+            if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.PutVariableScreenInfo, ref vinfo) == -1)
+                throw new UnixException();
         }
 
         private FbFixedScreenInfo GetFixedScreenInfo()
         {
             var finfo = new FbFixedScreenInfo();
-            if (UnsafeNativeMethods.Ioctl(_handle, IoctlDisplayCommand.GetFixedScreenInfo, ref finfo) == -1)
+            if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.GetFixedScreenInfo, ref finfo) == -1)
                 throw new UnixException();
             return finfo;
         }

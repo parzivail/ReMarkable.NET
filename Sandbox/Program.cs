@@ -17,19 +17,21 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-            var img = new Image<Rgb24>(400, 200, Color.White);
-
-            var fonts = new FontCollection();
-
-            using var memStream = new MemoryStream(EmbeddedResources.Lato_Black);
-            var fontFamily = fonts.Install(memStream);
-            var font = fontFamily.CreateFont(52);
+            // var img = new Image<Rgb24>(400, 200, Color.White);
+            //
+            // var fonts = new FontCollection();
+            //
+            // using var memStream = new MemoryStream(EmbeddedResources.Lato_Black);
+            // var fontFamily = fonts.Install(memStream);
+            // var font = fontFamily.CreateFont(52);
+            //
+            // img.Mutate(ctx => ctx.DrawText("Hello, World!", font, Color.Black, new PointF(10, 10)));
             
-            img.Mutate(ctx => ctx.DrawText("Hello, World!", font, Color.Black, new PointF(10, 10)));
-            
-            OutputDevices.Display.Framebuffer.Write(img, new Rectangle(0, 0, 400, 200), new Point(150, 200));
+            var img = Image.Load<Rgb24>(EmbeddedResources.display_test);
 
-            OutputDevices.Display.Refresh(new Rectangle(150, 200, 400, 200), WaveformMode.Gc16Fast);
+            OutputDevices.Display.Framebuffer.Write(img, new Rectangle(0, 0, img.Width, img.Height), new Point(0, 0));
+
+            OutputDevices.Display.Refresh(new Rectangle(0, 0, img.Width, img.Height), WaveformMode.Gc16Fast);
         }
     }
 }

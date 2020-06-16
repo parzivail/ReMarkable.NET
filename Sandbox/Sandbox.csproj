@@ -40,4 +40,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="pscp -pw root $(TargetDir)/* root@10.11.99.1:/home/root/rm_sandbox/" />
+  </Target>
+
 </Project>
