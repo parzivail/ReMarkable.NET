@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
-    public enum DigitizerKeyCode
+    public enum DigitizerEventKeyCode
     {
         BtnToolPen = 320,
         BtnToolRubber = 321,

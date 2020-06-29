@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Button
 {
-    public enum PhysicalButtonCode : ushort
+    public enum PhysicalButtonEventCode : ushort
     {
         KeyHome = 102,
         KeyLeft = 105,

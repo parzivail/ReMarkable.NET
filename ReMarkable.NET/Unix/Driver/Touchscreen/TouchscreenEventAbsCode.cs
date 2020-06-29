@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ReMarkable.NET.Unix.Driver.Touchscreen
+﻿namespace ReMarkable.NET.Unix.Driver.Touchscreen
 {
-    public enum TouchscreenAbsCode
+    public enum TouchscreenEventAbsCode
     {
         Distance = 25,
         MultiTouchSlot = 47,

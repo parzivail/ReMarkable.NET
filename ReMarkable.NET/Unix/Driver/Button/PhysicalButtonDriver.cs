@@ -7,14 +7,14 @@ namespace ReMarkable.NET.Unix.Driver.Button
 {
     public sealed class PhysicalButtonDriver : InputDriver
     {
-        public event EventHandler<PhysicalButtonCode> Pressed;
-        public event EventHandler<PhysicalButtonCode> Released;
+        public event EventHandler<PhysicalButtonEventCode> Pressed;
+        public event EventHandler<PhysicalButtonEventCode> Released;
 
-        public Dictionary<PhysicalButtonCode, KeyState> ButtonStates;
+        public Dictionary<PhysicalButtonEventCode, KeyState> ButtonStates;
 
         internal PhysicalButtonDriver(string devicePath) : base(devicePath)
         {
-            ButtonStates = new Dictionary<PhysicalButtonCode, KeyState>();
+            ButtonStates = new Dictionary<PhysicalButtonEventCode, KeyState>();
         }
 
         /// <inheritdoc />
@@ -22,14 +22,14 @@ namespace ReMarkable.NET.Unix.Driver.Button
         {
             var data = e.Data;
 
-            var eventType = (PhysicalButtonType)data.Type;
+            var eventType = (PhysicalButtonEventType)data.Type;
 
             switch (eventType)
             {
-                case PhysicalButtonType.Syn:
+                case PhysicalButtonEventType.Syn:
                     break;
-                case PhysicalButtonType.Key:
-                    var button = (PhysicalButtonCode)data.Code;
+                case PhysicalButtonEventType.Key:
+                    var button = (PhysicalButtonEventCode)data.Code;
                     var buttonState = (KeyState)data.Value;
 
                     ButtonStates[button] = KeyState.Pressed;

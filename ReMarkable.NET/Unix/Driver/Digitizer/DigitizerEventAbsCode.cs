@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
-    enum DigitizerAbsCode
+    enum DigitizerEventAbsCode
     {
         AbsX = 0,
         AbsY = 1,

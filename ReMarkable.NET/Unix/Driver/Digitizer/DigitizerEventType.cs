@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
-    enum DigitizerType
+    enum DigitizerEventType
     {
         Syn = 0,
         Key = 1,

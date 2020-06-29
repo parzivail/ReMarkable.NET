@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Button
 {
-    enum PhysicalButtonType : ushort
+    enum PhysicalButtonEventType : ushort
     {
         Syn = 0,
         Key = 1
