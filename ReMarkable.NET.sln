@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReMarkable.NET", "ReMarkable.NET\ReMarkable.NET.csproj", "{F7AD05B9-9C7A-4469-BF47-707B961842F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReMarkable.NET", "ReMarkable.NET\ReMarkable.NET.csproj", "{F7AD05B9-9C7A-4469-BF47-707B961842F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{FCC37EC3-7178-4D50-B680-AF65FDB276E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Sandbox\Sandbox.csproj", "{FCC37EC3-7178-4D50-B680-AF65FDB276E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmEmulator", "RmEmulator\RmEmulator.csproj", "{E8773286-D2EB-422D-821B-31A3877B1986}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FCC37EC3-7178-4D50-B680-AF65FDB276E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC37EC3-7178-4D50-B680-AF65FDB276E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC37EC3-7178-4D50-B680-AF65FDB276E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8773286-D2EB-422D-821B-31A3877B1986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8773286-D2EB-422D-821B-31A3877B1986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8773286-D2EB-422D-821B-31A3877B1986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8773286-D2EB-422D-821B-31A3877B1986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

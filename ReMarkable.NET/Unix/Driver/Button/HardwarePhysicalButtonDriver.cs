@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Button
 {
-    public sealed class PhysicalButtonDriver : InputDriver
+    public sealed class HardwarePhysicalButtonDriver : UnixInputDriver, IPhysicalButtonDriver
     {
-        public event EventHandler<PhysicalButtonEventCode> Pressed;
-        public event EventHandler<PhysicalButtonEventCode> Released;
+        public Dictionary<PhysicalButton, ButtonState> ButtonStates { get; }
 
-        public Dictionary<PhysicalButtonEventCode, KeyState> ButtonStates;
-
-        internal PhysicalButtonDriver(string devicePath) : base(devicePath)
+        public event EventHandler<PhysicalButton> Pressed;
+        public event EventHandler<PhysicalButton> Released;
+        
+        internal HardwarePhysicalButtonDriver(string devicePath) : base(devicePath)
         {
-            ButtonStates = new Dictionary<PhysicalButtonEventCode, KeyState>();
+            ButtonStates = new Dictionary<PhysicalButton, ButtonState>();
         }
 
         /// <inheritdoc />
@@ -29,17 +28,17 @@ namespace ReMarkable.NET.Unix.Driver.Button
                 case PhysicalButtonEventType.Syn:
                     break;
                 case PhysicalButtonEventType.Key:
-                    var button = (PhysicalButtonEventCode)data.Code;
-                    var buttonState = (KeyState)data.Value;
+                    var button = (PhysicalButton)data.Code;
+                    var buttonState = (ButtonState)data.Value;
 
-                    ButtonStates[button] = KeyState.Pressed;
+                    ButtonStates[button] = ButtonState.Pressed;
 
                     switch (buttonState)
                     {
-                        case KeyState.Released:
+                        case ButtonState.Released:
                             Released?.Invoke(null, button);
                             break;
-                        case KeyState.Pressed:
+                        case ButtonState.Pressed:
                             Pressed?.Invoke(null, button);
                             break;
                         default:

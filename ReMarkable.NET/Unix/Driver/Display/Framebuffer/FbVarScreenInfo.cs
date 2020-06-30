@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
+﻿namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
     internal struct FbVarScreenInfo
     {

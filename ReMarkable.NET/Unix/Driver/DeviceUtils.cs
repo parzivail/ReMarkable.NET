@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace ReMarkable.NET.Unix.Driver
 {
@@ -14,7 +11,6 @@ namespace ReMarkable.NET.Unix.Driver
         public static Dictionary<string, string> GetInputDeviceEventHandlers()
         {
             using var r = new StreamReader("/proc/bus/input/devices");
-
             var nameRegex = new Regex("^N: Name=\"(?<name>.+)\"$", RegexOptions.Compiled);
             var handlersRegex = new Regex("^H: Handlers=(?<handlers>.+)$", RegexOptions.Compiled);
 
@@ -25,7 +21,7 @@ namespace ReMarkable.NET.Unix.Driver
             while (!r.EndOfStream)
             {
                 var line = r.ReadLine();
-                if (string.IsNullOrWhiteSpace(line))
+                if (String.IsNullOrWhiteSpace(line))
                     continue;
 
                 var entryType = line[0];
@@ -48,7 +44,8 @@ namespace ReMarkable.NET.Unix.Driver
 
                         var match = handlersRegex.Match(line);
                         if (!match.Success)
-                            throw new InvalidDataException("Unexpected handlers formatting in /proc/bus/input/devices");
+                            throw new InvalidDataException(
+                                "Unexpected handlers formatting in /proc/bus/input/devices");
 
                         var handlers = match.Groups["handlers"].Value.Split(' ');
 
@@ -63,6 +60,11 @@ namespace ReMarkable.NET.Unix.Driver
             }
 
             return deviceMap;
+        }
+
+        public static float MicroToBaseUnit(float value)
+        {
+            return value * (float)Math.Pow(10, 6);
         }
     }
 }

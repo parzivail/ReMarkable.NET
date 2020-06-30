@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using ReMarkable.NET.Graphics;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace ReMarkable.NET.Graphics
+namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
-    public sealed class Rgb565Framebuffer : IDisposable
+    public sealed class HardwareFramebuffer : IDisposable, IFramebuffer
     {
         private readonly FileStream _deviceStream;
 
@@ -15,7 +16,7 @@ namespace ReMarkable.NET.Graphics
         public int VisibleWidth { get; }
         public int VisibleHeight { get; }
 
-        public Rgb565Framebuffer(string devicePath, int visibleWidth, int visibleHeight, int virtualWidth, int virtualHeight)
+        public HardwareFramebuffer(string devicePath, int visibleWidth, int visibleHeight, int virtualWidth, int virtualHeight)
         {
             DevicePath = devicePath;
             VisibleWidth = visibleWidth;
@@ -36,12 +37,12 @@ namespace ReMarkable.NET.Graphics
             image.Save(_deviceStream, new Rgb565FramebufferEncoder(this, srcArea, destPoint));
         }
 
-        internal int PointToOffset(int x, int y)
+        public int PointToOffset(int x, int y)
         {
             return (VirtualWidth * y + x) * sizeof(short);
         }
 
-        internal Point OffsetToPoint(long offset)
+        public Point OffsetToPoint(long offset)
         {
             offset /= sizeof(short);
             var x = (int)(offset % VirtualWidth);

@@ -4,11 +4,11 @@ using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver
 {
-    public abstract class InputDriver : IDisposable
+    public abstract class UnixInputDriver : IDisposable
     {
         private readonly StreamWatcher<EvEvent> _eventWatcher;
 
-        protected InputDriver(string device)
+        protected UnixInputDriver(string device)
         {
             Device = device;
             _eventWatcher = new StreamWatcher<EvEvent>(File.OpenRead(Device), 16);

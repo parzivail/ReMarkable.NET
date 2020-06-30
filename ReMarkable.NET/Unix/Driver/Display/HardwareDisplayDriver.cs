@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using ReMarkable.NET.Graphics;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Display
 {
-    public sealed class DisplayDriver : IDisposable
+    public sealed class HardwareDisplayDriver : IDisposable, IDisplayDriver
     {
         private readonly SafeUnixHandle _handle;
         private readonly FbVarScreenInfo _vinfo;
         private readonly FbFixedScreenInfo _finfo;
 
-        public readonly int VisibleWidth;
-        public readonly int VisibleHeight;
-        public readonly int VirtualWidth;
-        public readonly int VirtualHeight;
-        public readonly Rgb565Framebuffer Framebuffer;
+        public int VisibleWidth { get; }
+        public int VisibleHeight { get; }
+        public int VirtualWidth { get; }
+        public int VirtualHeight { get; }
+        public IFramebuffer Framebuffer { get; }
 
         public string DevicePath { get; }
 
-        internal DisplayDriver(string devicePath)
+        internal HardwareDisplayDriver(string devicePath)
         {
             DevicePath = devicePath;
             
@@ -34,7 +32,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
             VisibleHeight = (int)_vinfo.VisibleResolutionY;
             VirtualWidth = (int)_vinfo.VirtualResolutionX;
             VirtualHeight = (int)_vinfo.VirtualResolutionY;
-            Framebuffer = new Rgb565Framebuffer(devicePath, (int)VisibleWidth, (int)VisibleHeight, (int)VirtualWidth, (int)VirtualHeight);
+            Framebuffer = new HardwareFramebuffer(devicePath, VisibleWidth, VisibleHeight, VirtualWidth, VirtualHeight);
 
             _vinfo.AccelFlags = 0x01;
             _vinfo.Width = 0xFFFFFFFF;
@@ -107,7 +105,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
         public void Dispose()
         {
             _handle?.Dispose();
-            Framebuffer?.Dispose();
+            ((HardwareFramebuffer)Framebuffer)?.Dispose();
         }
     }
 }

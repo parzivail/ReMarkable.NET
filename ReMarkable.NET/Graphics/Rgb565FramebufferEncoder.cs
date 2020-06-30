@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
@@ -8,11 +9,11 @@ namespace ReMarkable.NET.Graphics
 {
     public class Rgb565FramebufferEncoder : IImageEncoder
     {
-        private readonly Rgb565Framebuffer _framebuffer;
+        private readonly HardwareFramebuffer _framebuffer;
         private readonly Rectangle _srcArea;
         private readonly Point _destPoint;
 
-        public Rgb565FramebufferEncoder(Rgb565Framebuffer framebuffer, Rectangle srcArea, Point destPoint)
+        public Rgb565FramebufferEncoder(HardwareFramebuffer framebuffer, Rectangle srcArea, Point destPoint)
         {
             _framebuffer = framebuffer;
             _srcArea = srcArea;

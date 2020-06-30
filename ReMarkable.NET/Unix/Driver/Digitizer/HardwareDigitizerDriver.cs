@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using ReMarkable.NET.Unix.Driver.Button;
 using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
-    public sealed class DigitizerDriver : InputDriver
+    public sealed class HardwareDigitizerDriver : UnixInputDriver, IDigitizerDriver
     {
         public event EventHandler<StylusTool> ToolChanged;
 
@@ -14,7 +15,10 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
 
         public event EventHandler<StylusState> StylusUpdate;
         
-        public Dictionary<DigitizerEventKeyCode, KeyState> ButtonStates;
+        public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates;
+
+        public int Width { get; }
+        public int Height { get; }
 
         private StylusTool _currentTool = StylusTool.None;
         private Point _currentPosition = Point.Empty;
@@ -22,9 +26,11 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         private int _currentDistance;
         private Point _currentTilt = Point.Empty;
 
-        internal DigitizerDriver(string devicePath) : base(devicePath)
+        internal HardwareDigitizerDriver(string devicePath, int width, int height) : base(devicePath)
         {
-            ButtonStates = new Dictionary<DigitizerEventKeyCode, KeyState>();
+            Width = width;
+            Height = height;
+            ButtonStates = new Dictionary<DigitizerEventKeyCode, ButtonState>();
         }
 
         /// <inheritdoc />
@@ -41,7 +47,7 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                     break;
                 case DigitizerEventType.Key:
                     var key = (DigitizerEventKeyCode)data.Code;
-                    var state = (KeyState)data.Value;
+                    var state = (ButtonState)data.Value;
                     
                     ButtonStates[key] = state;
 
@@ -58,7 +64,7 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                         case DigitizerEventKeyCode.BtnTouch:
                         case DigitizerEventKeyCode.BtnStylus:
                         case DigitizerEventKeyCode.BtnStylus2:
-                            if (state ==  KeyState.Pressed)
+                            if (state ==  ButtonState.Pressed)
                                 Pressed?.Invoke(null, key);
                             else
                                 Released?.Invoke(null, key);
