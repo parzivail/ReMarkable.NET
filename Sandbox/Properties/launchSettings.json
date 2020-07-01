@@ -3,7 +3,8 @@
     "Sandbox": {
       "commandName": "Executable",
       "executablePath": "pscp",
-      "commandLineArgs": "-pw root $(TargetDir)/* root@10.11.99.1:/home/root/rm_sandbox/"
+      "commandLineArgs": "-pw root $(TargetDir)/* root@10.11.99.1:/home/root/rm_sandbox/",
+      "remoteDebugEnabled": false
     }
   }
 }

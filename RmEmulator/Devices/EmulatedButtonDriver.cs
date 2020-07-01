@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
-using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Unix.Driver.Button;
 
-namespace RmEmulator.Drivers
+namespace RmEmulator.Devices
 {
     public class EmulatedButtonDriver : IPhysicalButtonDriver
     {

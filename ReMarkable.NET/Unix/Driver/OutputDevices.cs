@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using ReMarkable.NET.Unix.Driver.Display;
+using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver
 {
@@ -10,24 +10,18 @@ namespace ReMarkable.NET.Unix.Driver
 
         static OutputDevices()
         {
-            if (Environment.GetEnvironmentVariable("RM_EMULATOR") != null)
+#if DEBUG
+            // Load emulated input devices
+            var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
+            if (deviceContainer != null)
             {
-                // Load emulated output devices
-                var deviceContainer = Type.GetType("RmEmulator.Devices, RmEmulator");
-                if (deviceContainer == null)
-                    throw new Exception("Could not load emulation container");
+                deviceContainer.ReadStaticField("Display", out Display);
 
-                var displayDev = deviceContainer.GetField("Display", BindingFlags.Public | BindingFlags.Static);
-                if (displayDev == null)
-                    throw new Exception("Could not load emulated display device");
-
-                Display = (IDisplayDriver)displayDev.GetValue(displayDev);
+                return;
             }
-            else
-            {
-                // Load hardware output devices
-                Display = new HardwareDisplayDriver("/dev/fb0");
-            }
+#endif
+            // Load hardware output devices
+            Display = new HardwareDisplayDriver("/dev/fb0");
         }
     }
 }

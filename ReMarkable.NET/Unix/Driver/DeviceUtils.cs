@@ -21,7 +21,7 @@ namespace ReMarkable.NET.Unix.Driver
             while (!r.EndOfStream)
             {
                 var line = r.ReadLine();
-                if (String.IsNullOrWhiteSpace(line))
+                if (string.IsNullOrWhiteSpace(line))
                     continue;
 
                 var entryType = line[0];
@@ -64,7 +64,7 @@ namespace ReMarkable.NET.Unix.Driver
 
         public static float MicroToBaseUnit(float value)
         {
-            return value * (float)Math.Pow(10, 6);
+            return value * (float)Math.Pow(10, -6);
         }
     }
 }

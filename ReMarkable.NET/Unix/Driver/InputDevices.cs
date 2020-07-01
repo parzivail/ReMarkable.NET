@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Reflection;
 using ReMarkable.NET.Unix.Driver.Button;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
+using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver
 {
@@ -14,40 +14,24 @@ namespace ReMarkable.NET.Unix.Driver
 
         static InputDevices()
         {
-            if (Environment.GetEnvironmentVariable("RM_EMULATOR") != null)
+#if DEBUG
+            // Load emulated input devices
+            var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
+            if (deviceContainer != null)
             {
-                // Load emulated input devices
-                var deviceContainer = Type.GetType("RmEmulator.Devices, RmEmulator");
-                if (deviceContainer == null)
-                    throw new Exception("Could not load emulation container");
+                deviceContainer.ReadStaticField("PhysicalButtons", out PhysicalButtons);
+                deviceContainer.ReadStaticField("Touchscreen", out Touchscreen);
+                deviceContainer.ReadStaticField("Digitizer", out Digitizer);
 
-                var buttonsDev = deviceContainer.GetField("PhysicalButtons", BindingFlags.Public | BindingFlags.Static);
-                if (buttonsDev == null)
-                    throw new Exception("Could not load emulated button device");
-
-                PhysicalButtons = (IPhysicalButtonDriver)buttonsDev.GetValue(buttonsDev);
-
-                var touchscreenDev = deviceContainer.GetField("Touchscreen", BindingFlags.Public | BindingFlags.Static);
-                if (touchscreenDev == null)
-                    throw new Exception("Could not load emulated touchscreen device");
-
-                Touchscreen = (ITouchscreenDriver)touchscreenDev.GetValue(touchscreenDev);
-
-                var digitizerDev = deviceContainer.GetField("Digitizer", BindingFlags.Public | BindingFlags.Static);
-                if (digitizerDev == null)
-                    throw new Exception("Could not load emulated digitizer device");
-
-                Digitizer = (IDigitizerDriver)digitizerDev.GetValue(digitizerDev);
+                return;
             }
-            else
-            {
-                // Load hardware input devices
-                var deviceMap = DeviceUtils.GetInputDeviceEventHandlers();
+#endif
+            // Load hardware input devices
+            var deviceMap = DeviceUtils.GetInputDeviceEventHandlers();
 
-                PhysicalButtons = new HardwarePhysicalButtonDriver(deviceMap["gpio-keys"]);
-                Touchscreen = new HardwareTouchscreenDriver(deviceMap["cyttsp5_mt"], 767, 1023, 32);
-                Digitizer = new HardwareDigitizerDriver(deviceMap["Wacom I2C Digitizer"], 20967, 15725);
-            }
+            PhysicalButtons = new HardwarePhysicalButtonDriver(deviceMap["gpio-keys"]);
+            Touchscreen = new HardwareTouchscreenDriver(deviceMap["cyttsp5_mt"], 767, 1023, 32);
+            Digitizer = new HardwareDigitizerDriver(deviceMap["Wacom I2C Digitizer"], 20967, 15725);
         }
     }
 }

@@ -2,11 +2,11 @@
 
 namespace ReMarkable.NET.Unix.Driver.Battery
 {
-    class HardwareBatteryDriver : IPowerSupplyDriver
+    class HardwareBatteryMonitor : IPowerSupplyMonitor
     {
         public string Device { get; }
 
-        public HardwareBatteryDriver(string device)
+        public HardwareBatteryMonitor(string device)
         {
             Device = device;
         }
@@ -77,7 +77,7 @@ namespace ReMarkable.NET.Unix.Driver.Battery
                 return 0;
 
             // tenths of a degree C
-            return int.Parse(value) * 10;
+            return int.Parse(value) / 10f;
         }
 
         public bool IsOnline()
@@ -103,10 +103,10 @@ namespace ReMarkable.NET.Unix.Driver.Battery
 
             return value switch
             {
-                "Charging" => PowerSupplyStatus.Charging,
-                "Discharging" => PowerSupplyStatus.Discharging,
-                "NotCharging" => PowerSupplyStatus.NotCharging,
-                "FULL" => PowerSupplyStatus.Full,
+                "Charging\n" => PowerSupplyStatus.Charging,
+                "Discharging\n" => PowerSupplyStatus.Discharging,
+                "NotCharging\n" => PowerSupplyStatus.NotCharging,
+                "FULL\n" => PowerSupplyStatus.Full,
                 _ => PowerSupplyStatus.Unknown
             };
         }

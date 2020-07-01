@@ -4,7 +4,7 @@ using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using RmEmulator.Framebuffer;
 using SixLabors.ImageSharp;
 
-namespace RmEmulator.Drivers
+namespace RmEmulator.Devices
 {
     public class EmulatedDisplayDriver : IDisplayDriver
     {

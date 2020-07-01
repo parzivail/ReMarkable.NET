@@ -71,12 +71,12 @@ namespace RmEmulator
 
             CreateScreenVao();
 
-            Devices.Init(this);
+            EmulatedDevices.Init(this);
 
             ScreenTexture = GL.GenTexture();
 
-            var w = Devices.Display.VisibleWidth;
-            var h = Devices.Display.VisibleHeight;
+            var w = EmulatedDevices.Display.VisibleWidth;
+            var h = EmulatedDevices.Display.VisibleHeight;
 
             var pixels = Populate(new byte[w * h * 3], 0xFF);
 
@@ -104,14 +104,14 @@ namespace RmEmulator
                 appEntry.Invoke(null, new object[] { new string[0] });
             });
 
-            MouseDown += Devices.Touchscreen.ConsumeMouseDown;
-            MouseUp += Devices.Touchscreen.ConsumeMouseUp;
-            MouseMove += Devices.Touchscreen.ConsumeMouseMove;
+            MouseDown += EmulatedDevices.Touchscreen.ConsumeMouseDown;
+            MouseUp += EmulatedDevices.Touchscreen.ConsumeMouseUp;
+            MouseMove += EmulatedDevices.Touchscreen.ConsumeMouseMove;
 
-            KeyUp += Devices.PhysicalButtons.ConsumeKeyUp;
-            KeyDown += Devices.PhysicalButtons.ConsumeKeyDown;
+            KeyUp += EmulatedDevices.PhysicalButtons.ConsumeKeyUp;
+            KeyDown += EmulatedDevices.PhysicalButtons.ConsumeKeyDown;
 
-            Size = new Vector2i(Devices.Display.VisibleWidth / 2, Devices.Display.VisibleHeight / 2);
+            Size = new Vector2i(EmulatedDevices.Display.VisibleWidth / 2, EmulatedDevices.Display.VisibleHeight / 2);
 
             _appThread.Start();
         }
@@ -187,9 +187,6 @@ namespace RmEmulator
                 GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
 
                 var image = imageUploadTask.Image;
-                
-                using var fs = File.Open("E:\\colby\\Desktop\\image.png", FileMode.OpenOrCreate);
-                image.SaveAsPng(fs);
 
                 using var ms = new MemoryStream();
                 _textureEncoder.Encode(image, ms);
@@ -249,7 +246,7 @@ namespace RmEmulator
 
         public RefreshTask(Rectangle region, WaveformMode mode)
         {
-            Devices.Display.Framebuffer.ConstrainRectangle(ref region);
+            EmulatedDevices.Display.Framebuffer.ConstrainRectangle(ref region);
 
             Region = region;
             Mode = mode;
@@ -263,7 +260,7 @@ namespace RmEmulator
 
         public void Run()
         {
-            _image = Devices.Display.Framebuffer.Read(Region);
+            _image = EmulatedDevices.Display.Framebuffer.Read(Region);
             _image.Mutate(g => g.Crop(new Rectangle(Point.Empty, Region.Size)));
             
             Running = true;

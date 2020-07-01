@@ -1,7 +1,7 @@
 ﻿using System;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 
-namespace RmEmulator.Drivers
+namespace RmEmulator.Devices
 {
     public class EmulatedDigitizerDriver : IDigitizerDriver
     {

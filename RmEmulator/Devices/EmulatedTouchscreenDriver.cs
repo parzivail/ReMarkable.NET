@@ -2,8 +2,9 @@
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
+using RmEmulator;
 
-namespace RmEmulator.Drivers
+namespace RmEmulator.Devices
 {
     public class EmulatedTouchscreenDriver : ITouchscreenDriver
     {
@@ -55,8 +56,8 @@ namespace RmEmulator.Drivers
             var x = mouse.X / _window.Size.X;
             var y = mouse.Y / _window.Size.Y;
 
-            var devX = x * Devices.Display.VisibleWidth;
-            var devY = y * Devices.Display.VisibleHeight;
+            var devX = x * EmulatedDevices.Display.VisibleWidth;
+            var devY = y * EmulatedDevices.Display.VisibleHeight;
 
             var rawX = x * Width;
             var rawY = y * Height;
@@ -64,8 +65,8 @@ namespace RmEmulator.Drivers
             var xLast = mouseLast.X / _window.Size.X;
             var yLast = mouseLast.Y / _window.Size.Y;
 
-            var devXLast = xLast * Devices.Display.VisibleWidth;
-            var devYLast = yLast * Devices.Display.VisibleHeight;
+            var devXLast = xLast * EmulatedDevices.Display.VisibleWidth;
+            var devYLast = yLast * EmulatedDevices.Display.VisibleHeight;
 
             var rawXLast = xLast * Width;
             var rawYLast = yLast * Height;

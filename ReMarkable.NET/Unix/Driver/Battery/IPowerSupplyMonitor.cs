@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Battery
 {
-    public interface IPowerSupplyDriver
+    public interface IPowerSupplyMonitor
     {
         /// <summary>
         /// Gets the power supply percentage remaining

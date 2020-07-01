@@ -28,7 +28,7 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
             VirtualHeight = virtualHeight;
 
             _visualBounds = new Rectangle(0, 0, VisibleWidth, VisibleHeight);
-            
+
             _deviceStream = File.Open(DevicePath, FileMode.Open);
         }
 
@@ -45,9 +45,9 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
             var dPoint = new Point(destPoint.X - x, destPoint.Y - y);
             srcArea.Location = dPoint;
 
-            image.Mutate(srcImage => srcImage.Crop(srcArea));
-
-            image.Save(_deviceStream, new Rgb565FramebufferEncoder(this, srcArea, destPoint));
+            image
+                .Clone(srcImage => srcImage.Crop(srcArea))
+                .Save(_deviceStream, new Rgb565FramebufferEncoder(this, srcArea, destPoint));
         }
 
         /// <inheritdoc />
