@@ -29,9 +29,10 @@ namespace RmEmulator.Drivers
 
         public void ConsumeMouseDown(MouseButtonEventArgs obj)
         {
+            if (obj.Button != MouseButton.Left) return;
+
             _trackingId++;
-            if (obj.Button == MouseButton.Left)
-                Pressed?.Invoke(this, CreateFinger(FingerStatus.Down));
+            Pressed?.Invoke(this, CreateFinger(FingerStatus.Down));
         }
 
         public void ConsumeMouseUp(MouseButtonEventArgs obj)

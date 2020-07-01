@@ -57,6 +57,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
         public void Refresh(Rectangle rectangle, WaveformMode mode)
         {
+            Framebuffer.ConstrainRectangle(ref rectangle);
             var data = new FbUpdateData
             {
                 UpdateRegion = new FbRect

@@ -12,5 +12,8 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 
         Image<Rgb24> Read(Rectangle area);
         void Write<TPixel>(Image<TPixel> image, Rectangle srcArea, Point destPoint) where TPixel : unmanaged, IPixel<TPixel>;
+
+        void ConstrainRectangle(ref Rectangle srcArea, ref Point destPoint);
+        void ConstrainRectangle(ref Rectangle area);
     }
 }

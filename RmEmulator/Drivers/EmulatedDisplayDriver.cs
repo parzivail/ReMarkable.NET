@@ -8,6 +8,8 @@ namespace RmEmulator.Drivers
 {
     public class EmulatedDisplayDriver : IDisplayDriver
     {
+        private readonly EmulatorWindow _emulatorWindow;
+
         public int VirtualWidth => VisibleWidth;
         public int VirtualHeight => VisibleHeight;
         public int VisibleWidth { get; }
@@ -16,14 +18,16 @@ namespace RmEmulator.Drivers
 
         public EmulatedDisplayDriver(EmulatorWindow emulatorWindow, int visibleWidth, int visibleHeight)
         {
+            _emulatorWindow = emulatorWindow;
             VisibleWidth = visibleWidth;
             VisibleHeight = visibleHeight;
 
-            Framebuffer = new EmulatedFramebuffer(visibleWidth, visibleHeight);
+            Framebuffer = new EmulatedFramebuffer(_emulatorWindow, visibleWidth, visibleHeight);
         }
 
         public void Refresh(Rectangle rectangle, WaveformMode mode)
         {
+            _emulatorWindow.RefreshRegion(rectangle, mode);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -11,7 +11,13 @@ using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Desktop;
+using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using RmEmulator.Framebuffer;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using Rectangle = SixLabors.ImageSharp.Rectangle;
+using Size = System.Drawing.Size;
 
 namespace RmEmulator
 {
@@ -22,9 +28,11 @@ namespace RmEmulator
         public int ScreenVao { get; set; }
         public ShaderProgram ShaderScreen { get; set; }
         public int ScreenTexture { get; set; }
+        
+        private Rgb24TextureEncoder _textureEncoder = new Rgb24TextureEncoder();
 
-        public static bool RefreshFlag { get; set; }
-        private Rgb24TextureEncoder _textureEncoder;
+        private Queue<RefreshTask> _refreshQueue = new Queue<RefreshTask>();
+        private Queue<ImageUploadTask> _imageSwapQueue = new Queue<ImageUploadTask>();
 
         private Thread _appThread;
 
@@ -37,7 +45,7 @@ namespace RmEmulator
             UpdateFrame += WindowUpdate;
 
             Closing += WindowClosing;
-            
+
             WindowBorder = WindowBorder.Fixed;
         }
 
@@ -48,6 +56,9 @@ namespace RmEmulator
             GL.Enable(EnableCap.DebugOutput);
             GL.DebugMessageCallback(DebugCallback, IntPtr.Zero);
             GL.ActiveTexture(TextureUnit.Texture0);
+
+            GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
+            GL.PixelStore(PixelStoreParameter.PackAlignment, 1);
 
             // Set background color
             GL.ClearColor(1, 1, 1, 1);
@@ -60,9 +71,18 @@ namespace RmEmulator
 
             CreateScreenVao();
 
+            Devices.Init(this);
+
             ScreenTexture = GL.GenTexture();
 
+            var w = Devices.Display.VisibleWidth;
+            var h = Devices.Display.VisibleHeight;
+
+            var pixels = Populate(new byte[w * h * 3], 0xFF);
+
             GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, w, h, 0, PixelFormat.Rgb, PixelType.UnsignedByte, pixels);
+
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
                 (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
@@ -75,16 +95,14 @@ namespace RmEmulator
 
             var assemblyFile = "Sandbox.dll";
             var appAssy = Assembly.LoadFrom(assemblyFile);
-            
+
             var appEntry = appAssy.EntryPoint;
-            
+
             Environment.SetEnvironmentVariable("RM_EMULATOR", "1");
             _appThread = new Thread(() =>
             {
                 appEntry.Invoke(null, new object[] { new string[0] });
             });
-
-            Devices.Init(this);
 
             MouseDown += Devices.Touchscreen.ConsumeMouseDown;
             MouseUp += Devices.Touchscreen.ConsumeMouseUp;
@@ -93,11 +111,15 @@ namespace RmEmulator
             KeyUp += Devices.PhysicalButtons.ConsumeKeyUp;
             KeyDown += Devices.PhysicalButtons.ConsumeKeyDown;
 
-            _textureEncoder = new Rgb24TextureEncoder(Devices.Display.VisibleWidth, Devices.Display.VisibleHeight);
-
             Size = new Vector2i(Devices.Display.VisibleWidth / 2, Devices.Display.VisibleHeight / 2);
-            
+
             _appThread.Start();
+        }
+
+        public static byte[] Populate(byte[] arr, byte value)
+        {
+            for (var i = 0; i < arr.Length; i++) arr[i] = value;
+            return arr;
         }
 
         private void WindowClosing(CancelEventArgs obj)
@@ -148,6 +170,36 @@ namespace RmEmulator
 
         private void WindowUpdate(FrameEventArgs e)
         {
+            if (_refreshQueue.TryPeek(out var refreshTask))
+            {
+                if (!refreshTask.Running)
+                    refreshTask.Run();
+                else
+                {
+                    refreshTask.Poll(_imageSwapQueue);
+                    if (!refreshTask.Running)
+                        _refreshQueue.Dequeue();
+                }
+            }
+
+            if (_imageSwapQueue.TryDequeue(out var imageUploadTask))
+            {
+                GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
+
+                var image = imageUploadTask.Image;
+                
+                using var fs = File.Open("E:\\colby\\Desktop\\image.png", FileMode.OpenOrCreate);
+                image.SaveAsPng(fs);
+
+                using var ms = new MemoryStream();
+                _textureEncoder.Encode(image, ms);
+                var pixels = ms.GetBuffer();
+                
+                GL.TexSubImage2D(TextureTarget.Texture2D, 0, imageUploadTask.DestPoint.X, imageUploadTask.DestPoint.Y, imageUploadTask.Image.Width, imageUploadTask.Image.Height,
+                    PixelFormat.Rgb, PixelType.UnsignedByte, pixels);
+
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+            }
         }
 
         private void WindowRender(FrameEventArgs e)
@@ -156,24 +208,6 @@ namespace RmEmulator
             // Reset the view
             GL.Clear(bits);
 
-            if (RefreshFlag)
-            {
-                GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
-
-                var buf = EmulatedFramebuffer.BackBuffer;
-
-                using var ms = new MemoryStream();
-                _textureEncoder.Encode(buf, ms);
-                var pixels = ms.GetBuffer();
-
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, buf.Width,
-                    buf.Height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, pixels);
-
-                GL.BindTexture(TextureTarget.Texture2D, 0);
-
-                RefreshFlag = false;
-            }
-
             GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
             ShaderScreen.Use();
             DrawFullscreenQuad();
@@ -181,6 +215,76 @@ namespace RmEmulator
 
             // Swap the graphics buffer
             SwapBuffers();
+        }
+
+        public void RefreshRegion(Rectangle region, WaveformMode mode)
+        {
+            _refreshQueue.Enqueue(new RefreshTask(region, mode));
+        }
+    }
+
+    internal class ImageUploadTask
+    {
+        public Image<Rgb24> Image { get; }
+        public Point DestPoint { get; }
+
+        public ImageUploadTask(Image<Rgb24> image, Point destPoint)
+        {
+            Image = image;
+            DestPoint = destPoint;
+        }
+    }
+
+    internal class RefreshTask
+    {
+        private readonly int _maxCycles;
+
+        private Image<Rgb24> _image;
+        private int _intervals;
+        private DateTime _nextRefresh;
+
+        public Rectangle Region { get; }
+        public WaveformMode Mode { get; }
+        public bool Running { get; private set; }
+
+        public RefreshTask(Rectangle region, WaveformMode mode)
+        {
+            Devices.Display.Framebuffer.ConstrainRectangle(ref region);
+
+            Region = region;
+            Mode = mode;
+
+            _maxCycles = mode switch
+            {
+                WaveformMode.Gc16 => 2,
+                _ => 1
+            };
+        }
+
+        public void Run()
+        {
+            _image = Devices.Display.Framebuffer.Read(Region);
+            _image.Mutate(g => g.Crop(new Rectangle(Point.Empty, Region.Size)));
+            
+            Running = true;
+            _nextRefresh = DateTime.Now;
+        }
+
+        public void Poll(Queue<ImageUploadTask> imageSwapQueue)
+        {
+            if (DateTime.Now < _nextRefresh) return;
+
+            _intervals++;
+
+            if (_intervals > _maxCycles * 2)
+                Running = false;
+            else
+            {
+                _image.Mutate(img => img.Invert());
+                imageSwapQueue.Enqueue(new ImageUploadTask(_image, Region.Location));
+
+                _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(250);
+            }
         }
     }
 }

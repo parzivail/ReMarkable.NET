@@ -14,6 +14,8 @@ namespace RmEmulator.Framebuffer
 {
     public class EmulatedFramebuffer : IFramebuffer
     {
+        private readonly EmulatorWindow _emulatorWindow;
+
         public int VirtualWidth => VisibleWidth;
         public int VirtualHeight => VisibleHeight;
         public int VisibleWidth { get; }
@@ -21,8 +23,9 @@ namespace RmEmulator.Framebuffer
 
         public static Image<Rgb24> BackBuffer;
 
-        public EmulatedFramebuffer(int visibleWidth, int visibleHeight)
+        public EmulatedFramebuffer(EmulatorWindow emulatorWindow, int visibleWidth, int visibleHeight)
         {
+            _emulatorWindow = emulatorWindow;
             VisibleWidth = visibleWidth;
             VisibleHeight = visibleHeight;
 
@@ -31,14 +34,35 @@ namespace RmEmulator.Framebuffer
 
         public Image<Rgb24> Read(Rectangle area)
         {
+            ConstrainRectangle(ref area);
             return BackBuffer.Clone(i => i.Crop(area));
         }
 
         public void Write<TPixel>(Image<TPixel> image, Rectangle srcArea, Point destPoint) where TPixel : unmanaged, IPixel<TPixel>
         {
-            BackBuffer.Mutate(backBuffer => backBuffer.DrawImage(image.Clone(srcImage => srcImage.Crop(srcArea)), destPoint, 1));
+            image.Mutate(img => img.Grayscale(GrayscaleMode.Bt709, 1));
 
-            EmulatorWindow.RefreshFlag = true;
+            var (x, y) = new Point(destPoint.X, destPoint.Y);
+            ConstrainRectangle(ref srcArea, ref destPoint);
+            var dPoint = new Point(destPoint.X - x, destPoint.Y - y);
+            srcArea.Location = dPoint;
+
+            BackBuffer.Mutate(backBuffer => backBuffer.DrawImage(image.Clone(srcImage => srcImage.Crop(srcArea)), destPoint, 1));
+        }
+
+        /// <inheritdoc />
+        public void ConstrainRectangle(ref Rectangle srcArea, ref Point destPoint)
+        {
+            var tempRect = new Rectangle(destPoint, srcArea.Size);
+            tempRect.Intersect(BackBuffer.Bounds());
+            srcArea.Size = tempRect.Size;
+            destPoint = tempRect.Location;
+        }
+
+        /// <inheritdoc />
+        public void ConstrainRectangle(ref Rectangle area)
+        {
+            area.Intersect(BackBuffer.Bounds());
         }
     }
 }

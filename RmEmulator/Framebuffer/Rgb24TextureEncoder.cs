@@ -7,13 +7,8 @@ namespace RmEmulator.Framebuffer
 {
     internal class Rgb24TextureEncoder : IImageEncoder
     {
-        private readonly int _width;
-        private readonly int _height;
-
-        public Rgb24TextureEncoder(int width, int height)
+        public Rgb24TextureEncoder()
         {
-            _width = width;
-            _height = height;
         }
 
         /// <inheritdoc />
@@ -21,11 +16,11 @@ namespace RmEmulator.Framebuffer
         {
             var rgba32 = new Rgba32();
 
-            for (var y = 0; y < _height; y++)
+            for (var y = 0; y < image.Height; y++)
             {
                 var span = image.GetPixelRowSpan(y);
 
-                for (var x = 0; x < _width; x++)
+                for (var x = 0; x < image.Width; x++)
                 {
                     span[x].ToRgba32(ref rgba32);
                     stream.WriteByte(rgba32.R);
