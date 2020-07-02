@@ -45,6 +45,11 @@ namespace Graphite
             buffer.Mutate(g => g.DrawText(s, Font, ForegroundColor, size.Location));
         }
 
+        public virtual bool BoundsContains(PointF point)
+        {
+            return Bounds.Contains(point);
+        }
+
         internal virtual void OnPress(Finger finger)
         {
             FingerPress?.Invoke(this, finger);

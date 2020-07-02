@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RmEmulator
+namespace RmEmulator.Shader
 {
     public class GenericShaderUniform
     {

@@ -1,4 +1,4 @@
-﻿namespace RmEmulator
+﻿namespace RmEmulator.Shader
 {
     public class ShaderUniform<T> : GenericShaderUniform
     {

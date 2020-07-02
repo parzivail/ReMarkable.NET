@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Graphite.Controls;
+using Graphite.Util;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
 using SixLabors.ImageSharp;
@@ -89,7 +91,7 @@ namespace Graphite
                 return new List<Control>();
 
             return children
-                .Where(control => control.Bounds.Contains(position))
+                .Where(control => control.BoundsContains(position))
                 .GroupBy(control => control.Layer)
                 .OrderByDescending(controls => controls.Key)
                 .First()
@@ -132,10 +134,10 @@ namespace Graphite
             Refresh(new Rectangle(0, 0, Width, Height));
         }
 
-        public void Refresh(Rectangle rectangle)
+        public void Refresh(RectangleF rectangle)
         {
-            _pages.Peek().Draw(Buffer);
-            Update?.Invoke(this, new WindowUpdateEventArgs(Buffer, rectangle));
+            GetCurretPage().Draw(Buffer);
+            Update?.Invoke(this, new WindowUpdateEventArgs(Buffer, rectangle.GetContainingIntRect()));
         }
     }
 

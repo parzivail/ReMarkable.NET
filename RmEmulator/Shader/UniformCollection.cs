@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace RmEmulator
+namespace RmEmulator.Shader
 {
     public class UniformCollection : ICollection<GenericShaderUniform>
     {

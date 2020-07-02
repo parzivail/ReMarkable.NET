@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 
-namespace RmEmulator
+namespace RmEmulator.Shader
 {
     public class ShaderProgram
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace Graphite
+namespace Graphite.Controls
 {
     public class Panel : Control, IList<Control>
     {

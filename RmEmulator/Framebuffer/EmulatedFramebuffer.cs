@@ -37,8 +37,7 @@ namespace RmEmulator.Framebuffer
 
             var (x, y) = new Point(destPoint.X, destPoint.Y);
             ConstrainRectangle(ref srcArea, ref destPoint);
-            var dPoint = new Point(destPoint.X - x, destPoint.Y - y);
-            srcArea.Location = dPoint;
+            srcArea.Location = new Point(srcArea.Location.X + destPoint.X - x, srcArea.Location.Y + destPoint.Y - y);
 
             BackBuffer.Mutate(backBuffer => backBuffer.DrawImage(image.Clone(srcImage => srcImage.Crop(srcArea)), destPoint, 1));
         }

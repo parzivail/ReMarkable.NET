@@ -1,4 +1,5 @@
-﻿using SixLabors.ImageSharp;
+﻿using Graphite.Util;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
@@ -16,7 +17,7 @@ namespace Graphite.Controls
 
         private void DrawBounds(IImageProcessingContext g)
         {
-            g.Draw(ForegroundColor, 4, Bounds);
+            g.Draw(ForegroundColor, 4, Bounds.Inflated(-2, -2));
         }
     }
 }

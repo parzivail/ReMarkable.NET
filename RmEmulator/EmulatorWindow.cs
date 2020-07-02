@@ -11,6 +11,7 @@ using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Desktop;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using RmEmulator.Framebuffer;
+using RmEmulator.Shader;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;

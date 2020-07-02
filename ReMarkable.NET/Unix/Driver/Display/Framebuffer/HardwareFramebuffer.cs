@@ -42,8 +42,7 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
         {
             var (x, y) = new Point(destPoint.X, destPoint.Y);
             ConstrainRectangle(ref srcArea, ref destPoint);
-            var dPoint = new Point(destPoint.X - x, destPoint.Y - y);
-            srcArea.Location = dPoint;
+            srcArea.Location = new Point(srcArea.Location.X + destPoint.X - x, srcArea.Location.Y + destPoint.Y - y);
 
             image
                 .Clone(srcImage => srcImage.Crop(srcArea))

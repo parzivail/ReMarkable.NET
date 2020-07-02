@@ -26,11 +26,23 @@ namespace Sandbox
             var mainPage = w.CreatePage();
             var b = new Button
             {
-                Bounds = new Rectangle(50, 50, 200, 100),
+                Bounds = new Rectangle(50, 50, 200, 50),
                 Text = "Button"
             };
 
-            b.FingerPress += (sender, finger) => Console.WriteLine("Hello, World!");
+            b.FingerPress += (sender, finger) =>
+            {
+                Console.WriteLine("Hello, World!");
+                var b2 = new Button
+                {
+                    Bounds = new Rectangle(50, 150, 200, 50),
+                    Text = "Button 2"
+                };
+                b2.FingerPress += (s1, f1) => Console.WriteLine("Hello, World 2!");
+
+                mainPage.Content.Add(b2);
+                w.Refresh(b2.Bounds);
+            };
 
             mainPage.Content.Add(b);
 
