@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\segoemdl2.ttf" />
+    <None Remove="Resources\segoeui.ttf" />
+    <None Remove="Resources\segoeuib.ttf" />
+    <None Remove="Resources\segoeuil.ttf" />
+    <None Remove="Resources\segoeuisl.ttf" />
+    <None Remove="Resources\seguisb.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\segoemdl2.ttf" />
+    <EmbeddedResource Include="Resources\segoeui.ttf" />
+    <EmbeddedResource Include="Resources\segoeuib.ttf" />
+    <EmbeddedResource Include="Resources\segoeuil.ttf" />
+    <EmbeddedResource Include="Resources\segoeuisl.ttf" />
+    <EmbeddedResource Include="Resources\seguisb.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0002" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0009" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Fonts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Fonts.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Fonts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fonts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

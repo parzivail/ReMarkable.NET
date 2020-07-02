@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Graphite\Graphite.csproj" />
     <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
   </ItemGroup>
 

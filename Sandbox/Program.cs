@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Xsl;
+using Graphite;
+using Graphite.Controls;
 using Microsoft.VisualBasic;
 using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Unix.Driver.Battery;
@@ -21,12 +23,26 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-            var p = PassiveDevices.Performance;
+            var screen = OutputDevices.Display;
 
-            Console.WriteLine($"Cores: {p.NumberOfCores}");
-            Console.WriteLine($"Processors: {p.NumberOfProcessors}");
-            Console.WriteLine($"RAM: {p.TotalMemory}");
-            Console.WriteLine($"Swap: {p.TotalSwap}");
+            var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
+            w.Update += WindowUpdate;
+
+            var mainPage = w.CreatePage();
+            mainPage.Content.Add(new Button
+            {
+                Bounds = new Rectangle(50, 50, 200, 100)
+            });
+
+            w.Forward(mainPage);
+
+            while (true) { }
+        }
+
+        private static void WindowUpdate(object sender, WindowUpdateEventArgs e)
+        {
+            OutputDevices.Display.Framebuffer.Write(e.Buffer, e.UpdatedArea, e.UpdatedArea.Location);
+            OutputDevices.Display.Refresh(e.UpdatedArea, WaveformMode.Auto);
         }
     }
 }
