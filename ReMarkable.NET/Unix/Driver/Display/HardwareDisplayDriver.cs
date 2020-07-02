@@ -2,6 +2,7 @@
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace ReMarkable.NET.Unix.Driver.Display
 {
@@ -78,6 +79,20 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
             if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
                 throw new UnixException();
+        }
+
+        public void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
+            WaveformMode mode = WaveformMode.Auto)
+        {
+            Framebuffer.Write(image, srcArea, destPoint);
+
+            if (refreshArea == default)
+            {
+                refreshArea.Location = destPoint;
+                refreshArea.Size = srcArea.Size;
+            }
+
+            Refresh(refreshArea, mode);
         }
 
         private FbVarScreenInfo GetVarScreenInfo()

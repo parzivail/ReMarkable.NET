@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Graphite.Font
+﻿namespace Graphite.Typography
 {
     public static class SegoeUiSymbols
     {

@@ -1,21 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Threading;
-using System.Xml.Xsl;
-using Graphite;
+﻿using Graphite;
 using Graphite.Controls;
-using Microsoft.VisualBasic;
+using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
-using ReMarkable.NET.Unix.Driver.Battery;
-using ReMarkable.NET.Unix.Driver.Display.EinkController;
-using SixLabors.Fonts;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using Console = System.Console;
 
 namespace Sandbox
 {
@@ -28,10 +15,13 @@ namespace Sandbox
             var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
             w.Update += WindowUpdate;
 
+            var f = Fonts.SegoeUi;
+
             var mainPage = w.CreatePage();
             mainPage.Content.Add(new Button
             {
-                Bounds = new Rectangle(50, 50, 200, 100)
+                Bounds = new Rectangle(50, 50, 200, 100),
+                Text = "Button"
             });
 
             w.Forward(mainPage);
@@ -41,8 +31,7 @@ namespace Sandbox
 
         private static void WindowUpdate(object sender, WindowUpdateEventArgs e)
         {
-            OutputDevices.Display.Framebuffer.Write(e.Buffer, e.UpdatedArea, e.UpdatedArea.Location);
-            OutputDevices.Display.Refresh(e.UpdatedArea, WaveformMode.Auto);
+            OutputDevices.Display.Draw(e.Buffer, e.UpdatedArea, e.UpdatedArea.Location);
         }
     }
 }

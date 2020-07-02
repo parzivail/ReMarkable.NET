@@ -14,6 +14,7 @@ namespace Graphite.Controls
         public override void Draw(Image<Rgb24> buffer)
         {
             buffer.Mutate(DrawBounds);
+            DrawString(buffer, Text, Bounds);
         }
 
         private void DrawBounds(IImageProcessingContext g)

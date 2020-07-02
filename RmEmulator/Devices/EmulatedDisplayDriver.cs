@@ -3,6 +3,7 @@ using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using RmEmulator.Framebuffer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace RmEmulator.Devices
 {
@@ -28,6 +29,20 @@ namespace RmEmulator.Devices
         public void Refresh(Rectangle rectangle, WaveformMode mode)
         {
             _emulatorWindow.RefreshRegion(rectangle, mode);
+        }
+
+        public void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
+            WaveformMode mode = WaveformMode.Auto)
+        {
+            Framebuffer.Write(image, srcArea, destPoint);
+
+            if (refreshArea == default)
+            {
+                refreshArea.Location = destPoint;
+                refreshArea.Size = srcArea.Size;
+            }
+
+            Refresh(refreshArea, mode);
         }
     }
 }

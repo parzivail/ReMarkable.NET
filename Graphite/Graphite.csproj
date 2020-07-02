@@ -37,17 +37,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Fonts.Designer.cs">
+    <Compile Update="Resources\FontResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Fonts.resx</DependentUpon>
+      <DependentUpon>FontResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Fonts.resx">
+    <EmbeddedResource Update="Resources\FontResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Fonts.Designer.cs</LastGenOutput>
+      <LastGenOutput>FontResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
