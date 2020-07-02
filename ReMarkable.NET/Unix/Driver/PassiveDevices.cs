@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ReMarkable.NET.Unix.Driver.Battery;
 using ReMarkable.NET.Unix.Driver.Performance;
 using ReMarkable.NET.Util;

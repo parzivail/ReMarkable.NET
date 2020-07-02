@@ -24,6 +24,8 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         /// </summary>
         event EventHandler<StylusState> StylusUpdate;
 
+        StylusState State { get; }
+
         /// <summary>
         /// The horizontal resolution of the device
         /// </summary>

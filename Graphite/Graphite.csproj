@@ -37,6 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\FontResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

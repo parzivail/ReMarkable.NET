@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using ReMarkable.NET.Unix.Driver.Button;
 using ReMarkable.NET.Util;
+using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
@@ -17,6 +17,7 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         
         public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates;
 
+        public StylusState State { get; private set; }
         public int Width { get; }
         public int Height { get; }
 
@@ -43,7 +44,8 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
             switch (eventType)
             {
                 case DigitizerEventType.Syn:
-                    StylusUpdate?.Invoke(null, new StylusState(_currentTool, _currentPosition, _currentPressure, _currentDistance, _currentTilt));
+                    State = new StylusState(_currentTool, _currentPosition, _currentPressure, _currentDistance, _currentTilt);
+                    StylusUpdate?.Invoke(null, State);
                     break;
                 case DigitizerEventType.Key:
                     var key = (DigitizerEventKeyCode)data.Code;

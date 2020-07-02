@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Threading;
-
-namespace RmEmulator
+﻿namespace RmEmulator
 {
     class Program
     {

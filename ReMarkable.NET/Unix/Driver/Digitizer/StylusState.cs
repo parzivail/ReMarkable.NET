@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
@@ -17,6 +17,14 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
             Pressure = pressure;
             Distance = distance;
             Tilt = tilt;
+        }
+
+        public PointF GetDevicePosition()
+        {
+            var digitizer = InputDevices.Digitizer;
+            var display = OutputDevices.Display;
+
+            return new PointF(Position.X / (float)digitizer.Width * display.VisibleWidth, Position.Y / (float)digitizer.Height * display.VisibleHeight);
         }
 
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using System;
 using ReMarkable.NET.Unix.Driver.Digitizer;
+using SixLabors.ImageSharp;
 
 namespace RmEmulator.Devices
 {
@@ -12,6 +13,7 @@ namespace RmEmulator.Devices
         public event EventHandler<DigitizerEventKeyCode> Released;
         public event EventHandler<StylusState> StylusUpdate;
 
+        public StylusState State { get; } = new StylusState(StylusTool.None, Point.Empty, 0, 0, Point.Empty);
         public int Width { get; }
         public int Height { get; }
 

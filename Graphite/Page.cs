@@ -1,5 +1,4 @@
-﻿using System.Text;
-using SixLabors.ImageSharp;
+﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace Graphite

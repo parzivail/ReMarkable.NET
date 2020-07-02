@@ -1,6 +1,6 @@
-﻿using Graphite;
+﻿using System;
+using Graphite;
 using Graphite.Controls;
-using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
 using SixLabors.ImageSharp;
 
@@ -15,16 +15,26 @@ namespace Sandbox
             var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
             w.Update += WindowUpdate;
 
-            var f = Fonts.SegoeUi;
+            InputDevices.Digitizer.Pressed += (sender, code) => w.ConsumePress(InputDevices.Digitizer.State, code);
+            InputDevices.Digitizer.Released += (sender, code) => w.ConsumeRelease(InputDevices.Digitizer.State, code);
+            InputDevices.Digitizer.StylusUpdate += (sender, state) => w.ConsumeMove(state);
+
+            InputDevices.Touchscreen.Pressed += (sender, finger) => w.ConsumePress(finger);
+            InputDevices.Touchscreen.Released += (sender, finger) => w.ConsumeRelease(finger);
+            InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
 
             var mainPage = w.CreatePage();
-            mainPage.Content.Add(new Button
+            var b = new Button
             {
                 Bounds = new Rectangle(50, 50, 200, 100),
                 Text = "Button"
-            });
+            };
 
-            w.Forward(mainPage);
+            b.FingerPress += (sender, finger) => Console.WriteLine("Hello, World!");
+
+            mainPage.Content.Add(b);
+
+            w.ShowPage(mainPage);
 
             while (true) { }
         }

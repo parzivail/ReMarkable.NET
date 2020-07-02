@@ -2,7 +2,6 @@
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
-using RmEmulator;
 
 namespace RmEmulator.Devices
 {
