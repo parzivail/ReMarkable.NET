@@ -6,10 +6,11 @@ namespace Graphite.Typography
 {
     public class Fonts
     {
-        public static FontFamily SegoeUi;
-        public static FontFamily SegoeUiLight;
-        public static FontFamily SegoeUiSemilight;
-        public static FontFamily SegoeMdl2Assets;
+        public static readonly FontFamily SegoeUi;
+        public static readonly FontFamily SegoeUiLight;
+        public static readonly FontFamily SegoeUiSemilight;
+        public static readonly FontFamily SegoeUiSemibold;
+        public static readonly FontFamily SegoeMdl2;
 
         static Fonts()
         {
@@ -20,12 +21,14 @@ namespace Graphite.Typography
 
             InstallFont(fonts, FontResources.segoeuil); // Segoe UI Light
             InstallFont(fonts, FontResources.segoeuisl); // Segoe UI Semilight
-            InstallFont(fonts, FontResources.segoemdl2); // Segoe MDL2 Assets
+            InstallFont(fonts, FontResources.seguisb); // Segoe UI Semibold
+            InstallFont(fonts, FontResources.segoemdl2); // Material Icons
 
             SegoeUi = fonts.Find("Segoe UI");
             SegoeUiLight = fonts.Find("Segoe UI Light");
             SegoeUiSemilight = fonts.Find("Segoe UI Semilight");
-            SegoeMdl2Assets = fonts.Find("Segoe MDL2 Assets");
+            SegoeUiSemibold = fonts.Find("Segoe UI Semibold");
+            SegoeMdl2 = fonts.Find("Segoe MDL2 Assets");
         }
 
         private static void InstallFont(IFontCollection fonts, byte[] font)

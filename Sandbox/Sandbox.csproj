@@ -14,31 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Lato-Black.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Lato-Black.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Graphite\Graphite.csproj" />
     <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="EmbeddedResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>EmbeddedResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="EmbeddedResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EmbeddedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

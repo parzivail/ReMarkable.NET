@@ -14,7 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\segoemdl2.ttf" />
     <None Remove="Resources\segoeui.ttf" />
     <None Remove="Resources\segoeuib.ttf" />
     <None Remove="Resources\segoeuil.ttf" />
@@ -23,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\segoemdl2.ttf" />
     <EmbeddedResource Include="Resources\segoeui.ttf" />
     <EmbeddedResource Include="Resources\segoeuib.ttf" />
     <EmbeddedResource Include="Resources\segoeuil.ttf" />

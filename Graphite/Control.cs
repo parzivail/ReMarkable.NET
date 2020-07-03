@@ -6,6 +6,7 @@ using ReMarkable.NET.Unix.Driver.Touchscreen;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.Drawing.Processing.Processors.Text;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
@@ -13,13 +14,13 @@ namespace Graphite
 {
     public abstract class Control
     {
-        public event EventHandler<Finger> FingerPress; 
+        public event EventHandler<Finger> FingerPress;
         public event EventHandler<Finger> FingerRelease;
         public event EventHandler<Finger> FingerMove;
 
-        public event EventHandler<StylusPressEventArgs> StylusPress; 
+        public event EventHandler<StylusPressEventArgs> StylusPress;
         public event EventHandler<StylusPressEventArgs> StylusRelease;
-        public event EventHandler<StylusState> StylusMove; 
+        public event EventHandler<StylusState> StylusMove;
 
         public Control Parent { get; protected internal set; }
         public Window Window { get; protected internal set; }
@@ -31,7 +32,7 @@ namespace Graphite
         public Color ForegroundColor { get; set; } = Color.Black;
         public Color BackgroundColor { get; set; } = Color.White;
 
-        public Font Font { get; set; } = Fonts.SegoeUi.CreateFont(36);
+        public Font Font { get; set; } = Fonts.SegoeUiSemibold.CreateFont(36);
 
         public string Text { get; set; }
 
@@ -39,10 +40,13 @@ namespace Graphite
 
         internal void DrawString(Image<Rgb24> buffer, string s, RectangleF layoutRectangle)
         {
-            var size = TextMeasurer.Measure(s, new RendererOptions(Font)).ToRectangle();
+            var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
+            var textGraphicsOptions = new TextGraphicsOptions(new GraphicsOptions(), new TextOptions { FallbackFonts = { Fonts.SegoeMdl2 } });
+
+            var size = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
             size.CenterIn(layoutRectangle);
 
-            buffer.Mutate(g => g.DrawText(s, Font, ForegroundColor, size.Location));
+            buffer.Mutate(g => g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, size.Location));
         }
 
         public virtual bool BoundsContains(PointF point)
