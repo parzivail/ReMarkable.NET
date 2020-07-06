@@ -32,7 +32,9 @@ namespace Sandbox
             var b = new Button
             {
                 Bounds = new Rectangle(50, 50, 230, 50),
-                Text = $"Hello World"
+                Text = "Send",
+                Icon = SegoeUiSymbols.StorageTape,
+                IconPadding = 10
             };
 
             b.FingerPress += (sender, finger) =>

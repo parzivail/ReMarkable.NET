@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -41,6 +42,11 @@ namespace ReMarkable.NET.Graphics
                 Buffer.BlockCopy(rgb565Buf, 0, buf, 0, buf.Length);
                 stream.Write(buf, 0, buf.Length);
             }
+        }
+
+        public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new NotImplementedException();
         }
     }
 }

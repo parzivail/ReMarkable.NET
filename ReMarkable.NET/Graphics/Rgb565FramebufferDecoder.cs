@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -30,6 +31,16 @@ namespace ReMarkable.NET.Graphics
         {
             var image = new Image<Rgb24>(configuration, _area.Width, _area.Height);
             return DecodeIntoImage(stream, image);
+        }
+
+        public Task<Image<TPixel>> DecodeAsync<TPixel>(Configuration configuration, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Image> DecodeAsync(Configuration configuration, Stream stream)
+        {
+            throw new NotImplementedException();
         }
 
         private Image<TPixel> DecodeIntoImage<TPixel>(Stream stream, Image<TPixel> image) where TPixel : unmanaged, IPixel<TPixel>

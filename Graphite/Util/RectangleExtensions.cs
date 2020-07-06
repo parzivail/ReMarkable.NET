@@ -12,6 +12,18 @@ namespace Graphite.Util
             self.Location = other.Location + (other.Size - self.Size) / 2;
         }
 
+        public static void CenterInVertically(ref this RectangleF self, RectangleF other)
+        {
+            var loc = other.Location + (other.Size - self.Size) / 2;
+            self.Location = new PointF(self.Left, loc.Y);
+        }
+
+        public static void CenterInHorizontally(ref this RectangleF self, RectangleF other)
+        {
+            var loc = other.Location + (other.Size - self.Size) / 2;
+            self.Location = new PointF(loc.X, self.Top);
+        }
+
         public static RectangleF ToRectangle(this FontRectangle fr)
         {
             return new RectangleF(new PointF(fr.Left, fr.Top), new SizeF(fr.Width, fr.Height));

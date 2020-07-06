@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
@@ -28,6 +29,11 @@ namespace RmEmulator.Framebuffer
                     stream.WriteByte(rgba32.B);
                 }
             }
+        }
+
+        public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

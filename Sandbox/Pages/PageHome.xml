@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Page>
+  <VerticalPanel Width="*" Height="*">
+    <HorizontalPanel Width="100" Height="*">
+      <Button Height="100" Text="\uED25" Click="ButtonFolderClick"/>
+      <Button Height="100" Text="%%OneWayBinding:DynamicButtonText" Click="ButtonDynamicClick"/>
+    </HorizontalPanel>
+  </VerticalPanel>
+</Page>

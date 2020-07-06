@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Graphite.Typography;
 using Graphite.Util;
 using ReMarkable.NET.Unix.Driver.Digitizer;
@@ -35,18 +36,36 @@ namespace Graphite
         public Font Font { get; set; } = Fonts.SegoeUiSemibold.CreateFont(36);
 
         public string Text { get; set; }
+        public char Icon { get; set; }
+        public float IconPadding { get; set; }
 
         public abstract void Draw(Image<Rgb24> buffer);
 
-        internal void DrawString(Image<Rgb24> buffer, string s, RectangleF layoutRectangle)
+        internal void DrawStringWithIcon(Image<Rgb24> buffer, string icon, string s, RectangleF layoutRectangle)
         {
             var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
             var textGraphicsOptions = new TextGraphicsOptions(new GraphicsOptions(), new TextOptions { FallbackFonts = { Fonts.SegoeMdl2 } });
 
-            var size = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
-            size.CenterIn(layoutRectangle);
+            var iconSize = TextMeasurer.Measure(icon, rendererOptions).ToRectangle();
+            var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
 
-            buffer.Mutate(g => g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, size.Location));
+            if (!s.Contains('\n'))
+                strSize.Height = Font.Size;
+
+            iconSize.Width += IconPadding;
+
+            iconSize.CenterInVertically(layoutRectangle);
+            strSize.CenterInVertically(layoutRectangle);
+
+            var combinedLeft = layoutRectangle.Left + (layoutRectangle.Width - (iconSize.Width + strSize.Width)) / 2;
+
+            iconSize.Location = new PointF(combinedLeft, iconSize.Top);
+            strSize.Location = new PointF(combinedLeft + iconSize.Width, strSize.Top);
+
+            buffer.Mutate(g => g
+                .DrawText(textGraphicsOptions, icon, Font, ForegroundColor, iconSize.Location)
+                .DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location)
+            );
         }
 
         public virtual bool BoundsContains(PointF point)
