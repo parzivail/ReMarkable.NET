@@ -4,6 +4,7 @@ using System.Linq;
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
 using ReMarkable.NET.Unix.Driver.Button;
+using ReMarkable.NET.Unix.Driver.Generic;
 
 namespace RmEmulator.Devices
 {

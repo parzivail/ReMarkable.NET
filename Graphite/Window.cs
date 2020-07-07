@@ -136,7 +136,12 @@ namespace Graphite
 
         public void Refresh(RectangleF rectangle)
         {
-            GetCurretPage().Draw(Buffer);
+            var currentPage = GetCurretPage();
+
+            if (currentPage == null)
+                return;
+
+            currentPage.Draw(Buffer);
             Update?.Invoke(this, new WindowUpdateEventArgs(Buffer, rectangle.GetContainingIntRect()));
         }
     }

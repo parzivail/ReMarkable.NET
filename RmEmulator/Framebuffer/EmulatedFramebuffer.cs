@@ -15,6 +15,7 @@ namespace RmEmulator.Framebuffer
         public int VisibleHeight { get; }
 
         public static Image<Rgb24> BackBuffer;
+        public static Image<Rgb24> FrontBuffer;
 
         public EmulatedFramebuffer(EmulatorWindow emulatorWindow, int visibleWidth, int visibleHeight)
         {

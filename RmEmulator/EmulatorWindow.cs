@@ -13,6 +13,7 @@ using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using RmEmulator.Framebuffer;
 using RmEmulator.Shader;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
@@ -27,7 +28,7 @@ namespace RmEmulator
         public int ScreenVao { get; set; }
         public ShaderProgram ShaderScreen { get; set; }
         public int ScreenTexture { get; set; }
-        
+
         private Rgb24TextureEncoder _textureEncoder = new Rgb24TextureEncoder();
 
         private Queue<RefreshTask> _refreshQueue = new Queue<RefreshTask>();
@@ -190,7 +191,7 @@ namespace RmEmulator
                 using var ms = new MemoryStream();
                 _textureEncoder.Encode(image, ms);
                 var pixels = ms.GetBuffer();
-                
+
                 GL.TexSubImage2D(TextureTarget.Texture2D, 0, imageUploadTask.DestPoint.X, imageUploadTask.DestPoint.Y, imageUploadTask.Image.Width, imageUploadTask.Image.Height,
                     PixelFormat.Rgb, PixelType.UnsignedByte, pixels);
 
@@ -233,9 +234,8 @@ namespace RmEmulator
 
     internal class RefreshTask
     {
-        private readonly int _maxCycles;
-
         private Image<Rgb24> _image;
+        private Image<Rgb24> _previousImage;
         private int _intervals;
         private DateTime _nextRefresh;
 
@@ -249,19 +249,15 @@ namespace RmEmulator
 
             Region = region;
             Mode = mode;
-
-            _maxCycles = mode switch
-            {
-                WaveformMode.Gc16 => 2,
-                _ => 1
-            };
         }
 
         public void Run()
         {
             _image = EmulatedDevices.Display.Framebuffer.Read(Region);
             _image.Mutate(g => g.Crop(new Rectangle(Point.Empty, Region.Size)));
-            
+
+            _previousImage = EmulatedFramebuffer.FrontBuffer.Clone(g => g.Crop(Region));
+
             Running = true;
             _nextRefresh = DateTime.Now;
         }
@@ -272,14 +268,33 @@ namespace RmEmulator
 
             _intervals++;
 
-            if (_intervals > _maxCycles * 2)
+            if (_intervals > 5)
                 Running = false;
             else
             {
-                _image.Mutate(img => img.Invert());
-                imageSwapQueue.Enqueue(new ImageUploadTask(_image, Region.Location));
-
-                _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(250);
+                switch (_intervals)
+                {
+                    case 1:
+                        // new, inverted, edge detected, edges and fill removed from old
+                        // imageSwapQueue.Enqueue(new ImageUploadTask(_image.Clone(g => g.DetectEdges(EdgeDetectionOperators.Laplacian3x3)), Region.Location));
+                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(175);
+                        break;
+                    case 2:
+                        // new, inverted rectangle
+                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(96);
+                        break;
+                    case 3:
+                        // new, inverted, edge detected, edges removed from old
+                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(88);
+                        break;
+                    case 4:
+                        // old, black removed from black on new
+                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(117);
+                        break;
+                    case 5:
+                        // new
+                        break;
+                }
             }
         }
     }

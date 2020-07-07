@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ReMarkable.NET.Unix.Driver.Generic;
 using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver

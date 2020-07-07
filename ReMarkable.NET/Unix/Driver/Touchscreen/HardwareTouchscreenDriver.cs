@@ -1,4 +1,5 @@
 ﻿using System;
+using ReMarkable.NET.Unix.Driver.Generic;
 using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Touchscreen
@@ -49,8 +50,10 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                             case FingerStatus.Moving:
                                 Moved?.Invoke(this, Fingers[_slot]);
                                 break;
+                            case FingerStatus.Untracked:
+                                break;
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                throw new ArgumentOutOfRangeException("Status", Fingers[_slot].Status, Fingers[_slot].Status.GetType().Name);
                         }
 
                         Fingers[_slot].Status = Fingers[_slot].Status switch
@@ -67,7 +70,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     ProcessAbsoluteTouch((TouchscreenEventAbsCode)data.Code, data.Value);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(eventType), eventType, eventType.GetType().Name);
             }
         }
 
@@ -134,7 +137,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     }
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(code), code, null);
+                    throw new ArgumentOutOfRangeException(nameof(code), code, code.GetType().Name);
             }
         }
     }

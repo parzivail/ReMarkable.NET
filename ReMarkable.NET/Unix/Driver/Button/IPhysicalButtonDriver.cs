@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReMarkable.NET.Unix.Driver.Generic;
 
 namespace ReMarkable.NET.Unix.Driver.Button
 {

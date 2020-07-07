@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReMarkable.NET.Unix.Driver.Button;
+using ReMarkable.NET.Unix.Driver.Generic;
 using ReMarkable.NET.Util;
 using SixLabors.ImageSharp;
 
@@ -72,14 +73,14 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                                 Released?.Invoke(null, key);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            throw new ArgumentOutOfRangeException(nameof(key), key, key.GetType().Name);
                     }
 
                     break;
                 case DigitizerEventType.Abs:
-                    var payload = (DigitizerEventAbsCode) data.Code;
+                    var eventCode = (DigitizerEventAbsCode) data.Code;
 
-                    switch (payload)
+                    switch (eventCode)
                     {
                         case DigitizerEventAbsCode.AbsX:
                             _currentPosition.X = data.Value;
@@ -100,12 +101,12 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                             _currentTilt.Y = data.Value;
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            throw new ArgumentOutOfRangeException(nameof(eventCode), eventCode, eventCode.GetType().Name);
                     }
 
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(eventType), eventType, eventType.GetType().Name);
             }
         }
     }

@@ -15,6 +15,12 @@ namespace Graphite
 {
     public abstract class Control
     {
+        private RectangleF _bounds;
+        private Font _font = Fonts.SegoeUiSemibold.CreateFont(36);
+        private Color _foregroundColor = Color.Black;
+        private Color _backgroundColor = Color.White;
+        private string _text;
+
         public event EventHandler<Finger> FingerPress;
         public event EventHandler<Finger> FingerRelease;
         public event EventHandler<Finger> FingerMove;
@@ -26,46 +32,84 @@ namespace Graphite
         public Control Parent { get; protected internal set; }
         public Window Window { get; protected internal set; }
 
-        public RectangleF Bounds { get; set; }
+        public RectangleF Bounds
+        {
+            get => _bounds;
+            set => RedrawWithChange(() => _bounds = value);
+        }
 
         public int Layer { get; set; }
 
-        public Color ForegroundColor { get; set; } = Color.Black;
-        public Color BackgroundColor { get; set; } = Color.White;
+        public Color ForegroundColor
+        {
+            get => _foregroundColor;
+            set => RedrawWithChange(() => _foregroundColor = value);
+        }
 
-        public Font Font { get; set; } = Fonts.SegoeUiSemibold.CreateFont(36);
+        public Color BackgroundColor
+        {
+            get => _backgroundColor;
+            set => RedrawWithChange(() => _backgroundColor = value);
+        }
 
-        public string Text { get; set; }
-        public char Icon { get; set; }
-        public float IconPadding { get; set; }
+        public Font Font
+        {
+            get => _font;
+            set => RedrawWithChange(() => _font = value);
+        }
+
+        public string Text
+        {
+            get => _text;
+            set => RedrawWithChange(() => _text = value);
+        }
 
         public abstract void Draw(Image<Rgb24> buffer);
 
-        internal void DrawStringWithIcon(Image<Rgb24> buffer, string icon, string s, RectangleF layoutRectangle)
+        /// <summary>
+        /// Redraws the control with the smallest rectangle that
+        /// encompasses the visual change provided by the lambda
+        /// including removing artifacts from the previous value
+        /// </summary>
+        /// <param name="action">The visual change to update</param>
+        protected void RedrawWithChange(Action action)
         {
-            var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
+            var oldMinimumRect = GetMinimumRedrawRect();
+            action?.Invoke();
+            var newMinimumRect = GetMinimumRedrawRect();
+
+            var redrawRect = oldMinimumRect.GetSmallestContaining(newMinimumRect);
+            Window?.Refresh(redrawRect);
+        }
+
+        protected void DrawString(Image<Rgb24> buffer, string s, RectangleF layoutRectangle)
+        {
+            if (s == null)
+                return;
+
             var textGraphicsOptions = new TextGraphicsOptions(new GraphicsOptions(), new TextOptions { FallbackFonts = { Fonts.SegoeMdl2 } });
 
-            var iconSize = TextMeasurer.Measure(icon, rendererOptions).ToRectangle();
+            var strSize = MeasureString(s, layoutRectangle);
+
+            buffer.Mutate(g => g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location));
+        }
+
+        protected RectangleF MeasureString(string s, RectangleF layoutRectangle)
+        {
+            if (s == null)
+                return RectangleF.Empty;
+
+            var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
+
             var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
+            strSize.CenterIn(layoutRectangle);
 
-            if (!s.Contains('\n'))
-                strSize.Height = Font.Size;
+            return strSize;
+        }
 
-            iconSize.Width += IconPadding;
-
-            iconSize.CenterInVertically(layoutRectangle);
-            strSize.CenterInVertically(layoutRectangle);
-
-            var combinedLeft = layoutRectangle.Left + (layoutRectangle.Width - (iconSize.Width + strSize.Width)) / 2;
-
-            iconSize.Location = new PointF(combinedLeft, iconSize.Top);
-            strSize.Location = new PointF(combinedLeft + iconSize.Width, strSize.Top);
-
-            buffer.Mutate(g => g
-                .DrawText(textGraphicsOptions, icon, Font, ForegroundColor, iconSize.Location)
-                .DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location)
-            );
+        protected virtual RectangleF GetMinimumRedrawRect()
+        {
+            return Bounds;
         }
 
         public virtual bool BoundsContains(PointF point)

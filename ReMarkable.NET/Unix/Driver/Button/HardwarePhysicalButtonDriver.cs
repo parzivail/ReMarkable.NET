@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReMarkable.NET.Unix.Driver.Generic;
 using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Button
@@ -42,12 +43,12 @@ namespace ReMarkable.NET.Unix.Driver.Button
                             Pressed?.Invoke(null, button);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            throw new ArgumentOutOfRangeException(nameof(buttonState), buttonState, buttonState.GetType().Name);
                     }
 
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(eventType), eventType, eventType.GetType().Name);
             }
         }
     }

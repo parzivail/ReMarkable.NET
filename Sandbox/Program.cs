@@ -29,20 +29,30 @@ namespace Sandbox
             InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
 
             var mainPage = w.CreatePage();
+
+            var presses = 0;
+            var random = new Random();
+
+            var l = new Label
+            {
+                Bounds = new Rectangle(50, 150, 230, 50),
+                Text = "Label"
+            };
+
             var b = new Button
             {
                 Bounds = new Rectangle(50, 50, 230, 50),
-                Text = "Send",
-                Icon = SegoeUiSymbols.StorageTape,
-                IconPadding = 10
+                Text = "Send"
             };
 
             b.FingerPress += (sender, finger) =>
             {
-                Console.WriteLine("Hello, World!");
+                l.Text = $"{Math.Pow(10, random.Next(6))} {presses} presses";
+                presses++;
             };
 
             mainPage.Content.Add(b);
+            mainPage.Content.Add(l);
 
             w.ShowPage(mainPage);
 

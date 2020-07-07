@@ -1,6 +1,8 @@
 ﻿using Graphite.Controls;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace Graphite
 {
@@ -26,6 +28,7 @@ namespace Graphite
 
         public void Draw(Image<Rgb24> buffer)
         {
+            buffer.Mutate(g => g.Clear(Color.White));
             Content.Draw(buffer);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http.Headers;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -22,6 +23,17 @@ namespace Graphite.Util
         {
             var loc = other.Location + (other.Size - self.Size) / 2;
             self.Location = new PointF(loc.X, self.Top);
+        }
+
+        public static RectangleF GetSmallestContaining(this RectangleF a, RectangleF b)
+        {
+            var x = Math.Min(a.Left, b.Left);
+            var y = Math.Max(a.Top, b.Top);
+
+            var width = Math.Max(a.Right, b.Right) - x;
+            var height = Math.Max(a.Bottom, b.Bottom) - y;
+
+            return new RectangleF(x, y, width, height);
         }
 
         public static RectangleF ToRectangle(this FontRectangle fr)

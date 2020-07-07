@@ -4,6 +4,7 @@ using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using RmEmulator.Framebuffer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace RmEmulator.Devices
 {
@@ -29,6 +30,7 @@ namespace RmEmulator.Devices
         public void Refresh(Rectangle rectangle, WaveformMode mode)
         {
             _emulatorWindow.RefreshRegion(rectangle, mode);
+            EmulatedFramebuffer.FrontBuffer.Mutate(g => g.DrawImage(EmulatedFramebuffer.BackBuffer.Clone(g2 => g2.Crop(rectangle)), rectangle.Location, 1));
         }
 
         public void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
