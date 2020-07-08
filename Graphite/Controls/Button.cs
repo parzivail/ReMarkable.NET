@@ -55,10 +55,10 @@ namespace Graphite.Controls
 
             buffer.Mutate(g =>
             {
-                g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location);
+                g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.GetContainingIntRect().Location);
 
                 if (icon != 0)
-                    g.DrawText(textGraphicsOptions, icon.ToString(), Font, ForegroundColor, iconSize.Location);
+                    g.DrawText(textGraphicsOptions, icon.ToString(), Font, ForegroundColor, iconSize.GetContainingIntRect().Location);
             });
         }
 

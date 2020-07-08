@@ -16,7 +16,7 @@ namespace Graphite
     public abstract class Control
     {
         private RectangleF _bounds;
-        private Font _font = Fonts.SegoeUiSemibold.CreateFont(36);
+        private Font _font = Fonts.SegoeUiSemibold.CreateFont(32);
         private Color _foregroundColor = Color.Black;
         private Color _backgroundColor = Color.White;
         private string _text;
@@ -104,7 +104,7 @@ namespace Graphite
             var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
             strSize.CenterIn(layoutRectangle);
 
-            return strSize;
+            return strSize.GetContainingIntRect();
         }
 
         protected virtual RectangleF GetMinimumRedrawRect()

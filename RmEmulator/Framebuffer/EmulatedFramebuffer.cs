@@ -24,6 +24,7 @@ namespace RmEmulator.Framebuffer
             VisibleHeight = visibleHeight;
 
             BackBuffer = new Image<Rgb24>(visibleWidth, visibleHeight);
+            FrontBuffer = new Image<Rgb24>(visibleWidth, visibleHeight);
         }
 
         public Image<Rgb24> Read(Rectangle area)

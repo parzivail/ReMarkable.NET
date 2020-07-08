@@ -30,12 +30,10 @@ namespace Sandbox
 
             var mainPage = w.CreatePage();
 
-            var presses = 0;
-            var random = new Random();
 
             var l = new Label
             {
-                Bounds = new Rectangle(50, 150, 230, 50),
+                Bounds = new Rectangle(400, 150, 230, 50),
                 Text = "Label"
             };
 
@@ -47,8 +45,7 @@ namespace Sandbox
 
             b.FingerPress += (sender, finger) =>
             {
-                l.Text = $"{Math.Pow(10, random.Next(6))} {presses} presses";
-                presses++;
+                l.Text = $"{SegoeUiSymbols.GiftboxOpen}";
             };
 
             mainPage.Content.Add(b);

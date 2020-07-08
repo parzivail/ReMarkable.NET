@@ -12,10 +12,7 @@ using OpenToolkit.Windowing.Desktop;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using RmEmulator.Framebuffer;
 using RmEmulator.Shader;
-using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 using Size = System.Drawing.Size;
 
@@ -217,85 +214,6 @@ namespace RmEmulator
         public void RefreshRegion(Rectangle region, WaveformMode mode)
         {
             _refreshQueue.Enqueue(new RefreshTask(region, mode));
-        }
-    }
-
-    internal class ImageUploadTask
-    {
-        public Image<Rgb24> Image { get; }
-        public Point DestPoint { get; }
-
-        public ImageUploadTask(Image<Rgb24> image, Point destPoint)
-        {
-            Image = image;
-            DestPoint = destPoint;
-        }
-    }
-
-    internal class RefreshTask
-    {
-        private Image<Rgb24> _image;
-        private Image<Rgb24> _previousImage;
-        private int _intervals;
-        private DateTime _nextRefresh;
-
-        public Rectangle Region { get; }
-        public WaveformMode Mode { get; }
-        public bool Running { get; private set; }
-
-        public RefreshTask(Rectangle region, WaveformMode mode)
-        {
-            EmulatedDevices.Display.Framebuffer.ConstrainRectangle(ref region);
-
-            Region = region;
-            Mode = mode;
-        }
-
-        public void Run()
-        {
-            _image = EmulatedDevices.Display.Framebuffer.Read(Region);
-            _image.Mutate(g => g.Crop(new Rectangle(Point.Empty, Region.Size)));
-
-            _previousImage = EmulatedFramebuffer.FrontBuffer.Clone(g => g.Crop(Region));
-
-            Running = true;
-            _nextRefresh = DateTime.Now;
-        }
-
-        public void Poll(Queue<ImageUploadTask> imageSwapQueue)
-        {
-            if (DateTime.Now < _nextRefresh) return;
-
-            _intervals++;
-
-            if (_intervals > 5)
-                Running = false;
-            else
-            {
-                switch (_intervals)
-                {
-                    case 1:
-                        // new, inverted, edge detected, edges and fill removed from old
-                        // imageSwapQueue.Enqueue(new ImageUploadTask(_image.Clone(g => g.DetectEdges(EdgeDetectionOperators.Laplacian3x3)), Region.Location));
-                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(175);
-                        break;
-                    case 2:
-                        // new, inverted rectangle
-                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(96);
-                        break;
-                    case 3:
-                        // new, inverted, edge detected, edges removed from old
-                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(88);
-                        break;
-                    case 4:
-                        // old, black removed from black on new
-                        _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(117);
-                        break;
-                    case 5:
-                        // new
-                        break;
-                }
-            }
         }
     }
 }
