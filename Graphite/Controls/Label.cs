@@ -7,12 +7,12 @@ namespace Graphite.Controls
     {
         public override void Draw(Image<Rgb24> buffer)
         {
-            DrawString(buffer, Text, Bounds);
+            DrawString(buffer, Text, Bounds, RectAlign.Left | RectAlign.Top);
         }
 
         protected override RectangleF GetMinimumRedrawRect()
         {
-            return MeasureString(Text, Bounds);
+            return MeasureString(Text, Bounds, RectAlign.Left | RectAlign.Top);
         }
     }
 }

@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using NLog;
 using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
+using ReMarkable.NET.Util;
 
 namespace RmEmulator.Shader
 {
     public class ShaderProgram
     {
+        private static Logger _logger;
+
+        static ShaderProgram()
+        {
+            _logger = Lumberjack.CreateLogger("GLSL");
+        }
+
         private readonly string _fProg;
         private readonly string _vProg;
         protected Dictionary<string, int> CacheLoc;
@@ -122,7 +131,7 @@ namespace RmEmulator.Shader
         {
             msg = msg.Trim();
             if (msg.Length > 0)
-                Console.WriteLine($"GLSL: {msg}");
+                _logger.Debug(msg);
         }
     }
 }

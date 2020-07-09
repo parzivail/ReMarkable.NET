@@ -1,13 +1,8 @@
-﻿using System;
-using Graphite;
+﻿using Graphite;
 using Graphite.Controls;
-using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
-using SixLabors.Fonts;
+using ReMarkable.NET.Util;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace Sandbox
 {
@@ -15,6 +10,8 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
+            var logger = Lumberjack.CreateLogger("Sandbox");
+
             var screen = OutputDevices.Display;
 
             var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
@@ -40,6 +37,7 @@ namespace Sandbox
                 Bounds = new Rectangle(400, 50, 50, 50)
             });
 
+            logger.Info("Showing main page");
             w.ShowPage(mainPage);
 
             while (true) { }

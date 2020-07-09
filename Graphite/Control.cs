@@ -82,14 +82,14 @@ namespace Graphite
             Window?.Refresh(redrawRect);
         }
 
-        protected void DrawString(Image<Rgb24> buffer, string s, RectangleF layoutRectangle)
+        protected void DrawString(Image<Rgb24> buffer, string s, RectangleF layoutRectangle, RectAlign align = RectAlign.Center | RectAlign.Middle)
         {
             if (s == null)
                 return;
 
             var textGraphicsOptions = new TextGraphicsOptions(new GraphicsOptions(), new TextOptions { FallbackFonts = { Fonts.SegoeMdl2 } });
 
-            var strSize = MeasureString(s, layoutRectangle);
+            var strSize = MeasureString(s, layoutRectangle, align);
 
             buffer.Mutate(g => g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location));
         }
@@ -107,8 +107,8 @@ namespace Graphite
 
             iconSize.Width += iconPadding;
 
-            iconSize.CenterInVertically(layoutRectangle);
-            strSize.CenterInVertically(layoutRectangle);
+            iconSize.Align(layoutRectangle, RectAlign.Middle);
+            strSize.Align(layoutRectangle, RectAlign.Middle);
 
             var combinedLeft = layoutRectangle.Left + (layoutRectangle.Width - (iconSize.Width + strSize.Width)) / 2;
 
@@ -124,7 +124,7 @@ namespace Graphite
             });
         }
 
-        protected RectangleF MeasureString(string s, RectangleF layoutRectangle)
+        protected RectangleF MeasureString(string s, RectangleF layoutRectangle, RectAlign align)
         {
             if (s == null)
                 return RectangleF.Empty;
@@ -132,8 +132,7 @@ namespace Graphite
             var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
 
             var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
-            strSize.CenterIn(layoutRectangle);
-
+            strSize.Align(layoutRectangle, align);
             return strSize.GetContainingIntRect();
         }
 

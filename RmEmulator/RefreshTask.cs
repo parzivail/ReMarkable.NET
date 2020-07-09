@@ -48,7 +48,6 @@ namespace RmEmulator
             {
                 Running = false;
                 EmulatedFramebuffer.FrontBuffer.Mutate(g => g.DrawImage(EmulatedFramebuffer.BackBuffer.Clone(g2 => g2.Crop(Region)), Region.Location, 1));
-                EmulatedFramebuffer.FrontBuffer.Save("E:\\colby\\Desktop\\temp2\\output.png");
             }
             else
             {
@@ -107,6 +106,8 @@ namespace RmEmulator
                         imageSwapQueue.Enqueue(new ImageUploadTask(_image, Region.Location));
                         break;
                     }
+                    default:
+                        break;
                 }
             }
         }

@@ -5,19 +5,17 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using NLog;
 using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
 using OpenToolkit.Windowing.Desktop;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
-using RmEmulator.Devices;
+using ReMarkable.NET.Util;
 using RmEmulator.Framebuffer;
 using RmEmulator.Shader;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using Rectangle = SixLabors.ImageSharp.Rectangle;
-using Size = System.Drawing.Size;
 
 namespace RmEmulator
 {
@@ -25,19 +23,24 @@ namespace RmEmulator
     {
         private static readonly DebugProc DebugCallback = OnGlMessage;
 
+        private static Logger _logger;
+        private static Logger _glLogger;
+
         public int ScreenVao { get; set; }
         public ShaderProgram ShaderScreen { get; set; }
         public int ScreenTexture { get; set; }
 
-        private Rgb24TextureEncoder _textureEncoder = new Rgb24TextureEncoder();
+        private readonly Rgb24TextureEncoder _textureEncoder = new Rgb24TextureEncoder();
 
-        private Queue<RefreshTask> _refreshQueue = new Queue<RefreshTask>();
-        private Queue<ImageUploadTask> _imageSwapQueue = new Queue<ImageUploadTask>();
+        private readonly Queue<RefreshTask> _refreshQueue = new Queue<RefreshTask>();
+        private readonly Queue<ImageUploadTask> _imageUploadQueue = new Queue<ImageUploadTask>();
 
         private Thread _appThread;
 
         public EmulatorWindow() : base(GameWindowSettings.Default, NativeWindowSettings.Default)
         {
+            Thread.CurrentThread.Name = "EmuWindow";
+
             Load += WindowLoad;
             Resize += WindowResize;
 
@@ -47,10 +50,15 @@ namespace RmEmulator
             Closing += WindowClosing;
 
             WindowBorder = WindowBorder.Fixed;
+
+            _logger = Lumberjack.CreateLogger("RmEmulator");
+            _glLogger = Lumberjack.CreateLogger("OpenGL");
         }
 
         private void WindowLoad()
         {
+            _logger.Info("Setting up OpenGL");
+
             // Set up caps
             GL.Enable(EnableCap.RescaleNormal);
             GL.Enable(EnableCap.DebugOutput);
@@ -64,15 +72,17 @@ namespace RmEmulator
             GL.ClearColor(1, 1, 1, 1);
 
             ShaderScreen = new ShaderProgram(
-                "#version 330 core\nout vec4 FragColor;\nin vec2 TexCoords;\nuniform sampler2D tex;\nvoid main(){FragColor=vec4(texture(tex,vec2(TexCoords.x,1-TexCoords.y)).rgb,1.0);}",
+                "#version 330 core\nout vec4 FragColor;\nin vec2 TexCoords;\nuniform sampler2D texture;\nvoid main(){FragColor=vec4(texture(texture,vec2(TexCoords.x,1-TexCoords.y)).rgb,1.0);}",
                 "#version 330 core\nlayout (location=0) in vec2 aPos;\nlayout (location=1) in vec2 aTexCoords;\nout vec2 TexCoords;\nvoid main()\n{\ngl_Position=vec4(aPos.x,aPos.y,0.0,1.0);\nTexCoords=aTexCoords;\n} "
                 );
-            ShaderScreen.Uniforms.SetValue("tex", 0);
+            ShaderScreen.Uniforms.SetValue("texture", 0);
 
             CreateScreenVao();
 
+            _logger.Info("Creating emulated devices");
             EmulatedDevices.Init(this);
 
+            _logger.Info("Creating screen buffer");
             ScreenTexture = GL.GenTexture();
 
             var w = EmulatedDevices.Display.VisibleWidth;
@@ -93,17 +103,6 @@ namespace RmEmulator
                 (int)TextureWrapMode.ClampToEdge);
             GL.BindTexture(TextureTarget.Texture2D, 0);
 
-            var assemblyFile = "Sandbox.dll";
-            var appAssy = Assembly.LoadFrom(assemblyFile);
-
-            var appEntry = appAssy.EntryPoint;
-
-            Environment.SetEnvironmentVariable("RM_EMULATOR", "1");
-            _appThread = new Thread(() =>
-            {
-                appEntry.Invoke(null, new object[] { new string[0] });
-            });
-
             MouseDown += EmulatedDevices.Touchscreen.ConsumeMouseDown;
             MouseUp += EmulatedDevices.Touchscreen.ConsumeMouseUp;
             MouseMove += EmulatedDevices.Touchscreen.ConsumeMouseMove;
@@ -119,11 +118,25 @@ namespace RmEmulator
                 Directory.CreateDirectory("Screenshots");
                 var filename = $"Screenshots/screenshot-{DateTime.Now.Ticks}.png";
                 EmulatedFramebuffer.FrontBuffer.Save(filename);
-                Console.WriteLine($"Saved screenshot as {filename}");
+                _logger.Info("Saved screenshot as {filename}");
             };
 
             Size = new Vector2i(EmulatedDevices.Display.VisibleWidth / 2, EmulatedDevices.Display.VisibleHeight / 2);
+            
+            _logger.Info("Loading application assembly");
 
+            var assemblyFile = "Sandbox.dll";
+            var appAssy = Assembly.LoadFrom(assemblyFile);
+
+            var appEntry = appAssy.EntryPoint;
+
+            Environment.SetEnvironmentVariable("RM_EMULATOR", "1");
+            _appThread = new Thread(() => { appEntry.Invoke(null, new object[] {new string[0]}); })
+            {
+                Name = "EmuApp"
+            };
+
+            _logger.Info("Spawning application thread");
             _appThread.Start();
         }
 
@@ -145,7 +158,7 @@ namespace RmEmulator
                 return;
 
             var msg = Marshal.PtrToStringAnsi(message, length);
-            Console.WriteLine($"OpenGL: {msg}");
+            _glLogger.Debug(msg);
         }
 
         private void CreateScreenVao()
@@ -176,7 +189,7 @@ namespace RmEmulator
 
         private void WindowResize(ResizeEventArgs obj)
         {
-            GL.Viewport(new Size(Size.X, Size.Y));
+            GL.Viewport(0, 0, Size.X, Size.Y);
         }
 
         private void WindowUpdate(FrameEventArgs e)
@@ -184,17 +197,22 @@ namespace RmEmulator
             if (_refreshQueue.TryPeek(out var refreshTask))
             {
                 if (!refreshTask.Running)
+                {
+                    _logger.Debug($"Refreshing region [Location=({refreshTask.Region.X},{refreshTask.Region.Y}) Size=({refreshTask.Region.Width},{refreshTask.Region.Height})] with {refreshTask.Mode} waveform");
                     refreshTask.Run();
+                }
                 else
                 {
-                    refreshTask.Poll(_imageSwapQueue);
+                    refreshTask.Poll(_imageUploadQueue);
                     if (!refreshTask.Running)
                         _refreshQueue.Dequeue();
                 }
             }
 
-            if (_imageSwapQueue.TryDequeue(out var imageUploadTask))
+            if (_imageUploadQueue.TryDequeue(out var imageUploadTask))
             {
+                _logger.Debug($"Bitting region [Location=({imageUploadTask.DestPoint.X},{imageUploadTask.DestPoint.Y}) Size=({imageUploadTask.Image.Width},{imageUploadTask.Image.Height})]");
+
                 GL.BindTexture(TextureTarget.Texture2D, ScreenTexture);
 
                 var image = imageUploadTask.Image;
