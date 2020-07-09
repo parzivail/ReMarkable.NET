@@ -94,6 +94,36 @@ namespace Graphite
             buffer.Mutate(g => g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.Location));
         }
 
+        protected void DrawStringWithIcon(Image<Rgb24> buffer, char icon, float iconPadding, string s, RectangleF layoutRectangle)
+        {
+            var rendererOptions = new RendererOptions(Font) { FallbackFontFamilies = new[] { Fonts.SegoeMdl2 } };
+            var textGraphicsOptions = new TextGraphicsOptions(new GraphicsOptions(), new TextOptions { FallbackFonts = { Fonts.SegoeMdl2 } });
+
+            var iconSize = icon == 0 ? RectangleF.Empty : TextMeasurer.Measure(icon.ToString(), rendererOptions).ToRectangle();
+            var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
+
+            if (s != null && !s.Contains('\n'))
+                strSize.Height = Font.Size;
+
+            iconSize.Width += iconPadding;
+
+            iconSize.CenterInVertically(layoutRectangle);
+            strSize.CenterInVertically(layoutRectangle);
+
+            var combinedLeft = layoutRectangle.Left + (layoutRectangle.Width - (iconSize.Width + strSize.Width)) / 2;
+
+            iconSize.Location = new PointF(combinedLeft, iconSize.Top);
+            strSize.Location = new PointF(combinedLeft + iconSize.Width, strSize.Top);
+
+            buffer.Mutate(g =>
+            {
+                g.DrawText(textGraphicsOptions, s, Font, ForegroundColor, strSize.GetContainingIntRect().Location);
+
+                if (icon != 0)
+                    g.DrawText(textGraphicsOptions, icon.ToString(), Font, ForegroundColor, iconSize.GetContainingIntRect().Location);
+            });
+        }
+
         protected RectangleF MeasureString(string s, RectangleF layoutRectangle)
         {
             if (s == null)

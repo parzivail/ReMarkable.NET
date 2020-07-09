@@ -8,10 +8,13 @@ using System.Threading;
 using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
+using OpenToolkit.Windowing.Common.Input;
 using OpenToolkit.Windowing.Desktop;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
+using RmEmulator.Devices;
 using RmEmulator.Framebuffer;
 using RmEmulator.Shader;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 using Size = System.Drawing.Size;
@@ -107,6 +110,17 @@ namespace RmEmulator
 
             KeyUp += EmulatedDevices.PhysicalButtons.ConsumeKeyUp;
             KeyDown += EmulatedDevices.PhysicalButtons.ConsumeKeyDown;
+
+            KeyDown += args =>
+            {
+                if (args.Key != Key.S)
+                    return;
+
+                Directory.CreateDirectory("Screenshots");
+                var filename = $"Screenshots/screenshot-{DateTime.Now.Ticks}.png";
+                EmulatedFramebuffer.FrontBuffer.Save(filename);
+                Console.WriteLine($"Saved screenshot as {filename}");
+            };
 
             Size = new Vector2i(EmulatedDevices.Display.VisibleWidth / 2, EmulatedDevices.Display.VisibleHeight / 2);
 

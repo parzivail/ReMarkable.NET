@@ -29,27 +29,16 @@ namespace Sandbox
             InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
 
             var mainPage = w.CreatePage();
-
-
-            var l = new Label
+            
+            mainPage.Content.Add(new BatteryIndicator
             {
-                Bounds = new Rectangle(400, 150, 230, 50),
-                Text = "Label"
-            };
+                Bounds = new Rectangle(400, 150, 50, 50)
+            });
 
-            var b = new Button
+            mainPage.Content.Add(new WiFiIndicator
             {
-                Bounds = new Rectangle(50, 50, 230, 50),
-                Text = "Send"
-            };
-
-            b.FingerPress += (sender, finger) =>
-            {
-                l.Text = $"{SegoeUiSymbols.GiftboxOpen}";
-            };
-
-            mainPage.Content.Add(b);
-            mainPage.Content.Add(l);
+                Bounds = new Rectangle(400, 50, 50, 50)
+            });
 
             w.ShowPage(mainPage);
 

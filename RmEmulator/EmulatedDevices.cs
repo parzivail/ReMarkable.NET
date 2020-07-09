@@ -1,4 +1,5 @@
-﻿using RmEmulator.Devices;
+﻿using OpenToolkit.Graphics.ES20;
+using RmEmulator.Devices;
 
 namespace RmEmulator
 {
@@ -13,6 +14,7 @@ namespace RmEmulator
         public static EmulatedPerformanceMonitor Performance;
         public static EmulatedPowerSupplyMonitor Battery;
         public static EmulatedPowerSupplyMonitor UsbPower;
+        public static EmulatedWirelessMonitor Wireless;
 
         public static void Init(EmulatorWindow emulatorWindow)
         {
@@ -25,6 +27,7 @@ namespace RmEmulator
             Performance = new EmulatedPerformanceMonitor();
             Battery = new EmulatedPowerSupplyMonitor();
             UsbPower = new EmulatedPowerSupplyMonitor();
+            Wireless = new EmulatedWirelessMonitor();
         }
     }
 }

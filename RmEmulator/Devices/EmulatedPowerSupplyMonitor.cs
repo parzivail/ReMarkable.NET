@@ -6,7 +6,7 @@ namespace RmEmulator.Devices
     {
         public float GetPercentage()
         {
-            return 1;
+            return 0.99f;
         }
 
         public float GetChargeFull()
