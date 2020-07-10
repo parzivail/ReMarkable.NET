@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Graphite.Symbols;
 using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Unix.Driver.Battery;
 
 namespace Graphite.Controls
 {
-    public class BatteryIndicator : Label
+    public class BatteryIndicator : IconLabel<SegoeMdl2Glyphs>
     {
-        private static readonly char[] BatteryIndicators =
+        private static readonly SegoeMdl2Glyphs[] BatteryIndicators =
         {
-            SegoeUiSymbols.MobBattery0, SegoeUiSymbols.MobBattery1, SegoeUiSymbols.MobBattery2, SegoeUiSymbols.MobBattery3, SegoeUiSymbols.MobBattery4, 
-            SegoeUiSymbols.MobBattery5, SegoeUiSymbols.MobBattery6, SegoeUiSymbols.MobBattery7, SegoeUiSymbols.MobBattery8, SegoeUiSymbols.MobBattery9, 
-            SegoeUiSymbols.MobBattery10
+            SegoeMdl2Glyphs.VerticalBattery0, SegoeMdl2Glyphs.VerticalBattery1, SegoeMdl2Glyphs.VerticalBattery2, SegoeMdl2Glyphs.VerticalBattery3, SegoeMdl2Glyphs.VerticalBattery4,
+            SegoeMdl2Glyphs.VerticalBattery5, SegoeMdl2Glyphs.VerticalBattery6, SegoeMdl2Glyphs.VerticalBattery7, SegoeMdl2Glyphs.VerticalBattery8, SegoeMdl2Glyphs.VerticalBattery9, 
+            SegoeMdl2Glyphs.VerticalBattery10
         };
 
-        private static readonly char[] ChargingBatteryIndicators =
+        private static readonly SegoeMdl2Glyphs[] ChargingBatteryIndicators =
         {
-            SegoeUiSymbols.MobBatteryCharging0, SegoeUiSymbols.MobBatteryCharging1, SegoeUiSymbols.MobBatteryCharging2, SegoeUiSymbols.MobBatteryCharging3, SegoeUiSymbols.MobBatteryCharging4, 
-            SegoeUiSymbols.MobBatteryCharging5, SegoeUiSymbols.MobBatteryCharging6, SegoeUiSymbols.MobBatteryCharging7, SegoeUiSymbols.MobBatteryCharging8, SegoeUiSymbols.MobBatteryCharging9, 
-            SegoeUiSymbols.MobBatteryCharging10
+            SegoeMdl2Glyphs.VerticalBatteryCharging0, SegoeMdl2Glyphs.VerticalBatteryCharging1, SegoeMdl2Glyphs.VerticalBatteryCharging2, SegoeMdl2Glyphs.VerticalBatteryCharging3, SegoeMdl2Glyphs.VerticalBatteryCharging4, 
+            SegoeMdl2Glyphs.VerticalBatteryCharging5, SegoeMdl2Glyphs.VerticalBatteryCharging6, SegoeMdl2Glyphs.VerticalBatteryCharging7, SegoeMdl2Glyphs.VerticalBatteryCharging8, SegoeMdl2Glyphs.VerticalBatteryCharging9, 
+            SegoeMdl2Glyphs.VerticalBatteryCharging10
         };
 
-        public BatteryIndicator()
+        public BatteryIndicator() : base(SymbolAtlases.SegoeMdl2)
         {
             Poll();
         }
@@ -35,7 +36,7 @@ namespace Graphite.Controls
 
             var indicators = PassiveDevices.Battery.GetStatus() != PowerSupplyStatus.Charging ? ChargingBatteryIndicators : BatteryIndicators;
             var batteryIndex = (int)Math.Round((indicators.Length - 1) * batteryPercentage);
-            Text = $"{indicators[batteryIndex]}";
+            Icon = indicators[batteryIndex];
         }
     }
 }

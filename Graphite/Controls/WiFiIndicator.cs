@@ -1,22 +1,23 @@
 ﻿using System;
+using Graphite.Symbols;
 using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
 
 namespace Graphite.Controls
 {
-    public class WiFiIndicator : Label
+    public class WiFiIndicator : IconLabel<SegoeMdl2Glyphs>
     {
-        private static readonly char[] WiFiIndicators =
+        private static readonly SegoeMdl2Glyphs[] WiFiIndicators =
         {
-            SegoeUiSymbols.MobWifi1, SegoeUiSymbols.MobWifi2, SegoeUiSymbols.MobWifi3, SegoeUiSymbols.MobWifi4
+            SegoeMdl2Glyphs.Wifi1, SegoeMdl2Glyphs.Wifi2, SegoeMdl2Glyphs.Wifi3, SegoeMdl2Glyphs.Wifi4
         };
 
-        private static readonly char[] WiFiWarningIndicators =
+        private static readonly SegoeMdl2Glyphs[] WiFiWarningIndicators =
         {
-            SegoeUiSymbols.MobWifiWarning1, SegoeUiSymbols.MobWifiWarning2, SegoeUiSymbols.MobWifiWarning3, SegoeUiSymbols.MobWifiWarning4
+            SegoeMdl2Glyphs.WifiWarning1, SegoeMdl2Glyphs.WifiWarning2, SegoeMdl2Glyphs.WifiWarning3, SegoeMdl2Glyphs.WifiWarning4
         };
 
-        public WiFiIndicator()
+        public WiFiIndicator() : base(SymbolAtlases.SegoeMdl2)
         {
             Poll();
         }
@@ -42,14 +43,14 @@ namespace Graphite.Controls
                     };
 
                     var batteryIndex = (int) Math.Round((indicators.Length - 1) * wifiStrength);
-                    Text = $"{indicators[batteryIndex]}";
+                    Icon = indicators[batteryIndex];
                     break;
                 }
                 case WifiStatus.NotConnected:
-                    Text = $"{SegoeUiSymbols.NetworkOffline}";
+                    Icon = SegoeMdl2Glyphs.NetworkOffline;
                     break;
                 case WifiStatus.Disabled:
-                    Text = $"{SegoeUiSymbols.MobAirplane}";
+                    Icon = SegoeMdl2Glyphs.Airplane;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

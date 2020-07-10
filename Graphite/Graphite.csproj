@@ -40,17 +40,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\FontResources.Designer.cs">
+    <Compile Update="Symbols\EmbeddedSymbols.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>FontResources.resx</DependentUpon>
+      <DependentUpon>EmbeddedSymbols.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Typography\EmbeddedFonts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmbeddedFonts.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\FontResources.resx">
+    <EmbeddedResource Update="Symbols\EmbeddedSymbols.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>FontResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>EmbeddedSymbols.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Typography\EmbeddedFonts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmbeddedFonts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

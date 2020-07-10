@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Graphite;
 using Graphite.Controls;
 using ReMarkable.NET.Unix.Driver;
@@ -14,6 +15,8 @@ namespace Sandbox
         static void Main(string[] args)
         {
             var logger = Lumberjack.CreateLogger("Sandbox");
+
+            var threadLock = new ManualResetEventSlim();
 
             var screen = OutputDevices.Display;
 
@@ -33,7 +36,7 @@ namespace Sandbox
             logger.Info("Showing main page");
             w.ShowPage(mainPage);
 
-            while (true) { }
+            threadLock.Wait();
         }
 
         private static void WindowUpdate(object sender, WindowUpdateEventArgs e)
