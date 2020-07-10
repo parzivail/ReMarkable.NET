@@ -1,7 +1,10 @@
-﻿using Graphite;
+﻿using System;
+using System.Collections.Generic;
+using Graphite;
 using Graphite.Controls;
 using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Util;
+using Sandbox.Pages;
 using SixLabors.ImageSharp;
 
 namespace Sandbox
@@ -25,17 +28,7 @@ namespace Sandbox
             InputDevices.Touchscreen.Released += (sender, finger) => w.ConsumeRelease(finger);
             InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
 
-            var mainPage = w.CreatePage();
-            
-            mainPage.Content.Add(new BatteryIndicator
-            {
-                Bounds = new Rectangle(400, 150, 50, 50)
-            });
-
-            mainPage.Content.Add(new WiFiIndicator
-            {
-                Bounds = new Rectangle(400, 50, 50, 50)
-            });
+            var mainPage = w.CreatePage<MainPage>();
 
             logger.Info("Showing main page");
             w.ShowPage(mainPage);

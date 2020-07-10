@@ -14,16 +14,15 @@ namespace Graphite
 
         public Window Window { get; }
 
-        internal Page(Window window, int width, int height)
+        internal Page(Window window, int width, int height, Panel content)
         {
             Window = window;
             Width = width;
             Height = height;
-            Content = new Panel
-            {
-                Window = window,
-                Bounds = new Rectangle(0, 0, width, height)
-            };
+
+            Content = content;
+            Content.Bounds = new Rectangle(0, 0, width, height);
+            Content.LayoutControls();
         }
 
         public void Draw(Image<Rgb24> buffer)

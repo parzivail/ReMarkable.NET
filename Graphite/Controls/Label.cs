@@ -1,5 +1,6 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace Graphite.Controls
 {
@@ -7,12 +8,12 @@ namespace Graphite.Controls
     {
         public override void Draw(Image<Rgb24> buffer)
         {
-            DrawString(buffer, Text, Bounds, RectAlign.Left | RectAlign.Top);
+            DrawString(buffer, Text, Bounds, TextAlign);
         }
 
         protected override RectangleF GetMinimumRedrawRect()
         {
-            return MeasureString(Text, Bounds, RectAlign.Left | RectAlign.Top);
+            return MeasureString(Text, Bounds, TextAlign);
         }
     }
 }

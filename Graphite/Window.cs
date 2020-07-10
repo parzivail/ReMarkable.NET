@@ -117,9 +117,9 @@ namespace Graphite
             return _pages.Count > 0 ? _pages.Peek() : null;
         }
 
-        public Page CreatePage()
+        public Page CreatePage<T>() where T : Panel, new()
         {
-            return new Page(this, Width, Height);
+            return new Page(this, Width, Height, new T());
         }
 
         public void ShowPage(Page page)

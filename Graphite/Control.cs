@@ -20,6 +20,7 @@ namespace Graphite
         private Color _foregroundColor = Color.Black;
         private Color _backgroundColor = Color.White;
         private string _text;
+        private RectAlign _textAlign = RectAlign.Left | RectAlign.Top;
 
         public event EventHandler<Finger> FingerPress;
         public event EventHandler<Finger> FingerRelease;
@@ -36,6 +37,18 @@ namespace Graphite
         {
             get => _bounds;
             set => RedrawWithChange(() => _bounds = value);
+        }
+
+        public PointF Location
+        {
+            get => Bounds.Location;
+            set => RedrawWithChange(() => _bounds.Location = value);
+        }
+
+        public SizeF Size
+        {
+            get => Bounds.Size;
+            set => RedrawWithChange(() => _bounds.Size = value);
         }
 
         public int Layer { get; set; }
@@ -62,6 +75,12 @@ namespace Graphite
         {
             get => _text;
             set => RedrawWithChange(() => _text = value);
+        }
+
+        public RectAlign TextAlign
+        {
+            get => _textAlign;
+            set => RedrawWithChange(() => _textAlign = value);
         }
 
         public abstract void Draw(Image<Rgb24> buffer);
@@ -134,6 +153,11 @@ namespace Graphite
             var strSize = TextMeasurer.Measure(s, rendererOptions).ToRectangle();
             strSize.Align(layoutRectangle, align);
             return strSize.GetContainingIntRect();
+        }
+
+        protected void DrawBounds(IImageProcessingContext g)
+        {
+            g.Draw(ForegroundColor, 1, Bounds);
         }
 
         protected virtual RectangleF GetMinimumRedrawRect()

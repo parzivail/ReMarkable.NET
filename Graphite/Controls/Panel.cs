@@ -33,7 +33,7 @@ namespace Graphite.Controls
         }
 
         /// <inheritdoc />
-        public void Add(Control item)
+        public virtual void Add(Control item)
         {
             if (item != null)
             {
@@ -116,6 +116,10 @@ namespace Graphite.Controls
         public override void Draw(Image<Rgb24> buffer)
         {
             foreach (var control in _controls) control.Draw(buffer);
+        }
+
+        public virtual void LayoutControls()
+        {
         }
     }
 }

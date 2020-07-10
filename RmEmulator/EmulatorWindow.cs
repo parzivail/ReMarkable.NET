@@ -72,10 +72,10 @@ namespace RmEmulator
             GL.ClearColor(1, 1, 1, 1);
 
             ShaderScreen = new ShaderProgram(
-                "#version 330 core\nout vec4 FragColor;\nin vec2 TexCoords;\nuniform sampler2D texture;\nvoid main(){FragColor=vec4(texture(texture,vec2(TexCoords.x,1-TexCoords.y)).rgb,1.0);}",
+                "#version 330 core\nout vec4 FragColor;\nin vec2 TexCoords;\nuniform sampler2D img;\nvoid main(){FragColor=vec4(texture(img,vec2(TexCoords.x,1-TexCoords.y)).rgb,1.0);}",
                 "#version 330 core\nlayout (location=0) in vec2 aPos;\nlayout (location=1) in vec2 aTexCoords;\nout vec2 TexCoords;\nvoid main()\n{\ngl_Position=vec4(aPos.x,aPos.y,0.0,1.0);\nTexCoords=aTexCoords;\n} "
                 );
-            ShaderScreen.Uniforms.SetValue("texture", 0);
+            ShaderScreen.Uniforms.SetValue("img", 0);
 
             CreateScreenVao();
 
@@ -118,7 +118,7 @@ namespace RmEmulator
                 Directory.CreateDirectory("Screenshots");
                 var filename = $"Screenshots/screenshot-{DateTime.Now.Ticks}.png";
                 EmulatedFramebuffer.FrontBuffer.Save(filename);
-                _logger.Info("Saved screenshot as {filename}");
+                _logger.Info($"Saved screenshot as {filename}");
             };
 
             Size = new Vector2i(EmulatedDevices.Display.VisibleWidth / 2, EmulatedDevices.Display.VisibleHeight / 2);

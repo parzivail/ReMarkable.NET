@@ -31,10 +31,5 @@ namespace Graphite.Controls
             buffer.Mutate(DrawBounds);
             DrawStringWithIcon(buffer, Icon, IconPadding, Text, Bounds);
         }
-
-        private void DrawBounds(IImageProcessingContext g)
-        {
-            g.Draw(ForegroundColor, 4, Bounds.Inflated(-2, -2));
-        }
     }
 }
