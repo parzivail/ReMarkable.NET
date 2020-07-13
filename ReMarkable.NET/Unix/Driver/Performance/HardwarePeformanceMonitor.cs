@@ -6,16 +6,26 @@ using System.Text.RegularExpressions;
 
 namespace ReMarkable.NET.Unix.Driver.Performance
 {
+    /// <summary>
+    ///     Provides a set of methods to profile hardware performance metrics
+    /// </summary>
     public class HardwarePeformanceMonitor : IPerformanceMonitor
     {
-        private readonly Dictionary<string, Measurement> _cpuMeasurements;
-        private readonly Dictionary<string, Measurement> _networkMeasurements;
+        /// <summary>
+        ///     Contains the instantaneous CPU time-based measurements
+        /// </summary>
+        private readonly Dictionary<string, PerformanceMeasurement> _cpuMeasurements;
 
-        /// <inheritdoc />
-        public int NumberOfProcessors { get; }
+        /// <summary>
+        ///     Contains the instantaneous network time-based measurements
+        /// </summary>
+        private readonly Dictionary<string, PerformanceMeasurement> _networkMeasurements;
 
         /// <inheritdoc />
         public int NumberOfCores { get; }
+
+        /// <inheritdoc />
+        public int NumberOfProcessors { get; }
 
         /// <inheritdoc />
         public long TotalMemory { get; }
@@ -25,13 +35,13 @@ namespace ReMarkable.NET.Unix.Driver.Performance
 
         public HardwarePeformanceMonitor()
         {
-            _cpuMeasurements = new Dictionary<string, Measurement>();
+            _cpuMeasurements = new Dictionary<string, PerformanceMeasurement>();
             var cpuMeasurements = GetCpuMeasurements();
 
             foreach (var (key, _) in cpuMeasurements)
             {
-                _cpuMeasurements.Add($"idle-{key}", new Measurement());
-                _cpuMeasurements.Add($"total-{key}", new Measurement());
+                _cpuMeasurements.Add($"idle-{key}", new PerformanceMeasurement());
+                _cpuMeasurements.Add($"total-{key}", new PerformanceMeasurement());
             }
 
             NumberOfProcessors = 1;
@@ -42,14 +52,100 @@ namespace ReMarkable.NET.Unix.Driver.Performance
             TotalMemory = memoryMeasurements["MemTotal"];
             TotalSwap = memoryMeasurements["SwapTotal"];
 
-            _networkMeasurements = new Dictionary<string, Measurement>();
+            _networkMeasurements = new Dictionary<string, PerformanceMeasurement>();
             var networkMeasurements = GetNetworkMeasurements();
 
             foreach (var (key, _) in networkMeasurements)
             {
-                _networkMeasurements.Add($"tx-{key}", new Measurement());
-                _networkMeasurements.Add($"rx-{key}", new Measurement());
+                _networkMeasurements.Add($"tx-{key}", new PerformanceMeasurement());
+                _networkMeasurements.Add($"rx-{key}", new PerformanceMeasurement());
             }
+        }
+
+        /// <inheritdoc />
+        public long GetFreeMemory()
+        {
+            var memoryMeasurements = GetMemoryMeasurements();
+            return memoryMeasurements["MemAvailable"];
+        }
+
+        /// <inheritdoc />
+        public long GetFreeSwap()
+        {
+            var memoryMeasurements = GetMemoryMeasurements();
+            return memoryMeasurements["SwapFree"];
+        }
+
+        /// <inheritdoc />
+        public string[] GetNetworkAdapters()
+        {
+            return GetNetworkMeasurements().Keys.ToArray();
+        }
+
+        /// <inheritdoc />
+        public long GetNetworkRxSpeed(string adapter)
+        {
+            var nowBytes = GetNetworkMeasurements()[adapter].RxBytes;
+            var measurement = _networkMeasurements[$"rx-{adapter}"].PushMeasurementPerSecond(nowBytes);
+
+            return (long) measurement;
+        }
+
+        /// <inheritdoc />
+        public long GetNetworkRxTotal(string adapter)
+        {
+            return GetNetworkMeasurements()[adapter].RxBytes;
+        }
+
+        /// <inheritdoc />
+        public long GetNetworkTxSpeed(string adapter)
+        {
+            var nowBytes = GetNetworkMeasurements()[adapter].TxBytes;
+            var measurement = _networkMeasurements[$"tx-{adapter}"].PushMeasurementPerSecond(nowBytes);
+
+            return (long) measurement;
+        }
+
+        /// <inheritdoc />
+        public long GetNetworkTxTotal(string adapter)
+        {
+            return GetNetworkMeasurements()[adapter].TxBytes;
+        }
+
+        /// <inheritdoc />
+        public float GetProcessorTime()
+        {
+            var cpuMeasurements = GetCpuMeasurements();
+            var cpuTotal = cpuMeasurements["cpu"];
+
+            var idle = _cpuMeasurements["idle-cpu"].PushMeasurement(cpuTotal.Idle);
+            var total = _cpuMeasurements["total-cpu"].PushMeasurement(cpuTotal.Total);
+
+            return (float) (1 - idle / total);
+        }
+
+        /// <inheritdoc />
+        public float GetProcessorTime(int processor)
+        {
+            if (processor != 0)
+                throw new ArgumentException(nameof(processor));
+
+            return GetProcessorTime();
+        }
+
+        /// <inheritdoc />
+        public float GetProcessorTime(int processor, int core)
+        {
+            if (processor != 0)
+                throw new ArgumentException(nameof(processor));
+
+            var cpuMeasurements = GetCpuMeasurements();
+            var cpuTotal = cpuMeasurements["cpu"];
+
+            var idle = _cpuMeasurements[$"idle-cpu{core}"].PushMeasurement(cpuTotal.Idle);
+            var total = _cpuMeasurements[$"total-cpu{core}"].PushMeasurement(cpuTotal.Total);
+
+            return (float) (1 - idle / total);
         }
 
         private static Dictionary<string, CpuMeasurement> GetCpuMeasurements()
@@ -145,97 +241,14 @@ namespace ReMarkable.NET.Unix.Driver.Performance
                     var txCompressed = long.Parse(columns[15]);
                     var txMulticast = long.Parse(columns[16]);
 
-                    d.Add(adapterName, new NetDeviceInfo(rxBytes, rxPackets, rxErrs, rxDrop, rxFifo, rxFrame, rxCompressed, rxMulticast, txBytes, txPackets, txErrs, txDrop, txFifo, txFrame, txCompressed, txMulticast));
+                    d.Add(adapterName,
+                        new NetDeviceInfo(rxBytes, rxPackets, rxErrs, rxDrop, rxFifo, rxFrame, rxCompressed,
+                            rxMulticast, txBytes, txPackets, txErrs, txDrop, txFifo, txFrame, txCompressed,
+                            txMulticast));
                 }
             }
 
             return d;
-        }
-
-        /// <inheritdoc />
-        public float GetProcessorTime()
-        {
-            var cpuMeasurements = GetCpuMeasurements();
-            var cpuTotal = cpuMeasurements["cpu"];
-
-            var idle = _cpuMeasurements["idle-cpu"].PushMeasurement(cpuTotal.Idle);
-            var total = _cpuMeasurements["total-cpu"].PushMeasurement(cpuTotal.Total);
-
-            return (float)(1 - idle / total);
-        }
-
-        /// <inheritdoc />
-        public float GetProcessorTime(int processor)
-        {
-            if (processor != 0)
-                throw new ArgumentException(nameof(processor));
-
-            return GetProcessorTime();
-        }
-
-        /// <inheritdoc />
-        public float GetProcessorTime(int processor, int core)
-        {
-            if (processor != 0)
-                throw new ArgumentException(nameof(processor));
-
-            var cpuMeasurements = GetCpuMeasurements();
-            var cpuTotal = cpuMeasurements["cpu"];
-
-            var idle = _cpuMeasurements[$"idle-cpu{core}"].PushMeasurement(cpuTotal.Idle);
-            var total = _cpuMeasurements[$"total-cpu{core}"].PushMeasurement(cpuTotal.Total);
-
-            return (float)(1 - idle / total);
-        }
-
-        /// <inheritdoc />
-        public long GetFreeMemory()
-        {
-            var memoryMeasurements = GetMemoryMeasurements();
-            return memoryMeasurements["MemAvailable"];
-        }
-
-        /// <inheritdoc />
-        public long GetFreeSwap()
-        {
-            var memoryMeasurements = GetMemoryMeasurements();
-            return memoryMeasurements["SwapFree"];
-        }
-
-        /// <inheritdoc />
-        public string[] GetNetworkAdapters()
-        {
-            return GetNetworkMeasurements().Keys.ToArray();
-        }
-
-        /// <inheritdoc />
-        public long GetNetworkTxSpeed(string adapter)
-        {
-            var nowBytes = GetNetworkMeasurements()[adapter].TxBytes;
-            var measurement = _networkMeasurements[$"tx-{adapter}"].PushMeasurementPerSecond(nowBytes);
-
-            return (long)measurement;
-        }
-
-        /// <inheritdoc />
-        public long GetNetworkRxSpeed(string adapter)
-        {
-            var nowBytes = GetNetworkMeasurements()[adapter].RxBytes;
-            var measurement = _networkMeasurements[$"rx-{adapter}"].PushMeasurementPerSecond(nowBytes);
-
-            return (long)measurement;
-        }
-
-        /// <inheritdoc />
-        public long GetNetworkTxTotal(string adapter)
-        {
-            return GetNetworkMeasurements()[adapter].TxBytes;
-        }
-
-        /// <inheritdoc />
-        public long GetNetworkRxTotal(string adapter)
-        {
-            return GetNetworkMeasurements()[adapter].RxBytes;
         }
     }
 }
