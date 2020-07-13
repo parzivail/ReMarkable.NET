@@ -39,21 +39,21 @@ namespace Graphite
 
         public void ConsumePress(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
+            var eligibleControls = GetControlsAtPoint(fingerState.DevicePosition);
             foreach (var control in eligibleControls)
                 control.OnPress(fingerState);
         }
 
         public void ConsumeRelease(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
+            var eligibleControls = GetControlsAtPoint(fingerState.DevicePosition);
             foreach (var control in eligibleControls)
                 control.OnRelease(fingerState);
         }
 
         public void ConsumeMove(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
+            var eligibleControls = GetControlsAtPoint(fingerState.DevicePosition);
             foreach (var control in eligibleControls)
                 control.OnMove(fingerState);
         }

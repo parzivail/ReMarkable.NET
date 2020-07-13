@@ -2,6 +2,7 @@
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Common.Input;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
+using SixLabors.ImageSharp;
 
 namespace RmEmulator.Devices
 {
@@ -74,14 +75,10 @@ namespace RmEmulator.Devices
             {
                 Status = status,
                 Id = _trackingId,
-                DeviceX = (int)devX,
-                DeviceY = (int)devY,
-                RawX = (int)rawX,
-                RawY = (int)rawY,
-                PreviousDeviceX = (int)devXLast,
-                PreviousDeviceY = (int)devYLast,
-                PreviousRawX = (int)rawXLast,
-                PreviousRawY = (int)rawYLast,
+                DevicePosition = new Point((int)devX, (int)devY),
+                RawPosition = new Point((int)rawX, (int)rawY),
+                PreviousDevicePosition = new Point((int)devXLast, (int)devYLast),
+                PreviousRawPosition = new Point((int)rawXLast, (int)rawYLast),
                 Pressure = 128,
                 PreviousPressure = 128
             };

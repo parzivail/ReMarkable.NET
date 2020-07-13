@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using ReMarkable.NET.Unix.Driver.Digitizer;
+using ReMarkable.NET.Unix.Driver.Generic;
 using SixLabors.ImageSharp;
 
 namespace RmEmulator.Devices
@@ -16,6 +18,10 @@ namespace RmEmulator.Devices
         public StylusState State { get; } = new StylusState(StylusTool.None, Point.Empty, 0, 0, Point.Empty);
         public int Width { get; }
         public int Height { get; }
+        
+        // TODO
+        /// <inheritdoc />
+        public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates { get; }
 
         public EmulatedDigitizerDriver(EmulatorWindow window, int width, int height)
         {

@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
-    internal struct FbBitfield
+    public struct FbBitfield
     {
         /// <summary>
         ///     beginning of bitfield

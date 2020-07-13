@@ -3,7 +3,7 @@
 namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
     [Flags]
-    internal enum FbVMode : uint
+    public enum FbVMode : uint
     {
         NonInterlaced = 0,
         Interlaced = 1,

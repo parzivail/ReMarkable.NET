@@ -3,7 +3,7 @@
 namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
     [Flags]
-    internal enum FbSync : uint
+    public enum FbSync : uint
     {
         None = 0,
         HorizontalHighActive = 1,
