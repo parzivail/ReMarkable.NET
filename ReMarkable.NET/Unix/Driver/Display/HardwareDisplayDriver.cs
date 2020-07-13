@@ -1,6 +1,7 @@
 ﻿using System;
 using ReMarkable.NET.Unix.Driver.Display.EinkController;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
+using ReMarkable.NET.Unix.Stream;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -44,7 +45,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
         {
             DevicePath = devicePath;
 
-            _handle = UnsafeNativeMethods.Open(DevicePath, 0, UnixFileMode.WriteOnly);
+            _handle = NativeUnixStreamMethods.Open(DevicePath, 0, UnixFileMode.WriteOnly);
 
             var vinfo = GetVarScreenInfo();
 

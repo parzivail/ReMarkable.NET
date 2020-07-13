@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
+using ReMarkable.NET.Unix.Stream;
 
 namespace ReMarkable.NET.Unix.Driver.Display.EinkController
 {

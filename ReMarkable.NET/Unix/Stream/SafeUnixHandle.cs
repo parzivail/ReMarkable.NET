@@ -3,8 +3,11 @@ using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace ReMarkable.NET.Unix
+namespace ReMarkable.NET.Unix.Stream
 {
+    /// <summary>
+    /// Provides a safe handle to a device that can be have IOCTL commands issued to it
+    /// </summary>
     [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
     [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
     internal sealed class SafeUnixHandle : SafeHandle
@@ -19,7 +22,7 @@ namespace ReMarkable.NET.Unix
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         protected override bool ReleaseHandle()
         {
-            return UnsafeNativeMethods.Close(handle) != -1;
+            return NativeUnixStreamMethods.Close(handle) != -1;
         }
     }
 }

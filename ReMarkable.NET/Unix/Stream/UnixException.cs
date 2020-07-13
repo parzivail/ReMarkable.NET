@@ -3,8 +3,11 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace ReMarkable.NET.Unix
+namespace ReMarkable.NET.Unix.Stream
 {
+    /// <summary>
+    /// Wraps a Unix exception in a class that makes the exception friendlier to read
+    /// </summary>
     [Serializable]
     internal class UnixException : ExternalException
     {
@@ -144,9 +147,7 @@ namespace ReMarkable.NET.Unix
             "EHWPOISON: Memory page has hardware error"
         };
 
-        private readonly int _nativeErrorCode;
-
-        public int NativeErrorCode => _nativeErrorCode;
+        public int NativeErrorCode { get; }
 
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
         public UnixException()
@@ -169,7 +170,7 @@ namespace ReMarkable.NET.Unix
         public UnixException(int error, string message)
             : base(message)
         {
-            _nativeErrorCode = error;
+            NativeErrorCode = error;
         }
 
         public UnixException(string message, Exception innerException)
@@ -180,7 +181,7 @@ namespace ReMarkable.NET.Unix
         protected UnixException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            _nativeErrorCode = info.GetInt32("NativeErrorCode");
+            NativeErrorCode = info.GetInt32("NativeErrorCode");
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -190,7 +191,7 @@ namespace ReMarkable.NET.Unix
                 throw new ArgumentNullException(nameof(info));
             }
 
-            info.AddValue("NativeErrorCode", _nativeErrorCode);
+            info.AddValue("NativeErrorCode", NativeErrorCode);
             base.GetObjectData(info, context);
         }
 

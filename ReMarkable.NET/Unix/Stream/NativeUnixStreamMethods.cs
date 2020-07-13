@@ -2,9 +2,12 @@
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 
-namespace ReMarkable.NET.Unix
+namespace ReMarkable.NET.Unix.Stream
 {
-    internal static class UnsafeNativeMethods
+    /// <summary>
+    /// Defines P/Invoke methods for opening and closing Unix file streams
+    /// </summary>
+    internal static class NativeUnixStreamMethods
     {
         [DllImport("libc", EntryPoint = "open", SetLastError = true)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA2101:Specify marshaling for P/Invoke string arguments", Justification = "Specifying a marshaling breaks rM compatability")]
