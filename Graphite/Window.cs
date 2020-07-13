@@ -37,25 +37,25 @@ namespace Graphite
             _pages = new Stack<Page>();
         }
 
-        public void ConsumePress(Finger finger)
+        public void ConsumePress(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(finger.DeviceX, finger.DeviceY));
+            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
             foreach (var control in eligibleControls)
-                control.OnPress(finger);
+                control.OnPress(fingerState);
         }
 
-        public void ConsumeRelease(Finger finger)
+        public void ConsumeRelease(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(finger.DeviceX, finger.DeviceY));
+            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
             foreach (var control in eligibleControls)
-                control.OnRelease(finger);
+                control.OnRelease(fingerState);
         }
 
-        public void ConsumeMove(Finger finger)
+        public void ConsumeMove(FingerState fingerState)
         {
-            var eligibleControls = GetControlsAtPoint(new PointF(finger.DeviceX, finger.DeviceY));
+            var eligibleControls = GetControlsAtPoint(new PointF(fingerState.DeviceX, fingerState.DeviceY));
             foreach (var control in eligibleControls)
-                control.OnMove(finger);
+                control.OnMove(fingerState);
         }
 
         public void ConsumePress(StylusState stylus, DigitizerEventKeyCode code)

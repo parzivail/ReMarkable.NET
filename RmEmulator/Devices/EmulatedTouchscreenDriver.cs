@@ -9,9 +9,9 @@ namespace RmEmulator.Devices
     {
         private readonly EmulatorWindow _window;
 
-        public event EventHandler<Finger> Pressed;
-        public event EventHandler<Finger> Released;
-        public event EventHandler<Finger> Moved;
+        public event EventHandler<FingerState> Pressed;
+        public event EventHandler<FingerState> Released;
+        public event EventHandler<FingerState> Moved;
 
         public int Width { get; }
         public int Height { get; }
@@ -47,7 +47,7 @@ namespace RmEmulator.Devices
                 Moved?.Invoke(this, CreateFinger(FingerStatus.Moving));
         }
 
-        private Finger CreateFinger(FingerStatus status)
+        private FingerState CreateFinger(FingerStatus status)
         {
             var mouse = _window.MouseState;
             var mouseLast = _window.LastMouseState;
@@ -70,7 +70,7 @@ namespace RmEmulator.Devices
             var rawXLast = xLast * Width;
             var rawYLast = yLast * Height;
             
-            var finger = new Finger
+            var finger = new FingerState
             {
                 Status = status,
                 Id = _trackingId,

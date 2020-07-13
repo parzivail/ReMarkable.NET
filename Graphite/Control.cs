@@ -22,9 +22,9 @@ namespace Graphite
         private string _text;
         private RectAlign _textAlign = RectAlign.Left | RectAlign.Top;
 
-        public event EventHandler<Finger> FingerPress;
-        public event EventHandler<Finger> FingerRelease;
-        public event EventHandler<Finger> FingerMove;
+        public event EventHandler<FingerState> FingerPress;
+        public event EventHandler<FingerState> FingerRelease;
+        public event EventHandler<FingerState> FingerMove;
 
         public event EventHandler<StylusPressEventArgs> StylusPress;
         public event EventHandler<StylusPressEventArgs> StylusRelease;
@@ -164,19 +164,19 @@ namespace Graphite
             return Bounds.Contains(point);
         }
 
-        internal virtual void OnPress(Finger finger)
+        internal virtual void OnPress(FingerState fingerState)
         {
-            FingerPress?.Invoke(this, finger);
+            FingerPress?.Invoke(this, fingerState);
         }
 
-        internal virtual void OnRelease(Finger finger)
+        internal virtual void OnRelease(FingerState fingerState)
         {
-            FingerRelease?.Invoke(this, finger);
+            FingerRelease?.Invoke(this, fingerState);
         }
 
-        internal virtual void OnMove(Finger finger)
+        internal virtual void OnMove(FingerState fingerState)
         {
-            FingerMove?.Invoke(this, finger);
+            FingerMove?.Invoke(this, fingerState);
         }
 
         internal virtual void OnPress(StylusState stylus, DigitizerEventKeyCode code)

@@ -1,6 +1,9 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Touchscreen
 {
-    enum TouchscreenEventType
+    /// <summary>
+    ///     Defines the possible event types the touchscreen can raise
+    /// </summary>
+    internal enum TouchscreenEventType
     {
         Syn = 0,
         Key = 1,
