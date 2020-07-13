@@ -6,12 +6,13 @@ using System.Security.Permissions;
 namespace ReMarkable.NET.Unix.Stream
 {
     /// <summary>
-    /// Wraps a Unix exception in a class that makes the exception friendlier to read
+    ///     Wraps a Unix exception in a class that makes the exception friendlier to read
     /// </summary>
     [Serializable]
     internal class UnixException : ExternalException
     {
-        private static readonly string[] ErrorMessages = {
+        private static readonly string[] ErrorMessages =
+        {
             "EPERM: Operation not permitted",
             "ENOENT: No such file or directory",
             "ESRCH: No such process",
@@ -186,10 +187,7 @@ namespace ReMarkable.NET.Unix.Stream
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
+            if (info == null) throw new ArgumentNullException(nameof(info));
 
             info.AddValue("NativeErrorCode", NativeErrorCode);
             base.GetObjectData(info, context);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReMarkable.NET.Unix.Driver.Generic;
-using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Button
 {
@@ -33,15 +32,15 @@ namespace ReMarkable.NET.Unix.Driver.Button
         {
             var data = e.Data;
 
-            var eventType = (PhysicalButtonEventType) data.Type;
+            var eventType = (PhysicalButtonEventType)data.Type;
 
             switch (eventType)
             {
                 case PhysicalButtonEventType.Syn:
                     break;
                 case PhysicalButtonEventType.Key:
-                    var button = (PhysicalButton) data.Code;
-                    var buttonState = (ButtonState) data.Value;
+                    var button = (PhysicalButton)data.Code;
+                    var buttonState = (ButtonState)data.Value;
 
                     ButtonStates[button] = ButtonState.Pressed;
 

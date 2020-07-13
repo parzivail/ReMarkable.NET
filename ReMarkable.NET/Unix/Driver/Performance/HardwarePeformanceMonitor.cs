@@ -88,7 +88,7 @@ namespace ReMarkable.NET.Unix.Driver.Performance
             var nowBytes = GetNetworkMeasurements()[adapter].RxBytes;
             var measurement = _networkMeasurements[$"rx-{adapter}"].PushMeasurementPerSecond(nowBytes);
 
-            return (long) measurement;
+            return (long)measurement;
         }
 
         /// <inheritdoc />
@@ -103,7 +103,7 @@ namespace ReMarkable.NET.Unix.Driver.Performance
             var nowBytes = GetNetworkMeasurements()[adapter].TxBytes;
             var measurement = _networkMeasurements[$"tx-{adapter}"].PushMeasurementPerSecond(nowBytes);
 
-            return (long) measurement;
+            return (long)measurement;
         }
 
         /// <inheritdoc />
@@ -121,7 +121,7 @@ namespace ReMarkable.NET.Unix.Driver.Performance
             var idle = _cpuMeasurements["idle-cpu"].PushMeasurement(cpuTotal.Idle);
             var total = _cpuMeasurements["total-cpu"].PushMeasurement(cpuTotal.Total);
 
-            return (float) (1 - idle / total);
+            return (float)(1 - idle / total);
         }
 
         /// <inheritdoc />
@@ -145,7 +145,7 @@ namespace ReMarkable.NET.Unix.Driver.Performance
             var idle = _cpuMeasurements[$"idle-cpu{core}"].PushMeasurement(cpuTotal.Idle);
             var total = _cpuMeasurements[$"total-cpu{core}"].PushMeasurement(cpuTotal.Total);
 
-            return (float) (1 - idle / total);
+            return (float)(1 - idle / total);
         }
 
         private static Dictionary<string, CpuMeasurement> GetCpuMeasurements()

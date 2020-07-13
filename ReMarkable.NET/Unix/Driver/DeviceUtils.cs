@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 namespace ReMarkable.NET.Unix.Driver
 {
     /// <summary>
-    /// Provides a set of methods that assist in interacting with hardware devices
+    ///     Provides a set of methods that assist in interacting with hardware devices
     /// </summary>
     public class DeviceUtils
     {
         /// <summary>
-        /// Parses `/proc/bus/input/devices` to create a mapped dictionary of input device names and their event streams
+        ///     Parses `/proc/bus/input/devices` to create a mapped dictionary of input device names and their event streams
         /// </summary>
-        /// <returns>A <see cref="Dictionary{TKey,TValue}"/> mapping device names to handler event stream filenames</returns>
+        /// <returns>A <see cref="Dictionary{TKey,TValue}" /> mapping device names to handler event stream filenames</returns>
         public static Dictionary<string, string> GetInputDeviceEventHandlers()
         {
             using var r = new StreamReader("/proc/bus/input/devices");
@@ -70,7 +70,7 @@ namespace ReMarkable.NET.Unix.Driver
         }
 
         /// <summary>
-        /// Converts "micro" units to their base unit
+        ///     Converts "micro" units to their base unit
         /// </summary>
         /// <param name="value">The value offset by 10^6</param>
         /// <returns>The value multiplied by 10^(-6)</returns>

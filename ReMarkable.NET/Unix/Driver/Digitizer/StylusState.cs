@@ -60,8 +60,8 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         /// <returns>The tool position as a <see cref="PointF" /> display coordinate</returns>
         public PointF GetDevicePosition(IDigitizerDriver digitizer, IDisplayDriver display)
         {
-            return new PointF(Position.X / (float) digitizer.Width * display.VisibleWidth,
-                Position.Y / (float) digitizer.Height * display.VisibleHeight);
+            return new PointF(Position.X / (float)digitizer.Width * display.VisibleWidth,
+                Position.Y / (float)digitizer.Height * display.VisibleHeight);
         }
 
         /// <inheritdoc />

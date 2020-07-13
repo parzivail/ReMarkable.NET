@@ -1,6 +1,5 @@
 ﻿using System;
 using ReMarkable.NET.Unix.Driver.Generic;
-using ReMarkable.NET.Util;
 using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Touchscreen
@@ -56,7 +55,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
         {
             var data = e.Data;
 
-            var eventType = (TouchscreenEventType) data.Type;
+            var eventType = (TouchscreenEventType)data.Type;
 
             switch (eventType)
             {
@@ -91,7 +90,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     break;
                 }
                 case TouchscreenEventType.Absolute:
-                    ProcessAbsoluteTouch((TouchscreenEventAbsCode) data.Code, data.Value);
+                    ProcessAbsoluteTouch((TouchscreenEventAbsCode)data.Code, data.Value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(eventType), eventType, eventType.GetType().Name);
@@ -123,7 +122,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     Fingers[_slot].PreviousRawPosition.X = Fingers[_slot].RawPosition.X;
 
                     float pos = Width - 1 - value;
-                    _position.X = (int) (pos / Width * OutputDevices.Display.VisibleWidth);
+                    _position.X = (int)(pos / Width * OutputDevices.Display.VisibleWidth);
 
                     Fingers[_slot].DevicePosition.X = _position.X;
                     Fingers[_slot].RawPosition.X = value;
@@ -135,7 +134,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     Fingers[_slot].PreviousRawPosition.Y = Fingers[_slot].RawPosition.Y;
 
                     float pos = Height - 1 - value;
-                    _position.Y = (int) (pos / Height * OutputDevices.Display.VisibleHeight);
+                    _position.Y = (int)(pos / Height * OutputDevices.Display.VisibleHeight);
 
                     Fingers[_slot].DevicePosition.Y = _position.Y;
                     Fingers[_slot].RawPosition.Y = value;

@@ -7,25 +7,29 @@ using ReMarkable.NET.Util;
 namespace ReMarkable.NET.Unix.Driver
 {
     /// <summary>
-    /// Provides a static listing of available input devices. When referenced on a tablet, will contain instances of hardware drivers. When run in debug and with the RmEmulator assembly loaded, will contain instances of emulated drivers.
+    ///     Provides a static listing of available input devices. When referenced on a tablet, will contain instances of
+    ///     hardware drivers. When run in debug and with the RmEmulator assembly loaded, will contain instances of emulated
+    ///     drivers.
     /// </summary>
     public static class InputDevices
     {
         /// <summary>
-        /// Holds an instance of a physical button driver
-        /// </summary>
-        public static readonly IPhysicalButtonDriver PhysicalButtons;
-        /// <summary>
-        /// Holds an instance of a touchscreen driver
-        /// </summary>
-        public static readonly ITouchscreenDriver Touchscreen;
-        /// <summary>
-        /// Holds an instance of a digitizer driver
+        ///     Holds an instance of a digitizer driver
         /// </summary>
         public static readonly IDigitizerDriver Digitizer;
 
         /// <summary>
-        /// Loads the appropriate input devices
+        ///     Holds an instance of a physical button driver
+        /// </summary>
+        public static readonly IPhysicalButtonDriver PhysicalButtons;
+
+        /// <summary>
+        ///     Holds an instance of a touchscreen driver
+        /// </summary>
+        public static readonly ITouchscreenDriver Touchscreen;
+
+        /// <summary>
+        ///     Loads the appropriate input devices
         /// </summary>
         static InputDevices()
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReMarkable.NET.Unix.Driver.Generic;
-using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Keyboard
 {
@@ -33,7 +32,7 @@ namespace ReMarkable.NET.Unix.Driver.Keyboard
         {
             var data = e.Data;
 
-            var eventType = (KeyboardEventType) data.Type;
+            var eventType = (KeyboardEventType)data.Type;
 
             switch (eventType)
             {
@@ -43,8 +42,8 @@ namespace ReMarkable.NET.Unix.Driver.Keyboard
                     break;
                 case KeyboardEventType.Key:
                 {
-                    var key = (KeyboardKey) data.Code;
-                    var state = (ButtonState) data.Value;
+                    var key = (KeyboardKey)data.Code;
+                    var state = (ButtonState)data.Value;
 
                     switch (state)
                     {

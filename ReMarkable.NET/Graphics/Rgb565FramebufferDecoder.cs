@@ -9,22 +9,22 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace ReMarkable.NET.Graphics
 {
     /// <summary>
-    /// Provides methods for decoding a RGB565 framebuffer stream to an <see cref="Image"/>
+    ///     Provides methods for decoding a RGB565 framebuffer stream to an <see cref="Image" />
     /// </summary>
     public class Rgb565FramebufferDecoder : IImageDecoder
     {
         /// <summary>
-        /// The hardware framebuffer to read data from
-        /// </summary>
-        private readonly HardwareFramebuffer _framebuffer;
-
-        /// <summary>
-        /// The rectangular area to read from the framebuffer
+        ///     The rectangular area to read from the framebuffer
         /// </summary>
         private readonly Rectangle _area;
 
         /// <summary>
-        /// Creates a new <see cref="Rgb565FramebufferDecoder"/>
+        ///     The hardware framebuffer to read data from
+        /// </summary>
+        private readonly HardwareFramebuffer _framebuffer;
+
+        /// <summary>
+        ///     Creates a new <see cref="Rgb565FramebufferDecoder" />
         /// </summary>
         /// <param name="framebuffer">The hardware framebuffer to read data from</param>
         /// <param name="area">The rectangular area to read from the framebuffer</param>
@@ -35,7 +35,8 @@ namespace ReMarkable.NET.Graphics
         }
 
         /// <inheritdoc />
-        public Image<TPixel> Decode<TPixel>(Configuration configuration, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        public Image<TPixel> Decode<TPixel>(Configuration configuration, Stream stream)
+            where TPixel : unmanaged, IPixel<TPixel>
         {
             var image = new Image<TPixel>(configuration, _area.Width, _area.Height);
             return DecodeIntoImage(stream, image);
@@ -49,7 +50,8 @@ namespace ReMarkable.NET.Graphics
         }
 
         /// <inheritdoc />
-        public Task<Image<TPixel>> DecodeAsync<TPixel>(Configuration configuration, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        public Task<Image<TPixel>> DecodeAsync<TPixel>(Configuration configuration, Stream stream)
+            where TPixel : unmanaged, IPixel<TPixel>
         {
             throw new NotImplementedException();
         }
@@ -61,13 +63,14 @@ namespace ReMarkable.NET.Graphics
         }
 
         /// <summary>
-        /// Decodes the given RGB565 stream into the provided image
+        ///     Decodes the given RGB565 stream into the provided image
         /// </summary>
         /// <typeparam name="TPixel">The pixel format</typeparam>
-        /// <param name="stream">The RGB565 stream to read <see cref="ushort"/>-encoded image data from</param>
+        /// <param name="stream">The RGB565 stream to read <see cref="ushort" />-encoded image data from</param>
         /// <param name="image">The image to read data into</param>
-        /// <returns>The image passed as the <paramref name="image"/> argument</returns>
-        private Image<TPixel> DecodeIntoImage<TPixel>(Stream stream, Image<TPixel> image) where TPixel : unmanaged, IPixel<TPixel>
+        /// <returns>The image passed as the <paramref name="image" /> argument</returns>
+        private Image<TPixel> DecodeIntoImage<TPixel>(Stream stream, Image<TPixel> image)
+            where TPixel : unmanaged, IPixel<TPixel>
         {
             var buf = new byte[_area.Width * sizeof(short)];
             var rgb565Buf = new ushort[_area.Width];

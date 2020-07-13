@@ -49,10 +49,10 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
             var vinfo = GetVarScreenInfo();
 
-            VisibleWidth = (int) vinfo.VisibleResolutionX;
-            VisibleHeight = (int) vinfo.VisibleResolutionY;
-            VirtualWidth = (int) vinfo.VirtualResolutionX;
-            VirtualHeight = (int) vinfo.VirtualResolutionY;
+            VisibleWidth = (int)vinfo.VisibleResolutionX;
+            VisibleHeight = (int)vinfo.VisibleResolutionY;
+            VirtualWidth = (int)vinfo.VirtualResolutionX;
+            VirtualHeight = (int)vinfo.VirtualResolutionY;
             Framebuffer = new HardwareFramebuffer(devicePath, VisibleWidth, VisibleHeight, VirtualWidth, VirtualHeight);
 
             vinfo.AccelFlags = 0x01;
@@ -80,7 +80,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
         public void Dispose()
         {
             _handle?.Dispose();
-            ((HardwareFramebuffer) Framebuffer)?.Dispose();
+            ((HardwareFramebuffer)Framebuffer)?.Dispose();
         }
 
         /// <inheritdoc />
@@ -140,10 +140,10 @@ namespace ReMarkable.NET.Unix.Driver.Display
             {
                 UpdateRegion = new FbRect
                 {
-                    X = (uint) rectangle.X,
-                    Y = (uint) rectangle.Y,
-                    Width = (uint) rectangle.Width,
-                    Height = (uint) rectangle.Height
+                    X = (uint)rectangle.X,
+                    Y = (uint)rectangle.Y,
+                    Width = (uint)rectangle.Width,
+                    Height = (uint)rectangle.Height
                 },
                 WaveformMode = mode,
                 DisplayTemp = DisplayTemp.Papyrus,

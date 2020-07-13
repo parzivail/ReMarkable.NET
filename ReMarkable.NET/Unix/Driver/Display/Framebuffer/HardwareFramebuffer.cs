@@ -82,8 +82,8 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
         public Point OffsetToPoint(long offset)
         {
             offset /= sizeof(short);
-            var x = (int) (offset % VirtualWidth);
-            var y = (int) (offset / VirtualWidth);
+            var x = (int)(offset % VirtualWidth);
+            var y = (int)(offset / VirtualWidth);
 
             return new Point(x, y);
         }
