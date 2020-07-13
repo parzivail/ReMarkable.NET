@@ -1,4 +1,4 @@
-﻿using ReMarkable.NET.Unix.Driver.Battery;
+﻿using ReMarkable.NET.Unix.Driver.Power;
 
 namespace RmEmulator.Devices
 {

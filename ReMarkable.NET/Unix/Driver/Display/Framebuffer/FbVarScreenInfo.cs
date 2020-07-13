@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
 {
-    internal struct FbVarScreenInfo
+    public struct FbVarScreenInfo
     {
         public uint VisibleResolutionX;
 

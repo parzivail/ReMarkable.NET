@@ -5,7 +5,7 @@ using System.Text;
 using Graphite.Symbols;
 using Graphite.Typography;
 using ReMarkable.NET.Unix.Driver;
-using ReMarkable.NET.Unix.Driver.Battery;
+using ReMarkable.NET.Unix.Driver.Power;
 
 namespace Graphite.Controls
 {

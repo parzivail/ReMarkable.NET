@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Graphite.Controls;
 using Graphite.Util;
+using ReMarkable.NET.Unix.Driver;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Driver.Touchscreen;
 using SixLabors.ImageSharp;
@@ -59,21 +60,21 @@ namespace Graphite
 
         public void ConsumePress(StylusState stylus, DigitizerEventKeyCode code)
         {
-            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition());
+            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition(InputDevices.Digitizer, OutputDevices.Display));
             foreach (var control in eligibleControls)
                 control.OnPress(stylus, code);
         }
 
         public void ConsumeRelease(StylusState stylus, DigitizerEventKeyCode code)
         {
-            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition());
+            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition(InputDevices.Digitizer, OutputDevices.Display));
             foreach (var control in eligibleControls)
                 control.OnRelease(stylus, code);
         }
 
         public void ConsumeMove(StylusState stylus)
         {
-            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition());
+            var eligibleControls = GetControlsAtPoint(stylus.GetDevicePosition(InputDevices.Digitizer, OutputDevices.Display));
             foreach (var control in eligibleControls)
                 control.OnMove(stylus);
         }

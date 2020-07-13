@@ -12,11 +12,11 @@ namespace RmEmulator.Devices
     {
         private static readonly Dictionary<Key, PhysicalButton> KeyMap = new Dictionary<Key, PhysicalButton>
         {
-            { Key.Left, PhysicalButton.KeyLeft },
-            { Key.Space, PhysicalButton.KeyHome },
-            { Key.Right, PhysicalButton.KeyRight },
-            { Key.Enter, PhysicalButton.KeyPower },
-            { Key.Slash, PhysicalButton.KeyWakeUp } // No physical mapping
+            { Key.Left, PhysicalButton.Left },
+            { Key.Space, PhysicalButton.Home },
+            { Key.Right, PhysicalButton.Right },
+            { Key.Enter, PhysicalButton.Power },
+            { Key.Slash, PhysicalButton.WakeUp } // No physical mapping
         };
 
         private readonly EmulatorWindow _window;

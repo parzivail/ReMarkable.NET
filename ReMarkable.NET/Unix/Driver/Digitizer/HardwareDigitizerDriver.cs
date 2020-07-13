@@ -1,34 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReMarkable.NET.Unix.Driver.Button;
 using ReMarkable.NET.Unix.Driver.Generic;
 using ReMarkable.NET.Util;
 using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Digitizer
 {
+    /// <summary>
+    ///     Provides methods for monitoring the digitizer installed in the device
+    /// </summary>
     public sealed class HardwareDigitizerDriver : UnixInputDriver, IDigitizerDriver
     {
-        public event EventHandler<StylusTool> ToolChanged;
-
+        /// <inheritdoc />
         public event EventHandler<DigitizerEventKeyCode> Pressed;
+
+        /// <inheritdoc />
         public event EventHandler<DigitizerEventKeyCode> Released;
 
+        /// <inheritdoc />
         public event EventHandler<StylusState> StylusUpdate;
-        
-        public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates;
 
-        public StylusState State { get; private set; }
-        public int Width { get; }
-        public int Height { get; }
+        /// <inheritdoc />
+        public event EventHandler<StylusTool> ToolChanged;
 
-        private StylusTool _currentTool = StylusTool.None;
-        private Point _currentPosition = Point.Empty;
-        private int _currentPressure;
+        /// <summary>
+        ///     Temporary distance value accumulated for event dispatch
+        /// </summary>
         private int _currentDistance;
+
+        /// <summary>
+        ///     Temporary position value accumulated for event dispatch
+        /// </summary>
+        private Point _currentPosition = Point.Empty;
+
+        /// <summary>
+        ///     Temporary pressure value accumulated for event dispatch
+        /// </summary>
+        private int _currentPressure;
+
+        /// <summary>
+        ///     Temporary tilt value accumulated for event dispatch
+        /// </summary>
         private Point _currentTilt = Point.Empty;
 
-        internal HardwareDigitizerDriver(string devicePath, int width, int height) : base(devicePath)
+        /// <summary>
+        ///     Temporary tool value accumulated for event dispatch
+        /// </summary>
+        private StylusTool _currentTool = StylusTool.None;
+
+        /// <inheritdoc />
+        public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates { get; }
+
+        /// <inheritdoc />
+        public int Height { get; }
+
+        /// <inheritdoc />
+        public StylusState State { get; private set; }
+
+        /// <inheritdoc />
+        public int Width { get; }
+
+        /// <summary>
+        ///     Creates a new <see cref="HardwareDigitizerDriver" />
+        /// </summary>
+        /// <param name="devicePath">The device event stream to poll for new events</param>
+        /// <param name="width">The virtual width of the device</param>
+        /// <param name="height">The virtual height of the device</param>
+        public HardwareDigitizerDriver(string devicePath, int width, int height) : base(devicePath)
         {
             Width = width;
             Height = height;
@@ -40,34 +78,35 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         {
             var data = e.Data;
 
-            var eventType = (DigitizerEventType)data.Type;
+            var eventType = (DigitizerEventType) data.Type;
 
             switch (eventType)
             {
                 case DigitizerEventType.Syn:
-                    State = new StylusState(_currentTool, _currentPosition, _currentPressure, _currentDistance, _currentTilt);
+                    State = new StylusState(_currentTool, _currentPosition, _currentPressure, _currentDistance,
+                        _currentTilt);
                     StylusUpdate?.Invoke(null, State);
                     break;
                 case DigitizerEventType.Key:
-                    var key = (DigitizerEventKeyCode)data.Code;
-                    var state = (ButtonState)data.Value;
-                    
+                    var key = (DigitizerEventKeyCode) data.Code;
+                    var state = (ButtonState) data.Value;
+
                     ButtonStates[key] = state;
 
                     switch (key)
                     {
-                        case DigitizerEventKeyCode.BtnToolPen:
+                        case DigitizerEventKeyCode.ToolPen:
                             _currentTool = StylusTool.Pen;
                             ToolChanged?.Invoke(null, _currentTool);
                             break;
-                        case DigitizerEventKeyCode.BtnToolRubber:
+                        case DigitizerEventKeyCode.ToolRubber:
                             _currentTool = StylusTool.Eraser;
                             ToolChanged?.Invoke(null, _currentTool);
                             break;
-                        case DigitizerEventKeyCode.BtnTouch:
-                        case DigitizerEventKeyCode.BtnStylus:
-                        case DigitizerEventKeyCode.BtnStylus2:
-                            if (state ==  ButtonState.Pressed)
+                        case DigitizerEventKeyCode.Touch:
+                        case DigitizerEventKeyCode.Stylus:
+                        case DigitizerEventKeyCode.Stylus2:
+                            if (state == ButtonState.Pressed)
                                 Pressed?.Invoke(null, key);
                             else
                                 Released?.Invoke(null, key);
@@ -101,7 +140,8 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                             _currentTilt.Y = data.Value;
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(eventCode), eventCode, eventCode.GetType().Name);
+                            throw new ArgumentOutOfRangeException(nameof(eventCode), eventCode,
+                                eventCode.GetType().Name);
                     }
 
                     break;

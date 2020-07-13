@@ -8,12 +8,32 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace ReMarkable.NET.Graphics
 {
+    /// <summary>
+    /// Provides methods for encoding an <see cref="Image"/> to a RGB565 framebuffer stream
+    /// </summary>
     public class Rgb565FramebufferEncoder : IImageEncoder
     {
+        /// <summary>
+        /// The hardware framebuffer to write data to
+        /// </summary>
         private readonly HardwareFramebuffer _framebuffer;
+
+        /// <summary>
+        /// The area of the source image to encode
+        /// </summary>
         private readonly Rectangle _srcArea;
+
+        /// <summary>
+        /// The location to place the top-leftmost corner of the source area on the destination framebuffer
+        /// </summary>
         private readonly Point _destPoint;
 
+        /// <summary>
+        /// Creates a new <see cref="Rgb565FramebufferEncoder"/>
+        /// </summary>
+        /// <param name="framebuffer">The hardware framebuffer to write data to</param>
+        /// <param name="srcArea">The area of the source image to encode</param>
+        /// <param name="destPoint">The location to place the top-leftmost corner of the source area on the destination framebuffer</param>
         public Rgb565FramebufferEncoder(HardwareFramebuffer framebuffer, Rectangle srcArea, Point destPoint)
         {
             _framebuffer = framebuffer;
@@ -44,6 +64,7 @@ namespace ReMarkable.NET.Graphics
             }
         }
 
+        /// <inheritdoc />
         public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
         {
             throw new NotImplementedException();

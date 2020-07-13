@@ -9,16 +9,19 @@ namespace ReMarkable.NET.Unix.Driver
     {
         private readonly StreamWatcher<EvEvent> _eventWatcher;
 
+        /// <summary>
+        /// The device event stream to poll for new events
+        /// </summary>
+        public string Device { get; }
+
+        protected abstract void DataAvailable(object sender, DataAvailableEventArgs<EvEvent> e);
+
         protected UnixInputDriver(string device)
         {
             Device = device;
             _eventWatcher = new StreamWatcher<EvEvent>(File.OpenRead(Device), 16);
             _eventWatcher.DataAvailable += DataAvailable;
         }
-
-        public string Device { get; }
-
-        protected abstract void DataAvailable(object sender, DataAvailableEventArgs<EvEvent> e);
 
         protected virtual void Dispose(bool disposing)
         {

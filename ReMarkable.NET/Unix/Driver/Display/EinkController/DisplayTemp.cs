@@ -1,6 +1,6 @@
 ﻿namespace ReMarkable.NET.Unix.Driver.Display.EinkController
 {
-    public enum DisplayTemp
+    public enum DisplayTemp : uint
     {
         Ambient = 0x1000,
         Papyrus = 0x1001,

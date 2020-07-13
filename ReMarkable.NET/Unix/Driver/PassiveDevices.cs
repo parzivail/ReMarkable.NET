@@ -1,6 +1,6 @@
 ﻿using System;
-using ReMarkable.NET.Unix.Driver.Battery;
 using ReMarkable.NET.Unix.Driver.Performance;
+using ReMarkable.NET.Unix.Driver.Power;
 using ReMarkable.NET.Unix.Driver.Wireless;
 using ReMarkable.NET.Util;
 
@@ -30,8 +30,8 @@ namespace ReMarkable.NET.Unix.Driver
 #endif
 
             Performance = new HardwarePeformanceMonitor();
-            Battery = new HardwareBatteryMonitor("/sys/class/power_supply/bq27441-0");
-            UsbPower = new HardwareBatteryMonitor("/sys/class/power_supply/imx_usb_charger");
+            Battery = new HardwarePowerSupplyMonitor("/sys/class/power_supply/bq27441-0");
+            UsbPower = new HardwarePowerSupplyMonitor("/sys/class/power_supply/imx_usb_charger");
             Wireless = new HardwareWirelessMonitor();
         }
     }

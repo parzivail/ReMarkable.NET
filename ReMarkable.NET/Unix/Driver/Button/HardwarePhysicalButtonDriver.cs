@@ -5,14 +5,25 @@ using ReMarkable.NET.Util;
 
 namespace ReMarkable.NET.Unix.Driver.Button
 {
+    /// <summary>
+    ///     Provides methods for monitoring the physical buttons installed in the device
+    /// </summary>
     public sealed class HardwarePhysicalButtonDriver : UnixInputDriver, IPhysicalButtonDriver
     {
+        /// <inheritdoc />
+        public event EventHandler<PhysicalButton> Pressed;
+
+        /// <inheritdoc />
+        public event EventHandler<PhysicalButton> Released;
+
+        /// <inheritdoc />
         public Dictionary<PhysicalButton, ButtonState> ButtonStates { get; }
 
-        public event EventHandler<PhysicalButton> Pressed;
-        public event EventHandler<PhysicalButton> Released;
-        
-        internal HardwarePhysicalButtonDriver(string devicePath) : base(devicePath)
+        /// <summary>
+        ///     Creates a new <see cref="HardwarePhysicalButtonDriver" />
+        /// </summary>
+        /// <param name="devicePath">The device event stream to poll for new events</param>
+        public HardwarePhysicalButtonDriver(string devicePath) : base(devicePath)
         {
             ButtonStates = new Dictionary<PhysicalButton, ButtonState>();
         }
@@ -22,15 +33,15 @@ namespace ReMarkable.NET.Unix.Driver.Button
         {
             var data = e.Data;
 
-            var eventType = (PhysicalButtonEventType)data.Type;
+            var eventType = (PhysicalButtonEventType) data.Type;
 
             switch (eventType)
             {
                 case PhysicalButtonEventType.Syn:
                     break;
                 case PhysicalButtonEventType.Key:
-                    var button = (PhysicalButton)data.Code;
-                    var buttonState = (ButtonState)data.Value;
+                    var button = (PhysicalButton) data.Code;
+                    var buttonState = (ButtonState) data.Value;
 
                     ButtonStates[button] = ButtonState.Pressed;
 
@@ -43,7 +54,8 @@ namespace ReMarkable.NET.Unix.Driver.Button
                             Pressed?.Invoke(null, button);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(buttonState), buttonState, buttonState.GetType().Name);
+                            throw new ArgumentOutOfRangeException(nameof(buttonState), buttonState,
+                                buttonState.GetType().Name);
                     }
 
                     break;

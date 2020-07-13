@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ReMarkable.NET.Util
 {
-    class StreamWatcher<T> : IDisposable where T : struct
+    public class StreamWatcher<T> : IDisposable where T : struct
     {
         private readonly Stream _stream;
         private readonly byte[] _buffer;
