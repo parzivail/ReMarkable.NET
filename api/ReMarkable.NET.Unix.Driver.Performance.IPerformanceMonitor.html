@@ -1,0 +1,605 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IPerformanceMonitor
+   </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Interface IPerformanceMonitor
+   ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-dark">
+        <nav class="navbar navbar-expand-xl navbar-dark container-fluid">
+          
+          <a class="navbar-brand text-white" href="../index.html">
+            Remarkable.NET
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+      </header>
+      <div role="main" class="container-fluid body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor">
+                
+                <nav aria-label="breadcrumb" id="breadcrumb" class="hide-when-search">
+                  <!--<ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"></li>
+                  </ol>-->
+                </nav>  
+  
+  <h1 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor" class="text-break">Interface IPerformanceMonitor
+  </h1>
+  <h6 class="text-muted mb-0 mt-1">Namespace: <a class="xref" href="ReMarkable.NET.Unix.Driver.Performance.html">ReMarkable.NET.Unix.Driver.Performance</a></h6>
+  <h6 class="text-muted mb-0 mt-1">Assembly: ReMarkable.NET.dll</h6>
+  <p class="summary"><p>Provides an interface through which the system performance can be profiled</p>
+</p>
+  <div class="markdown level0 conceptual"></div>
+  <h5 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IPerformanceMonitor</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_NumberOfCores_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.NumberOfCores*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_NumberOfCores" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.NumberOfCores">NumberOfCores</h4>
+  <div class="markdown level1 summary"><p>Gets the number of total logical cores in the device</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int NumberOfCores { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_NumberOfProcessors_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.NumberOfProcessors*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_NumberOfProcessors" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.NumberOfProcessors">NumberOfProcessors</h4>
+  <div class="markdown level1 summary"><p>Gets the number of physical processors in the device</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int NumberOfProcessors { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_TotalMemory_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.TotalMemory*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_TotalMemory" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.TotalMemory">TotalMemory</h4>
+  <div class="markdown level1 summary"><p>Gets the total amount of memory in the device, in bytes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long TotalMemory { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_TotalSwap_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.TotalSwap*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_TotalSwap" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.TotalSwap">TotalSwap</h4>
+  <div class="markdown level1 summary"><p>Gets the total amount of swap in the device, in bytes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long TotalSwap { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetFreeMemory_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetFreeMemory*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetFreeMemory" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetFreeMemory">GetFreeMemory()</h4>
+  <div class="markdown level1 summary"><p>Gets the total amount of free memory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetFreeMemory()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The amount of free memory, in bytes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetFreeSwap_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetFreeSwap*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetFreeSwap" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetFreeSwap">GetFreeSwap()</h4>
+  <div class="markdown level1 summary"><p>Gets the total amount of free swap</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetFreeSwap()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The amount of free swap, in bytes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkAdapters_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkAdapters*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkAdapters" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkAdapters">GetNetworkAdapters()</h4>
+  <div class="markdown level1 summary"><p>Lists all of the available network adapters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string[] GetNetworkAdapters()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkRxSpeed_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkRxSpeed*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkRxSpeed_System_String_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkRxSpeed(System.String)">GetNetworkRxSpeed(String)</h4>
+  <div class="markdown level1 summary"><p>Gets the instantaneous network download speed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetNetworkRxSpeed(string adapter)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The adapter to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The speed in bytes/second</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkRxTotal_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkRxTotal*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkRxTotal_System_String_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkRxTotal(System.String)">GetNetworkRxTotal(String)</h4>
+  <div class="markdown level1 summary"><p>Gets the total network download utilization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetNetworkRxTotal(string adapter)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The adapter to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The utilization in bytes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkTxSpeed_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkTxSpeed*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkTxSpeed_System_String_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkTxSpeed(System.String)">GetNetworkTxSpeed(String)</h4>
+  <div class="markdown level1 summary"><p>Gets the instantaneous network upload speed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetNetworkTxSpeed(string adapter)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The adapter to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The speed in bytes/second</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkTxTotal_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkTxTotal*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetNetworkTxTotal_System_String_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetNetworkTxTotal(System.String)">GetNetworkTxTotal(String)</h4>
+  <div class="markdown level1 summary"><p>Gets the total network upload utilization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long GetNetworkTxTotal(string adapter)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The adapter to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The utilization in bytes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime">GetProcessorTime()</h4>
+  <div class="markdown level1 summary"><p>Gets the total processor utilization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">float GetProcessorTime()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The percentage utilization, from 0-1</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime_System_Int32_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime(System.Int32)">GetProcessorTime(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets a specific processor's utilization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">float GetProcessorTime(int processor)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">processor</span></td>
+        <td><p>The processor to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The percentage utilization, from 0-1</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Performance_IPerformanceMonitor_GetProcessorTime_System_Int32_System_Int32_" data-uid="ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.GetProcessorTime(System.Int32,System.Int32)">GetProcessorTime(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets a specific core's utilization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">float GetProcessorTime(int processor, int core)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">processor</span></td>
+        <td><p>The processor to query</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">core</span></td>
+        <td><p>The core to query</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The percentage utilization, from 0-1</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

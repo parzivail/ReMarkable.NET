@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Introduction ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-dark">
+        <nav class="navbar navbar-expand-xl navbar-dark container-fluid">
+          
+          <a class="navbar-brand text-white" href="../index.html">
+            Remarkable.NET
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+      </header>
+      <div role="main" class="container-fluid body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+                
+                <nav aria-label="breadcrumb" id="breadcrumb" class="hide-when-search">
+                  <!--<ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"></li>
+                  </ol>-->
+                </nav><h1 id="introduction">Introduction</h1>
+
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#organization">Organization</a></li>
+<li><a href="#input-devices">Input devices</a>
+<ul>
+<li><a href="#buttons">Buttons</a></li>
+<li><a href="#touchscreen">Touchscreen</a></li>
+<li><a href="#digitizer">Digitizer</a></li>
+</ul>
+</li>
+<li><a href="#output-devices">Output Devices</a>
+<ul>
+<li><a href="#display">Display</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To run the samples, ensure that you have <a href="install_dotnet.html">.NET Core installed</a> on your reMarkable.</p>
+<h2 id="organization">Organization</h2>
+<p>Remarkable.NET (rM.NET) is mostly a collection of software drivers for the various hardware installed in the reMarkable.</p>
+<p>Instances to each of the drivers can be found in their respective device container classes: <code>InputDevices</code>, which provides access to the buttons, digitizer, and touchscreen, <code>OutputDevices</code>, which contains the display, and <code>PassiveDevices</code>, which provides monitoring-only access to the battery, USB power supply, and memory and performance metrics.</p>
+<p>Very little code needs to be written to take advantage of the reMarkable's hardware.</p>
+<h2 id="input-devices">Input devices</h2>
+<p>The input devices utilize the event pattern to dispatch input events. The drivers read the <code>/dev/input/event*</code> streams and parse them accordingly.</p>
+<p>The corresponding device container classes do not explicitly reference specific <code>event*</code> streams for each device, as the event stream may not always correspond to the same device if additional devices are attached, like a USB keyboard. Instead, they parse <code>/proc/bus/input/devices</code> to map unique device names to their event stream.</p>
+<h3 id="buttons">Buttons</h3>
+<p>Hardware device name: <code>gpio-keys</code></p>
+<p>Field: <code>InputDevices.PhysicalButtons</code></p>
+<p>Hypothetical example:</p>
+<pre><code class="lang-csharp">// Exit when home button is pressed
+InputDevices.PhysicalButtons.Pressed += (sender, button) =&gt;
+{
+	if (button == PhysicalButton.Home)
+		CloseApp();
+};
+</code></pre>
+<h3 id="touchscreen">Touchscreen</h3>
+<p>Hardware device name: <code>cyttsp5_mt</code></p>
+<p>Field: <code>InputDevices.Touchscreen</code></p>
+<p>Hypothetical example:</p>
+<pre><code class="lang-csharp">// Hold &quot;dragging&quot; control
+Control control = null;
+
+// Start dragging on press
+InputDevices.Touchscreen.Pressed += (sender, finger) =&gt;
+{
+	control = GetControlAt(finger.DevicePosition);
+	control.BeginDrag(finger);
+};
+
+// Move control when finger moves
+InputDevices.Touchscreen.Moved += (sender, finger) =&gt;
+{
+	if (control.DraggingFingerId == finger.Id)
+		control.Drag(finger.PreviousDevicePosition, finger.DevicePosition);
+};
+
+// Redraw, etc. when done dragging
+InputDevices.Touchscreen.Released += (sender, finger) =&gt;
+{
+	control.EndDrag(finger);
+};
+</code></pre>
+<h3 id="digitizer">Digitizer</h3>
+<p>Hardware device name: <code>Wacom I2C Digitizer</code></p>
+<p>Field: <code>InputDevices.Digitizer</code></p>
+<p>Hypothetical example:</p>
+<pre><code class="lang-csharp">// Use the stylus as a pen
+InputDevices.Digitizer.StylusUpdate += (sender, state) =&gt;
+{
+    DrawLine(state);
+};
+
+// Swap to an eraser or other tool when the stylus is flipped (or a tool change is otherwise made)
+InputDevices.Digitizer.ToolChanged += (sender, tool) =&gt;
+{
+    SetStylusTool(tool);
+};
+</code></pre>
+<h2 id="output-devices">Output Devices</h2>
+<h3 id="display">Display</h3>
+<p>Hardware device: <code>/dev/fb0</code></p>
+<p>Field: <code>OutputDevices.Display</code></p>
+<p>Example:</p>
+<pre><code class="lang-csharp">// Create an image
+var img = new Image&lt;Rgb24&gt;(300, 300);
+
+// Do some image processing
+img.Mutate(ctx =&gt; ctx.DrawLines(Color.Black, 3, new PointF(50, 50), new PointF(250, 250)));
+
+// Draw the image to the screen
+OutputDevices.Display.Draw(img, img.Bounds(), Point.Empty);
+</code></pre>
+</article>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

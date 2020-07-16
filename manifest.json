@@ -1,0 +1,1077 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/colby/Downloads/docfx/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Graphics.Rgb565.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Graphics.Rgb565.html",
+          "hash": "jxKbFdH1JaK39rTIzuCOWg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Graphics.Rgb565FramebufferDecoder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Graphics.Rgb565FramebufferDecoder.html",
+          "hash": "3ivpCyzOt/U6R0ZbpQToBw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Graphics.Rgb565FramebufferEncoder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Graphics.Rgb565FramebufferEncoder.html",
+          "hash": "PcNAgk74WUmBP03bKGx7sw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Graphics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Graphics.html",
+          "hash": "1F9LoN/ICfrk71iGhz3F4A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Button.HardwarePhysicalButtonDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Button.HardwarePhysicalButtonDriver.html",
+          "hash": "n2wouHQ3HycH139y92EESA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Button.IPhysicalButtonDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Button.IPhysicalButtonDriver.html",
+          "hash": "/v3TWyif+mjkjgQfuFY85w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Button.PhysicalButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Button.PhysicalButton.html",
+          "hash": "Z0YbuqOpXJu0Aj+0j4btZw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Button.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Button.html",
+          "hash": "TikfyUgrMkfq6r5Ju3BX5w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.DeviceUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.DeviceUtils.html",
+          "hash": "St5vCVQnkZqQPClJhMaJqg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.DigitizerEventAbsCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.DigitizerEventAbsCode.html",
+          "hash": "1Ks2H7yco7NYcDT7WIHWNg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.DigitizerEventKeyCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.DigitizerEventKeyCode.html",
+          "hash": "7EIYsK+MZPYYSthBVQSrQw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.HardwareDigitizerDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.HardwareDigitizerDriver.html",
+          "hash": "wEtjjM8U5UbYerZfSrdzxQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.IDigitizerDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.IDigitizerDriver.html",
+          "hash": "gVlzGRvFMM0Nv8bP1tuQAA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.StylusState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.StylusState.html",
+          "hash": "P/66JaId3eXnjpgXPq6ugw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.StylusTool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.StylusTool.html",
+          "hash": "VTGs+DWNqqbudeInmt6Zsw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Digitizer.html",
+          "hash": "zct7P/XQUNl47DIz5FpyrQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.AutoUpdateMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.AutoUpdateMode.html",
+          "hash": "KU8Ab7r0YyRvHsjBWoyZwg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.DisplayTemp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.DisplayTemp.html",
+          "hash": "nzQX3Opfmu+ABvWvPbEsmg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbAltBufferData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbAltBufferData.html",
+          "hash": "zT4HqjqU4FOzVtZZSPKk5w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbRect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbRect.html",
+          "hash": "z772PItFFtRkB8aNdxzyrw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbUpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.FbUpdateData.html",
+          "hash": "n7pTAjMA9ampPZbldIk88Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.IoctlDisplayCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.IoctlDisplayCommand.html",
+          "hash": "NcHmDRCC4nj9apWb1IDe/g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateMarkerData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateMarkerData.html",
+          "hash": "vdZ4twEjjVeKG0DToiRmdA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateMode.html",
+          "hash": "UEU7ea87w4cfr2LYq4dlmw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateScheme.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.UpdateScheme.html",
+          "hash": "SG0AqYNIflOECaWan2qGzw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode.html",
+          "hash": "xLw7tYIiozugamA7hFWZtQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformModes.html",
+          "hash": "5EMnR6o35xv+48Tyrgri9w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.EinkController.html",
+          "hash": "j/FfDU6JvQTOJZKP3EUN6w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbBitfield.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbBitfield.html",
+          "hash": "V5IVoLkAsqa305favf3mVw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbFixedScreenInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbFixedScreenInfo.html",
+          "hash": "Ooo/c6f/OD9Sjwv7M9tmnw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbSync.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbSync.html",
+          "hash": "SQi3u3kDFjqTntqr9dAPew=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVMode.html",
+          "hash": "VMOBNA1srfMOkBaV1RLqtQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.html",
+          "hash": "LfsB9PMAOabDzJ6DH6PoCA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.HardwareFramebuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.HardwareFramebuffer.html",
+          "hash": "X7JFl2W2fPy8ull3t9gTig=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.IFramebuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.IFramebuffer.html",
+          "hash": "bU0WD4GoV5K0Up2XAp7CJg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.Framebuffer.html",
+          "hash": "Q0H69JaI2L3Jrzefjn9PYw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.html",
+          "hash": "mT2Xcx8K3wo33jhFeh25Pg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.IDisplayDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.IDisplayDriver.html",
+          "hash": "Ilg6477FodIg/6DXX9vGEg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Display.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Display.html",
+          "hash": "SQzhZzU1L9+oVOfadiy7cw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.ButtonState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.ButtonState.html",
+          "hash": "NPxb+37T5pTiJQJYuy57wA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.DataAvailableEventArgs-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.DataAvailableEventArgs-1.html",
+          "hash": "8Xa2a78fKG/icPgcnePdaA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.EvEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.EvEvent.html",
+          "hash": "DfzbEE9YcaoYBqQkOPCfZQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.UnixInputDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.UnixInputDriver.html",
+          "hash": "kCefO9VqQ0wC8ua3kjvNaw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Generic.html",
+          "hash": "oumGzcyGDi0nY9TKN4ukCA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.InputDevices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.InputDevices.html",
+          "hash": "0JxY5aw+8LAm091OlTUz4Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.HardwareKeyboardDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.HardwareKeyboardDriver.html",
+          "hash": "UTDisShrP24RNsdXBY2nFw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.IKeyboardDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.IKeyboardDriver.html",
+          "hash": "gvguBU8PuidPJOWXDG8hAg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyEventArgs.html",
+          "hash": "29gyGsUiXx0qZEPe8AjGBA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyPressEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyPressEventArgs.html",
+          "hash": "6i7E1iNzfd/rfhY6JaOWgQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyboardKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyboardKey.html",
+          "hash": "979yLXSPDNSQZaayXoVqgQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyboardLed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.KeyboardLed.html",
+          "hash": "s/QEz4r/FmIOOIok16Sldg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Keyboard.html",
+          "hash": "MazRBWqTvGICrij6W+ko8w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.OutputDevices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.OutputDevices.html",
+          "hash": "FXCSVP/2fyTcNOw48yAkLQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.PassiveDevices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.PassiveDevices.html",
+          "hash": "qsd/ThXDflbTq/+sWz9piw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.HardwarePeformanceMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.HardwarePeformanceMonitor.html",
+          "hash": "1NbWgXRefnBJpSCPEhtdAQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.IPerformanceMonitor.html",
+          "hash": "VyMqlor6vaMV31e1dZOV9A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Performance.html",
+          "hash": "SfolK92l6KM1KMfo+6n+Jg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Power.HardwarePowerSupplyMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Power.HardwarePowerSupplyMonitor.html",
+          "hash": "hYuH0vSfuEJ4sjTqGg7hdw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Power.IPowerSupplyMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Power.IPowerSupplyMonitor.html",
+          "hash": "hQz18+5jWOcdYIApRuFK4g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Power.PowerSupplyStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Power.PowerSupplyStatus.html",
+          "hash": "D9Doe0IojAU5STtNhjGL5g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Power.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Power.html",
+          "hash": "rJLMie3hq46arnPAKfWuPQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.FingerState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.FingerState.html",
+          "hash": "t+I/uZv87ycOoP3CKmn6qA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.FingerStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.FingerStatus.html",
+          "hash": "yFgKdHE0PcnO7LkOTwz7/g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.HardwareTouchscreenDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.HardwareTouchscreenDriver.html",
+          "hash": "oIJrCgzWce1iL/wcYi6+iw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.ITouchscreenDriver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.ITouchscreenDriver.html",
+          "hash": "a2+eQwkE/snS3dkVIWbwyQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.TouchscreenEventAbsCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.TouchscreenEventAbsCode.html",
+          "hash": "yuRQ8K+NCFQckkDO2uhBzw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Touchscreen.html",
+          "hash": "+ZaGbWWnMDqg944sW0uLkw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.HardwareWirelessMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.HardwareWirelessMonitor.html",
+          "hash": "3DesgHGEQbN0D4HY8Aa2HA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.IWirelessMonitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.IWirelessMonitor.html",
+          "hash": "w+XBjs3Sbhs07Dow4PDzpg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.Wireless.html",
+          "hash": "yeiQ18fJ9yuSxMIvs8FpJg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Driver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Driver.html",
+          "hash": "XbRPISBJZ30CxdoKxd/6Uw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Stream.UnixFileMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Stream.UnixFileMode.html",
+          "hash": "7QYtFn5dvE1N6g44SOs5Fg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Unix.Stream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Unix.Stream.html",
+          "hash": "IyQxTXZNEU1exE3q+fcq8g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Util.BufferExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Util.BufferExtensions.html",
+          "hash": "94JcOEJFDxXPa2Qfct4gLg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Util.Lumberjack.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Util.Lumberjack.html",
+          "hash": "cJHbS5MK4KCwYmI0ektgfg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Util.ReflectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Util.ReflectionExtensions.html",
+          "hash": "CSN2stvth3oYDmFO/uqSLw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Util.StreamWatcher-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Util.StreamWatcher-1.html",
+          "hash": "J5jLpEQphkM3XfLkRDk6Lg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ReMarkable.NET.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ReMarkable.NET.Util.html",
+          "hash": "ewFrfNtr7/zEQyHR+xcQ1Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "f8NyRXsgfYPtvMDW1T6npQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "kAIt3MVUSvFEMsDuH6CRww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/install_dotnet.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/install_dotnet.html",
+          "hash": "0F7nTvbWlF/8RIKV9axXng=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "vy9P6J8guo/uGD5PDNKZKw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "M+O2ZZDdhujCvG/UINbAXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "IX8LkYHsLMdzhO5aQMHPXA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "j89YAE1g4vojtFok1H/S4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 4
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 78,
+          "skipped_file_count": 78
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

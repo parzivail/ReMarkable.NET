@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class HardwareDisplayDriver
+   </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Class HardwareDisplayDriver
+   ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-dark">
+        <nav class="navbar navbar-expand-xl navbar-dark container-fluid">
+          
+          <a class="navbar-brand text-white" href="../index.html">
+            Remarkable.NET
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+      </header>
+      <div role="main" class="container-fluid body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver">
+                
+                <nav aria-label="breadcrumb" id="breadcrumb" class="hide-when-search">
+                  <!--<ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"></li>
+                  </ol>-->
+                </nav>  
+  
+  <h1 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver" class="text-break">Class HardwareDisplayDriver
+  </h1>
+  <h6 class="text-muted mb-0 mt-1">Namespace: <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.html">ReMarkable.NET.Unix.Driver.Display</a></h6>
+  <h6 class="text-muted mb-0 mt-1">Assembly: ReMarkable.NET.dll</h6>
+  <p class="summary"><p>Provides methods for interacting with the hardware display installed in the device</p>
+</p>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance mt-1">
+    <span class="markdown level6">Inheritance</span>
+    <span class="d-">
+      <span class="level0 mr-1"><span class="xref">System.Object</span><i class="fal fa-long-arrow-right fa-fw"></i></span>
+      <span class="level1"><span class="xref">HardwareDisplayDriver</span></span>
+    </span>
+  </div>
+  <div class="implements mt-1">
+    <h5 class="mb-0">
+  Implements
+    </h5>
+    <div><span class="xref">System.IDisposable</span></div>
+    <div><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.IDisplayDriver.html">IDisplayDriver</a></div>
+  </div>
+  <div class="inheritedMembers mt-1">
+    <h5 class="mb-0">
+  Inherited Members
+    </h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h5 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class HardwareDisplayDriver : IDisposable, IDisplayDriver</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver__ctor_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.#ctor*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver__ctor_System_String_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.#ctor(System.String)">HardwareDisplayDriver(String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.html">HardwareDisplayDriver</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HardwareDisplayDriver(string devicePath)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">devicePath</span></td>
+        <td><p>The device handle location</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_DevicePath_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.DevicePath*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_DevicePath" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.DevicePath">DevicePath</h4>
+  <div class="markdown level1 summary"><p>The device handle location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DevicePath { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Framebuffer_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Framebuffer*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Framebuffer" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Framebuffer">Framebuffer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IFramebuffer Framebuffer { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.IFramebuffer.html">IFramebuffer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VirtualHeight_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VirtualHeight*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VirtualHeight" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VirtualHeight">VirtualHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int VirtualHeight { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VirtualWidth_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VirtualWidth*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VirtualWidth" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VirtualWidth">VirtualWidth</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int VirtualWidth { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VisibleHeight_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VisibleHeight*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VisibleHeight" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VisibleHeight">VisibleHeight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int VisibleHeight { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VisibleWidth_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VisibleWidth*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_VisibleWidth" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.VisibleWidth">VisibleWidth</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int VisibleWidth { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Dispose_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Dispose*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Dispose" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Draw_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Draw*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Draw_Image_Rgb24__Rectangle_Point_Rectangle_ReMarkable_NET_Unix_Driver_Display_EinkController_WaveformMode_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Draw(Image{Rgb24},Rectangle,Point,Rectangle,ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode)">Draw(Image&lt;Rgb24&gt;, Rectangle, Point, Rectangle, WaveformMode)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Image&lt;Rgb24&gt; image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = null, WaveformMode mode = WaveformMode.Auto)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Image</span>&lt;<span class="xref">Rgb24</span>&gt;</td>
+        <td><span class="parametername">image</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Rectangle</span></td>
+        <td><span class="parametername">srcArea</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Point</span></td>
+        <td><span class="parametername">destPoint</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Rectangle</span></td>
+        <td><span class="parametername">refreshArea</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode.html">WaveformMode</a></td>
+        <td><span class="parametername">mode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_GetFixedScreenInfo_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.GetFixedScreenInfo*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_GetFixedScreenInfo" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.GetFixedScreenInfo">GetFixedScreenInfo()</h4>
+  <div class="markdown level1 summary"><p>Reads fixed device information from the display</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FbFixedScreenInfo GetFixedScreenInfo()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbFixedScreenInfo.html">FbFixedScreenInfo</a></td>
+        <td><p>A populated <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbFixedScreenInfo.html">FbFixedScreenInfo</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_GetVarScreenInfo_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.GetVarScreenInfo*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_GetVarScreenInfo" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.GetVarScreenInfo">GetVarScreenInfo()</h4>
+  <div class="markdown level1 summary"><p>Reads variable device information from the display</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FbVarScreenInfo GetVarScreenInfo()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.html">FbVarScreenInfo</a></td>
+        <td><p>A populated <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.html">FbVarScreenInfo</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_PutVarScreenInfo_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.PutVarScreenInfo*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_PutVarScreenInfo_ReMarkable_NET_Unix_Driver_Display_Framebuffer_FbVarScreenInfo_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.PutVarScreenInfo(ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo)">PutVarScreenInfo(FbVarScreenInfo)</h4>
+  <div class="markdown level1 summary"><p>Writes variable device to the display</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PutVarScreenInfo(FbVarScreenInfo vinfo)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.html">FbVarScreenInfo</a></td>
+        <td><span class="parametername">vinfo</span></td>
+        <td><p>A populated <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.Framebuffer.FbVarScreenInfo.html">FbVarScreenInfo</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Refresh_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Refresh*"></a>
+  <h4 id="ReMarkable_NET_Unix_Driver_Display_HardwareDisplayDriver_Refresh_Rectangle_ReMarkable_NET_Unix_Driver_Display_EinkController_WaveformMode_" data-uid="ReMarkable.NET.Unix.Driver.Display.HardwareDisplayDriver.Refresh(Rectangle,ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode)">Refresh(Rectangle, WaveformMode)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(Rectangle rectangle, WaveformMode mode)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Rectangle</span></td>
+        <td><span class="parametername">rectangle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ReMarkable.NET.Unix.Driver.Display.EinkController.WaveformMode.html">WaveformMode</a></td>
+        <td><span class="parametername">mode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements" class="text-muted font-weight-light font-italic">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+  <div>
+      <a class="xref" href="ReMarkable.NET.Unix.Driver.Display.IDisplayDriver.html">IDisplayDriver</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>
