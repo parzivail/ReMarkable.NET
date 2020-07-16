@@ -10,7 +10,7 @@ For API reference and examples, see [the documentation](https://parzivail.github
 
 ## NuGet
 
-Soon!
+[ReMarkable.NET](https://www.nuget.org/packages/ReMarkable.NET)
 
 ## Issues
 
