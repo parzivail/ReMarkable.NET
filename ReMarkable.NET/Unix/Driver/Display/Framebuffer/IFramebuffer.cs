@@ -57,5 +57,13 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
         /// <param name="destPoint">The point in the buffer where the source area will be drawn</param>
         void Write<TPixel>(Image<TPixel> image, Rectangle srcArea, Point destPoint)
             where TPixel : unmanaged, IPixel<TPixel>;
+
+        /// <summary>
+        /// Sets exactly one pixel in the framebuffer to the specified color
+        /// </summary>
+        /// <param name="x">The X coordinate of the pixel</param>
+        /// <param name="y">The Y coordinate of the pixel</param>
+        /// <param name="color">The color to set the pixel to</param>
+        void SetPixel(int x, int y, Color color);
     }
 }

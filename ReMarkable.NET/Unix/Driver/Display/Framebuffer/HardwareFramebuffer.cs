@@ -118,5 +118,12 @@ namespace ReMarkable.NET.Unix.Driver.Display.Framebuffer
                 .Clone(srcImage => srcImage.Crop(srcArea))
                 .Save(_deviceStream, new Rgb565FramebufferEncoder(this, srcArea, destPoint));
         }
+
+        public void SetPixel(int x, int y, Color color)
+        {
+            _deviceStream.Seek(PointToOffset(x, y), SeekOrigin.Begin);
+            var rgb = color.ToPixel<Rgb24>();
+            _deviceStream.Write(BitConverter.GetBytes(Rgb565.Pack(rgb.R, rgb.G, rgb.B)), 0, 2);
+        }
     }
 }

@@ -6,7 +6,7 @@ using SixLabors.ImageSharp;
 
 namespace Graphite.Util
 {
-    internal static class RectangleExtensions
+    public static class RectangleExtensions
     {
         public static RectangleF GetSmallestContaining(this RectangleF a, RectangleF b)
         {
