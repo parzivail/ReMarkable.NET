@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Authors>parzivail</Authors>
+    <Company />
+    <Description>A .NET library for developing applications for the reMarkable tablets</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/parzivail/ReMarkable.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/parzivail/ReMarkable.NET</RepositoryUrl>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
