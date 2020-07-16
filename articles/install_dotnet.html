@@ -78,7 +78,7 @@
 </li>
 </ul>
 <h2 id="obtain-a-copy-of-net-core">Obtain a copy of .NET Core</h2>
-<p>Unfortunately, as of the time of writing, there are no package managers on</p>
+<p>Unfortunately, as of the time of writing, there are no package managers working on reMarkables so we'll have to install .NET ourselves.</p>
 <p>Currently, rM.NET is built on .NET Core 3.1, which can be found <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">here</a>. Download the binaries for <strong>ARM32</strong>.</p>
 <h2 id="transfer-net-core-to-your-device">Transfer .NET Core to your device</h2>
 <p>Using <code>scp</code> or similar, like WinSCP, to transfer the archive to your reMarkable.</p>
@@ -87,7 +87,7 @@
 <p>Using <code>ssh</code> or similar, like Putty, connect to the device as <code>root</code>:</p>
 <pre><code>ssh root@10.11.99.1
 </code></pre>
-<p>You can find the SSH passwordf or your device near the bottom of the About page in your device settings.</p>
+<p>You can find the SSH password for your device near the bottom of the About page in your device settings.</p>
 <h2 id="unpack-the-net-archive">Unpack the .NET archive</h2>
 <p>Unpack the archive into a new folder called <code>dotnet</code>:</p>
 <pre><code>mkdir dotnet
