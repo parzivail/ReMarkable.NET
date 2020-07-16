@@ -984,10 +984,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "vy9P6J8guo/uGD5PDNKZKw=="
+          "hash": "hcQdJKMWTJ1FF3TjxXpcDw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1011,7 +1011,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "mGmah6QlR7yhNto/6Ar/qg=="
+          "hash": "XF0+U+EGSKvzFCuJdTOT6A=="
         }
       },
       "is_incremental": false,
@@ -1043,7 +1043,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 4,
-          "skipped_file_count": 3
+          "skipped_file_count": 2
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
