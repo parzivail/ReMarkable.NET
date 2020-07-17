@@ -27,64 +27,28 @@ namespace Sandbox
 
             var screen = OutputDevices.Display;
 
-            //            var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
-            //            w.Update += WindowUpdate;
-            //
-            //            InputDevices.Digitizer.Pressed += (sender, code) => w.ConsumePress(InputDevices.Digitizer.State, code);
-            //            InputDevices.Digitizer.Released += (sender, code) => w.ConsumeRelease(InputDevices.Digitizer.State, code);
-            //            InputDevices.Digitizer.StylusUpdate += (sender, state) => w.ConsumeMove(state);
-            //
-            //            InputDevices.Touchscreen.Pressed += (sender, finger) => w.ConsumePress(finger);
-            //            InputDevices.Touchscreen.Released += (sender, finger) => w.ConsumeRelease(finger);
-            //            InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
-            //
-            //            var mainPage = w.CreatePage<MainPage>();
-            //
-            //            logger.Info("Showing main page");
-            //            w.ShowPage(mainPage);
+            var w = new Window(screen.VisibleWidth, screen.VisibleHeight);
+            w.Update += WindowUpdate;
 
-            var buf = new Image<Rgb24>(screen.VisibleWidth, screen.VisibleHeight);
-            buf.Mutate(context => context.SetGraphicsOptions(options => options.Antialias = false).Clear(Color.White));
+            InputDevices.Digitizer.Pressed += (sender, code) => w.ConsumePress(InputDevices.Digitizer.State, code);
+            InputDevices.Digitizer.Released += (sender, code) => w.ConsumeRelease(InputDevices.Digitizer.State, code);
+            InputDevices.Digitizer.StylusUpdate += (sender, state) => w.ConsumeMove(state);
 
-            var white = buf.Clone();
+            InputDevices.Touchscreen.Pressed += (sender, finger) => w.ConsumePress(finger);
+            InputDevices.Touchscreen.Released += (sender, finger) => w.ConsumeRelease(finger);
+            InputDevices.Touchscreen.Moved += (sender, finger) => w.ConsumeMove(finger);
 
-            screen.Draw(buf, buf.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
+            var mainPage = w.CreatePage<MainPage>();
 
-            InputDevices.PhysicalButtons.Pressed += (sender, button) =>
-            {
-                switch (button)
-                {
-                    case PhysicalButton.Left:
-                        screen.Draw(white, white.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
-                        break;
-                    case PhysicalButton.Right:
-                        screen.Draw(buf, buf.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
-                        break;
-                }
-            };
-
-            var lastPos = PointF.Empty;
-            InputDevices.Digitizer.StylusUpdate += (sender, state) =>
-            {
-                var thisPos = state.GetDevicePosition(InputDevices.Digitizer, screen);
-                if (state.Pressure > 0 && (Math.Abs(lastPos.X - thisPos.X) >= 1 || Math.Abs(lastPos.Y - thisPos.Y) >= 1))
-                {
-                    var rect = Rectangle.Union(new Rectangle((int)lastPos.X, (int)lastPos.Y, 1, 1), new Rectangle((int)thisPos.X, (int)thisPos.Y, 1, 1));
-
-                    buf.Mutate(context => context.DrawLines(Color.Black, 2, lastPos, thisPos));
-                    screen.Draw(buf, rect, rect.Location, waveformMode: WaveformMode.Du, displayTemp: DisplayTemp.RemarkableDraw);
-
-                    lastPos = thisPos;
-                }
-
-            };
+            logger.Info("Showing main page");
+            w.ShowPage(mainPage);
 
             threadLock.Wait();
         }
 
         private static void WindowUpdate(object sender, WindowUpdateEventArgs e)
         {
-            OutputDevices.Display.Draw(e.Buffer, e.UpdatedArea, e.UpdatedArea.Location);
+            OutputDevices.Display.Draw(e.Buffer, e.UpdatedArea, e.UpdatedArea.Location, displayTemp: DisplayTemp.RemarkableDraw);
         }
     }
 }
