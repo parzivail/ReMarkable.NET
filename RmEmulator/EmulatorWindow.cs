@@ -243,9 +243,9 @@ namespace RmEmulator
             SwapBuffers();
         }
 
-        public void RefreshRegion(Rectangle region, WaveformMode mode)
+        public void RefreshRegion(Rectangle region, WaveformMode mode, DisplayTemp displayTemp, UpdateMode updateMode)
         {
-            _refreshQueue.Enqueue(new RefreshTask(region, mode));
+            _refreshQueue.Enqueue(new RefreshTask(region, mode, displayTemp, updateMode));
         }
     }
 }

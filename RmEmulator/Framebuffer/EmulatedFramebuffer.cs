@@ -2,6 +2,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Processors;
 
 namespace RmEmulator.Framebuffer
 {
@@ -42,6 +43,12 @@ namespace RmEmulator.Framebuffer
             srcArea.Location = new Point(srcArea.Location.X + destPoint.X - x, srcArea.Location.Y + destPoint.Y - y);
 
             BackBuffer.Mutate(backBuffer => backBuffer.DrawImage(image.Clone(srcImage => srcImage.Crop(srcArea)), destPoint, 1));
+        }
+
+        /// <inheritdoc />
+        public void SetPixel(int x, int y, Color color)
+        {
+            BackBuffer[x, y] = color;
         }
 
         /// <inheritdoc />

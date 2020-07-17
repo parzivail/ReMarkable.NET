@@ -42,18 +42,22 @@ namespace ReMarkable.NET.Unix.Driver.Display
         /// <param name="srcArea">The source area of the image to draw</param>
         /// <param name="destPoint">The point in the destination framebuffer where the source area will be drawn</param>
         /// <param name="refreshArea">The area of the screen to refresh. If omitted, will refresh the entire affected area.</param>
-        /// <param name="mode">
+        /// <param name="waveformMode">
         ///     The waveform mode to use when refreshing the screen. If omitted, will use
         ///     <see cref="WaveformMode.Auto" />
         /// </param>
+        /// <param name="displayTemp">The display temperature to use to refresh the region</param>
+        /// <param name="updateMode">The update mode to use to refresh</param>
         void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
-            WaveformMode mode = WaveformMode.Auto);
+            WaveformMode waveformMode = WaveformMode.Auto, DisplayTemp displayTemp = DisplayTemp.Papyrus, UpdateMode updateMode = UpdateMode.Partial);
 
         /// <summary>
         ///     Draws the contents of the internal buffer to the display device
         /// </summary>
         /// <param name="rectangle">The region of the buffer to be drawn to the device</param>
         /// <param name="mode">The update waveform used to refresh the region</param>
-        void Refresh(Rectangle rectangle, WaveformMode mode);
+        /// <param name="displayTemp">The display temperature to use to refresh the region</param>
+        /// <param name="updateMode">The update mode to use to refresh</param>
+        void Refresh(Rectangle rectangle, WaveformMode mode, DisplayTemp displayTemp, UpdateMode updateMode);
     }
 }

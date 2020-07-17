@@ -18,6 +18,11 @@ namespace ReMarkable.NET.Unix.Driver.Display
         private readonly SafeUnixHandle _handle;
 
         /// <summary>
+        ///     The update marker ID returned by the device
+        /// </summary>
+        private uint _updateMarker = 0;
+
+        /// <summary>
         ///     The device handle location
         /// </summary>
         public string DevicePath { get; }
@@ -71,7 +76,6 @@ namespace ReMarkable.NET.Unix.Driver.Display
             vinfo.Sync = FbSync.None;
             vinfo.VMode = FbVMode.NonInterlaced;
             vinfo.BitsPerPixel = sizeof(short) * 8;
-            vinfo.AccelFlags = 0;
 
             PutVarScreenInfo(vinfo);
         }
@@ -85,7 +89,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
 
         /// <inheritdoc />
         public void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
-            WaveformMode mode = WaveformMode.Auto)
+            WaveformMode waveformMode = WaveformMode.Auto, DisplayTemp displayTemp = DisplayTemp.Papyrus, UpdateMode updateMode = UpdateMode.Partial)
         {
             Framebuffer.Write(image, srcArea, destPoint);
 
@@ -95,7 +99,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
                 refreshArea.Size = srcArea.Size;
             }
 
-            Refresh(refreshArea, mode);
+            Refresh(refreshArea, waveformMode, displayTemp, updateMode);
         }
 
         /// <summary>
@@ -133,7 +137,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
         }
 
         /// <inheritdoc />
-        public void Refresh(Rectangle rectangle, WaveformMode mode)
+        public void Refresh(Rectangle rectangle, WaveformMode mode, DisplayTemp displayTemp, UpdateMode updateMode)
         {
             Framebuffer.ConstrainRectangle(ref rectangle);
             var data = new FbUpdateData
@@ -146,16 +150,19 @@ namespace ReMarkable.NET.Unix.Driver.Display
                     Height = (uint)rectangle.Height
                 },
                 WaveformMode = mode,
-                DisplayTemp = DisplayTemp.Papyrus,
-                UpdateMode = UpdateMode.Full,
-                UpdateMarker = 0,
+                DisplayTemp = displayTemp,
+                UpdateMode = updateMode,
+                UpdateMarker = _updateMarker,
                 DitherMode = 0,
                 QuantBit = 0,
                 Flags = 0
             };
 
-            if (DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.SendUpdate, ref data) == -1)
+            var retCode = DisplayIoctl.Ioctl(_handle, IoctlDisplayCommand.SendUpdate, ref data);
+            if (retCode == -1)
                 throw new UnixException();
+
+            _updateMarker = (uint) retCode;
         }
     }
 }

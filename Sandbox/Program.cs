@@ -48,30 +48,33 @@ namespace Sandbox
 
             var white = buf.Clone();
 
-            screen.Draw(buf, buf.Bounds(), Point.Empty, mode: WaveformMode.Du);
+            screen.Draw(buf, buf.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
 
             InputDevices.PhysicalButtons.Pressed += (sender, button) =>
             {
                 switch (button)
                 {
                     case PhysicalButton.Left:
-                        screen.Draw(white, white.Bounds(), Point.Empty, mode: WaveformMode.Du);
+                        screen.Draw(white, white.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
                         break;
                     case PhysicalButton.Right:
-                        screen.Draw(buf, buf.Bounds(), Point.Empty, mode: WaveformMode.Du);
+                        screen.Draw(buf, buf.Bounds(), Point.Empty, waveformMode: WaveformMode.Du);
                         break;
                 }
             };
 
+            var lastPos = PointF.Empty;
             InputDevices.Digitizer.StylusUpdate += (sender, state) =>
             {
-                if (state.Pressure > 0)
+                var thisPos = state.GetDevicePosition(InputDevices.Digitizer, screen);
+                if (state.Pressure > 0 && (Math.Abs(lastPos.X - thisPos.X) >= 1 || Math.Abs(lastPos.Y - thisPos.Y) >= 1))
                 {
-                    var thisPos = state.GetDevicePosition(InputDevices.Digitizer, screen);
-                    var rect = new Rectangle((int)thisPos.X, (int)thisPos.Y, 1, 1);
+                    var rect = Rectangle.Union(new Rectangle((int)lastPos.X, (int)lastPos.Y, 1, 1), new Rectangle((int)thisPos.X, (int)thisPos.Y, 1, 1));
 
-                    screen.Framebuffer.SetPixel(rect.X, rect.Y, Color.FromRgb(1, 1, 1));
-                    screen.Draw(buf, rect, rect.Location, mode: WaveformMode.Du);
+                    buf.Mutate(context => context.DrawLines(Color.Black, 2, lastPos, thisPos));
+                    screen.Draw(buf, rect, rect.Location, waveformMode: WaveformMode.Du, displayTemp: DisplayTemp.RemarkableDraw);
+
+                    lastPos = thisPos;
                 }
 
             };

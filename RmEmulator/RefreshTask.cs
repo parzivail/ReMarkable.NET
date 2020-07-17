@@ -17,14 +17,18 @@ namespace RmEmulator
 
         public Rectangle Region { get; }
         public WaveformMode Mode { get; }
+        public DisplayTemp DisplayTemp { get; }
+        public UpdateMode UpdateMode { get; }
         public bool Running { get; private set; }
 
-        public RefreshTask(Rectangle region, WaveformMode mode)
+        public RefreshTask(Rectangle region, WaveformMode mode, DisplayTemp displayTemp, UpdateMode updateMode)
         {
             EmulatedDevices.Display.Framebuffer.ConstrainRectangle(ref region);
 
             Region = region;
             Mode = mode;
+            DisplayTemp = displayTemp;
+            UpdateMode = updateMode;
         }
 
         public void Run()

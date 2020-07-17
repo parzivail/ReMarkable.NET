@@ -27,13 +27,13 @@ namespace RmEmulator.Devices
             Framebuffer = new EmulatedFramebuffer(_emulatorWindow, visibleWidth, visibleHeight);
         }
 
-        public void Refresh(Rectangle rectangle, WaveformMode mode)
+        public void Refresh(Rectangle rectangle, WaveformMode mode, DisplayTemp displayTemp, UpdateMode updateMode)
         {
-            _emulatorWindow.RefreshRegion(rectangle, mode);
+            _emulatorWindow.RefreshRegion(rectangle, mode, displayTemp, updateMode);
         }
 
         public void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
-            WaveformMode mode = WaveformMode.Auto)
+            WaveformMode waveformMode = WaveformMode.Auto, DisplayTemp displayTemp = DisplayTemp.Papyrus, UpdateMode updateMode = UpdateMode.Partial)
         {
             Framebuffer.Write(image, srcArea, destPoint);
 
@@ -43,7 +43,7 @@ namespace RmEmulator.Devices
                 refreshArea.Size = srcArea.Size;
             }
 
-            Refresh(refreshArea, mode);
+            Refresh(refreshArea, waveformMode, displayTemp, updateMode);
         }
     }
 }
