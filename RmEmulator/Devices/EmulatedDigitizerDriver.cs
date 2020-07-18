@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReMarkable.NET.Calibration;
+using ReMarkable.NET.Calibration.Builtin;
 using ReMarkable.NET.Unix.Driver.Digitizer;
 using ReMarkable.NET.Unix.Driver.Generic;
 using SixLabors.ImageSharp;
@@ -23,11 +25,18 @@ namespace RmEmulator.Devices
         /// <inheritdoc />
         public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates { get; }
 
+        /// <inheritdoc />
+        public TouchscreenCalibrator Calibrator { get; set; }
+
         public EmulatedDigitizerDriver(EmulatorWindow window, int width, int height)
         {
             _window = window;
             Width = width;
             Height = height;
+            Calibrator = new TouchscreenCalibrator
+            {
+                Calibration = BuiltinStylusCalibrations.ReMarkableMarker
+            };
         }
     }
 }

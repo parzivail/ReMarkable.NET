@@ -1,4 +1,5 @@
-﻿using ReMarkable.NET.Unix.Driver.Display;
+﻿using ReMarkable.NET.Calibration;
+using ReMarkable.NET.Unix.Driver.Display;
 using SixLabors.ImageSharp;
 
 namespace ReMarkable.NET.Unix.Driver.Digitizer
@@ -18,6 +19,11 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         ///     The position of the stylus tool
         /// </summary>
         public Point Position { get; }
+
+        /// <summary>
+        ///     The device screen position of the stylus tool
+        /// </summary>
+        public PointF DevicePosition => InputDevices.Digitizer.Calibrator.Apply(Position);
 
         /// <summary>
         ///     The pressure of the stylus tool
@@ -49,19 +55,6 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
             Pressure = pressure;
             Distance = distance;
             Tilt = tilt;
-        }
-
-
-        /// <summary>
-        ///     Maps the position of the tool from virtual digitizer coordinates to display coordinates
-        /// </summary>
-        /// <param name="digitizer">The digitizer to map coordinates from</param>
-        /// <param name="display">The display to map coordinates to</param>
-        /// <returns>The tool position as a <see cref="PointF" /> display coordinate</returns>
-        public PointF GetDevicePosition(IDigitizerDriver digitizer, IDisplayDriver display)
-        {
-            return new PointF(Position.Y / (float)digitizer.Height * display.VisibleWidth,
-                display.VisibleHeight - Position.X / (float)digitizer.Width * display.VisibleHeight);
         }
 
         /// <inheritdoc />

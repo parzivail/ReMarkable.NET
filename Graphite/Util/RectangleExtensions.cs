@@ -11,7 +11,7 @@ namespace Graphite.Util
         public static RectangleF GetSmallestContaining(this RectangleF a, RectangleF b)
         {
             var x = Math.Min(a.Left, b.Left);
-            var y = Math.Max(a.Top, b.Top);
+            var y = Math.Min(a.Top, b.Top);
 
             var width = Math.Max(a.Right, b.Right) - x;
             var height = Math.Max(a.Bottom, b.Bottom) - y;

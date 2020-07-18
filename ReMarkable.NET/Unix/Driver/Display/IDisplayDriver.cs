@@ -49,7 +49,7 @@ namespace ReMarkable.NET.Unix.Driver.Display
         /// <param name="displayTemp">The display temperature to use to refresh the region</param>
         /// <param name="updateMode">The update mode to use to refresh</param>
         void Draw(Image<Rgb24> image, Rectangle srcArea, Point destPoint, Rectangle refreshArea = default,
-            WaveformMode waveformMode = WaveformMode.Auto, DisplayTemp displayTemp = DisplayTemp.Papyrus, UpdateMode updateMode = UpdateMode.Partial);
+            WaveformMode waveformMode = WaveformMode.Auto, DisplayTemp displayTemp = DisplayTemp.Ambient, UpdateMode updateMode = UpdateMode.Partial);
 
         /// <summary>
         ///     Draws the contents of the internal buffer to the display device

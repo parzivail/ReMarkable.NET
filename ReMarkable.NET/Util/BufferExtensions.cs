@@ -1,4 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using NLog.LayoutRenderers.Wrappers;
 
 namespace ReMarkable.NET.Util
 {
@@ -25,6 +28,39 @@ namespace ReMarkable.NET.Util
             Marshal.FreeHGlobal(ptr);
 
             return ret;
+        }
+
+        public static byte[] ToByteArray<T>(this T data) where T : struct
+        {
+            var bufferSize = Marshal.SizeOf(data);
+            var byteArray = new byte[bufferSize];
+
+            var handle = Marshal.AllocHGlobal(bufferSize);
+            try
+            {
+                Marshal.StructureToPtr(data, handle, true);
+                Marshal.Copy(handle, byteArray, 0, bufferSize);
+
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(handle);
+            }
+            return byteArray;
+        }
+
+        public static void SaveStruct<T>(this Stream stream, T data) where T : struct
+        {
+            stream.Write(data.ToByteArray());
+        }
+
+        public static T LoadStruct<T>(this Stream stream, int size) where T : struct
+        {
+            var buf = new byte[size];
+            if (stream.Read(buf, 0, size) != size)
+                throw new InvalidDataException("Unable to read struct, insufficient data");
+
+            return buf.ToStruct<T>();
         }
     }
 }

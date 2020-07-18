@@ -22,10 +22,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Calibration\Builtin\lifebook.bin" />
+    <None Remove="Calibration\Builtin\marker.bin" />
+    <None Remove="Calibration\Builtin\x220.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Calibration\Builtin\lifebook.bin" />
+    <EmbeddedResource Include="Calibration\Builtin\marker.bin" />
+    <EmbeddedResource Include="Calibration\Builtin\x220.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NLog" Version="4.7.2" />
     <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta0013" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0003" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0010" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Calibration\Builtin\StylusCalibrations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StylusCalibrations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Calibration\Builtin\StylusCalibrations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StylusCalibrations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

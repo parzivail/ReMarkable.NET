@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReMarkable.NET.Calibration;
+using ReMarkable.NET.Calibration.Builtin;
 using ReMarkable.NET.Unix.Driver.Generic;
 using SixLabors.ImageSharp;
 
@@ -51,6 +53,9 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
         public Dictionary<DigitizerEventKeyCode, ButtonState> ButtonStates { get; }
 
         /// <inheritdoc />
+        public TouchscreenCalibrator Calibrator { get; set; }
+
+        /// <inheritdoc />
         public int Height { get; }
 
         /// <inheritdoc />
@@ -70,6 +75,10 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
             Width = width;
             Height = height;
             ButtonStates = new Dictionary<DigitizerEventKeyCode, ButtonState>();
+            Calibrator = new TouchscreenCalibrator
+            {
+                Calibration = BuiltinStylusCalibrations.ReMarkableMarker
+            };
         }
 
         /// <inheritdoc />
@@ -85,6 +94,17 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                     State = new StylusState(_currentTool, _currentPosition, _currentPressure, _currentDistance,
                         _currentTilt);
                     StylusUpdate?.Invoke(null, State);
+
+                    if (_currentTool == StylusTool.None)
+                    {
+                        _currentDistance = 255;
+                        _currentPressure = 0;
+                        _currentPosition = Point.Empty;
+                        _currentTilt = Point.Empty;
+                    }
+                    else if (_currentDistance > 0) _currentPressure = 0;
+                    else if (_currentPressure > 0) _currentDistance = 0;
+
                     break;
                 case DigitizerEventType.Key:
                     var key = (DigitizerEventKeyCode)data.Code;
@@ -95,14 +115,17 @@ namespace ReMarkable.NET.Unix.Driver.Digitizer
                     switch (key)
                     {
                         case DigitizerEventKeyCode.ToolPen:
-                            _currentTool = StylusTool.Pen;
+                            _currentTool = state == ButtonState.Pressed ? StylusTool.Pen : StylusTool.None;
                             ToolChanged?.Invoke(null, _currentTool);
                             break;
                         case DigitizerEventKeyCode.ToolRubber:
-                            _currentTool = StylusTool.Eraser;
+                            _currentTool = state == ButtonState.Pressed ? StylusTool.Eraser : StylusTool.None;
                             ToolChanged?.Invoke(null, _currentTool);
                             break;
                         case DigitizerEventKeyCode.Touch:
+                            // Stylus touch input unreliable, but data is redundant
+                            // because of ABS_PRESSURE
+                            break;
                         case DigitizerEventKeyCode.Stylus:
                         case DigitizerEventKeyCode.Stylus2:
                             if (state == ButtonState.Pressed)
