@@ -21,6 +21,7 @@ namespace Graphite
             Height = height;
 
             Content = content;
+            Content.Window = window;
             Content.Bounds = new Rectangle(0, 0, width, height);
             Content.LayoutControls();
         }
