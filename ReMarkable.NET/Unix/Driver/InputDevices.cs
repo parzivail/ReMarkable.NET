@@ -47,10 +47,20 @@ namespace ReMarkable.NET.Unix.Driver
 #endif
             // Load hardware input devices
             var deviceMap = DeviceUtils.GetInputDeviceEventHandlers();
-
-            PhysicalButtons = new HardwarePhysicalButtonDriver(deviceMap["gpio-keys"]);
-            Touchscreen = new HardwareTouchscreenDriver(deviceMap["cyttsp5_mt"], 767, 1023, 32);
-            Digitizer = new HardwareDigitizerDriver(deviceMap["Wacom I2C Digitizer"], 20967, 15725);
+            
+            if (deviceMap.ContainsKey("30370000.snvs:snvs-powerkey"))
+            {
+                // rM2
+                PhysicalButtons = new HardwarePhysicalButtonDriver(deviceMap["30370000.snvs:snvs-powerkey"]);
+                Touchscreen = new HardwareTouchscreenDriver(deviceMap["cyttsp5_mt"], 767, 1023, 32);
+                Digitizer = new HardwareDigitizerDriver(deviceMap["Wacom I2C Digitizer"], 20967, 15725);
+            }
+            else
+            {
+                PhysicalButtons = new HardwarePhysicalButtonDriver(deviceMap["gpio-keys"]);
+                Touchscreen = new HardwareTouchscreenDriver(deviceMap["cyttsp5_mt"], 767, 1023, 32);
+                Digitizer = new HardwareDigitizerDriver(deviceMap["Wacom I2C Digitizer"], 20967, 15725);
+            }
         }
     }
 }
