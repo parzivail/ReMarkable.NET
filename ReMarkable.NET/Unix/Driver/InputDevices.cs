@@ -55,7 +55,7 @@ namespace ReMarkable.NET.Unix.Driver
                     // rM2
                     var rm2DeviceMap = DeviceUtils.GetInputDeviceEventHandlers();
                     PhysicalButtons = new HardwarePhysicalButtonDriver(rm2DeviceMap["30370000.snvs:snvs-powerkey"]);
-                    Touchscreen = new HardwareTouchscreenDriver(rm2DeviceMap["pt_mt"], 767, 1023, 32);
+                    Touchscreen = new HardwareTouchscreenDriver(rm2DeviceMap["pt_mt"], 1403, 1871, 32, false);
                     Digitizer = new HardwareDigitizerDriver(rm2DeviceMap["Wacom I2C Digitizer"], 20967, 15725);
                     break;
             }

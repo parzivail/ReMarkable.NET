@@ -42,12 +42,18 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
         /// <inheritdoc />
         public int Width { get; }
 
-        public HardwareTouchscreenDriver(string devicePath, int width, int height, int maxFingers) : base(devicePath)
+        /// <summary>
+        /// Whether the width value should be left or right biased
+        /// </summary>
+        private readonly bool invertWidth;
+
+        public HardwareTouchscreenDriver(string devicePath, int width, int height, int maxFingers, bool shouldInvertWidth = true) : base(devicePath)
         {
             Width = width;
             Height = height;
             MaxFingers = maxFingers;
             Fingers = new FingerState[maxFingers];
+            invertWidth = shouldInvertWidth;
         }
 
         /// <inheritdoc />
@@ -121,7 +127,7 @@ namespace ReMarkable.NET.Unix.Driver.Touchscreen
                     Fingers[_slot].PreviousDevicePosition.X = Fingers[_slot].DevicePosition.X;
                     Fingers[_slot].PreviousRawPosition.X = Fingers[_slot].RawPosition.X;
 
-                    float pos = Width - 1 - value;
+                    float pos = invertWidth ? Width - 1 - value : value;
                     _position.X = (int)(pos / Width * OutputDevices.Display.VisibleWidth);
 
                     Fingers[_slot].DevicePosition.X = _position.X;
