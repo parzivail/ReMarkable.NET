@@ -17,5 +17,26 @@ namespace Graphite.Controls
 
             base.Add(item);
         }
+
+        public override PointF Location
+        {
+            get => base.Location;
+            set
+            {
+                base.Location = value;
+                RecalculateChildPositions();
+            }
+        }
+
+        private void RecalculateChildPositions()
+        {
+            float widthToAdd = 0;
+
+            foreach (var control in this)
+            {
+                control.Location = new PointF(Location.X + widthToAdd, Location.Y);
+                widthToAdd += control.Size.Width;
+            }
+        }
     }
 }
