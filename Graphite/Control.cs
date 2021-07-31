@@ -18,7 +18,7 @@ namespace Graphite
         private RectangleF _bounds;
         private Font _font = Fonts.SegoeUiSemibold.CreateFont(32);
         private Color _foregroundColor = Color.Black;
-        private Color _backgroundColor = Color.White;
+        private Color _backgroundColor = Color.Transparent;
         private string _text;
         private RectAlign _textAlign = RectAlign.Left | RectAlign.Top;
 
@@ -39,7 +39,7 @@ namespace Graphite
             set => RedrawWithChange(() => _bounds = value);
         }
 
-        public PointF Location
+        public virtual PointF Location
         {
             get => Bounds.Location;
             set => RedrawWithChange(() => _bounds.Location = value);

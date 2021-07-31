@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace Graphite.Controls
 {
@@ -115,6 +117,10 @@ namespace Graphite.Controls
         /// <inheritdoc />
         public override void Draw(Image<Rgb24> buffer)
         {
+            if (BackgroundColor != Color.Transparent)
+            {
+                buffer.Mutate(g => g.Fill(BackgroundColor, Bounds));
+            }
             foreach (var control in _controls) control.Draw(buffer);
         }
 
