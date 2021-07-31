@@ -21,18 +21,25 @@ namespace ReMarkable.NET.Unix.Driver
         /// </summary>
         static OutputDevices()
         {
-#if DEBUG
-            // Load emulated input devices
-            var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
-            if (deviceContainer != null)
+            switch (DeviceType.GetDevice())
             {
-                deviceContainer.ReadStaticField("Display", out Display);
-
-                return;
+                case Device.Emulator:
+                    // Load emulated input devices
+                    var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
+                    if (deviceContainer != null)
+                    {
+                        deviceContainer.ReadStaticField("Display", out Display);
+                    }
+                    break;
+                case Device.RM1:
+                    // Load hardware output devices
+                    Display = new HardwareDisplayDriver("/dev/fb0");
+                    break;
+                case Device.RM2:
+                    // Load hardware output devices
+                    Display = new RM2ShimDisplayDriver();
+                    break;
             }
-#endif
-            // Load hardware output devices
-            Display = new HardwareDisplayDriver("/dev/fb0");
         }
     }
 }
