@@ -65,9 +65,26 @@ namespace ReMarkable.NET.Graphics
         }
 
         /// <inheritdoc />
-        public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        public async Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
         {
-            throw new NotImplementedException();
+            var buf = new byte[_srcArea.Width * sizeof(short)];
+            var rgb565Buf = new ushort[_srcArea.Width];
+            var rgba32 = new Rgba32();
+
+            for (var y = 0; y < _srcArea.Height; y++)
+            {
+                var span = image.GetPixelRowSpan(y).ToArray();
+
+                for (var x = 0; x < _srcArea.Width; x++)
+                {
+                    span[x].ToRgba32(ref rgba32);
+                    rgb565Buf[x] = Rgb565.Pack(rgba32.R, rgba32.G, rgba32.B);
+                }
+
+                stream.Seek(_framebuffer.PointToOffset(_destPoint.X, _destPoint.Y + y), SeekOrigin.Begin);
+                Buffer.BlockCopy(rgb565Buf, 0, buf, 0, buf.Length);
+                await stream.WriteAsync(buf, 0, buf.Length);
+            }
         }
     }
 }
