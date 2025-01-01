@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RmEmulator": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\Sandbox\\bin\\Debug\\net8.0\\Sandbox.dll"
+    },
+    "EmulatingSandbox": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\Sandbox\\bin\\Debug\\net8.0\\Sandbox.dll"
+    }
+  }
+}

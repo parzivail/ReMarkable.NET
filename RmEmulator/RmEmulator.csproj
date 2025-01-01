@@ -15,6 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
-    <ProjectReference Include="..\Sandbox\Sandbox.csproj" />
   </ItemGroup>
 </Project>
