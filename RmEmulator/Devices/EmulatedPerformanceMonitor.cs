@@ -1,4 +1,5 @@
 ﻿using ReMarkable.NET.Unix.Driver.Performance;
+using System;
 
 namespace RmEmulator.Devices
 {
@@ -9,13 +10,13 @@ namespace RmEmulator.Devices
         public long TotalMemory => 510180000;
         public long TotalSwap => 0;
 
-        public float GetProcessorTime() => 0.5f;
+        public float GetProcessorTime() => MockedCPU();
 
-        public float GetProcessorTime(int processor) => 0.5f;
+        public float GetProcessorTime(int processor) => MockedCPU();
 
-        public float GetProcessorTime(int processor, int core) => 0.5f;
+        public float GetProcessorTime(int processor, int core) => MockedCPU();
 
-        public long GetFreeMemory() => 459162000;
+        public long GetFreeMemory() => MockedRAM();
 
         public long GetFreeSwap() => 0;
 
@@ -28,5 +29,23 @@ namespace RmEmulator.Devices
         public long GetNetworkTxTotal(string adapter) => 0;
 
         public long GetNetworkRxTotal(string adapter) => 0;
+
+
+        private float MockedCPU()
+        {
+            return (float)random.Next(0, 100) / 100;
+        }
+
+        private long MockedRAM()
+        {
+            return (long)(random.NextDouble() * TotalMemory);
+        }
+
+        private Random random = new Random();
+
+        public EmulatedPerformanceMonitor()
+        {
+            random = new Random(DateTime.Now.Millisecond);
+        }
     }
 }
