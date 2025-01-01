@@ -144,7 +144,7 @@ namespace Graphite
             if (s == null)
                 return RectangleF.Empty;
 
-            var strSize = TextMeasurer.Measure(s, new RendererOptions(Font)).ToRectangle();
+            var strSize = TextMeasurer.MeasureAdvance(s, new TextOptions(Font)).ToRectangle();
             strSize.Align(layoutRectangle, align);
             return strSize.GetContainingIntRect();
         }

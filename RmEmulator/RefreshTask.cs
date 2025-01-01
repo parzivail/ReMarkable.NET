@@ -63,7 +63,7 @@ namespace RmEmulator
                         var newImage = _previousImage.Clone(g =>
                         {
                             g.DrawImage(_image.Clone(g2 => g2.Invert()), PixelColorBlendingMode.Add, 1);
-                            g.DrawImage(_image.Clone(g2 => g2.DetectEdges(EdgeDetectionOperators.Laplacian3x3)),
+                            g.DrawImage(_image.Clone(g2 => g2.DetectEdges(KnownEdgeDetectorKernels.Laplacian3x3)),
                                 PixelColorBlendingMode.Subtract, 1);
                         });
                         imageSwapQueue.Enqueue(new ImageUploadTask(newImage, Region.Location));
@@ -76,7 +76,7 @@ namespace RmEmulator
                         var newImage = _image.Clone(g =>
                         {
                             g.Invert();
-                            g.DrawImage(_previousImage.Clone(g2 => g2.DetectEdges(EdgeDetectionOperators.Laplacian3x3)),
+                            g.DrawImage(_previousImage.Clone(g2 => g2.DetectEdges(KnownEdgeDetectorKernels.Laplacian3x3)),
                                 PixelColorBlendingMode.Add, 0.25f);
                         });
                         imageSwapQueue.Enqueue(new ImageUploadTask(newImage, Region.Location));
@@ -88,7 +88,7 @@ namespace RmEmulator
                         // new, inverted, edge detected, edges removed from old
                         var newImage = _previousImage.Clone(g =>
                         {
-                            g.DrawImage(_image.Clone(g2 => g2.DetectEdges(EdgeDetectionOperators.Laplacian3x3)), PixelColorBlendingMode.Add, 1);
+                            g.DrawImage(_image.Clone(g2 => g2.DetectEdges(KnownEdgeDetectorKernels.Laplacian3x3)), PixelColorBlendingMode.Add, 1);
                         });
                         imageSwapQueue.Enqueue(new ImageUploadTask(newImage, Region.Location));
                         _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(75);
@@ -99,7 +99,7 @@ namespace RmEmulator
                         // old, black removed from black on new
                         var newImage = _image.Clone(g =>
                         {
-                            g.DrawImage(_previousImage.Clone(g2 => g2.DetectEdges(EdgeDetectionOperators.Laplacian3x3).Invert()), PixelColorBlendingMode.Add, 1);
+                            g.DrawImage(_previousImage.Clone(g2 => g2.DetectEdges(KnownEdgeDetectorKernels.Laplacian3x3).Invert()), PixelColorBlendingMode.Add, 1);
                         });
                         imageSwapQueue.Enqueue(new ImageUploadTask(newImage, Region.Location));
                         _nextRefresh = DateTime.Now + TimeSpan.FromMilliseconds(120);

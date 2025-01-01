@@ -1,6 +1,8 @@
 ﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -19,7 +21,8 @@ namespace RmEmulator.Framebuffer
 
             for (var y = 0; y < image.Height; y++)
             {
-                var span = image.GetPixelRowSpan(y);
+                //var span = image.GetPixelRowSpan(y);
+                var span = image.DangerousGetPixelRowMemory(y).Span;
 
                 for (var x = 0; x < image.Width; x++)
                 {
@@ -32,6 +35,11 @@ namespace RmEmulator.Framebuffer
         }
 
         public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream, CancellationToken cancellationToken) where TPixel : unmanaged, IPixel<TPixel>
         {
             throw new System.NotImplementedException();
         }

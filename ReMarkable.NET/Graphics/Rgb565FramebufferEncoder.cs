@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -48,15 +50,24 @@ namespace ReMarkable.NET.Graphics
             var rgb565Buf = new ushort[_srcArea.Width];
             var rgba32 = new Rgba32();
 
+            
+
             for (var y = 0; y < _srcArea.Height; y++)
             {
-                var span = image.GetPixelRowSpan(y);
+                //var span = image.GetPixelRowSpan(y);
+                //for (var x = 0; x < _srcArea.Width; x++)
+                //{                    
+                //    span[x].ToRgba32(ref rgba32);
+                //    rgb565Buf[x] = Rgb565.Pack(rgba32.R, rgba32.G, rgba32.B);
+                //}
 
+                var span = image.DangerousGetPixelRowMemory(y).Span;
                 for (var x = 0; x < _srcArea.Width; x++)
                 {
                     span[x].ToRgba32(ref rgba32);
                     rgb565Buf[x] = Rgb565.Pack(rgba32.R, rgba32.G, rgba32.B);
                 }
+
 
                 stream.Seek(_framebuffer.PointToOffset(_destPoint.X, _destPoint.Y + y), SeekOrigin.Begin);
                 Buffer.BlockCopy(rgb565Buf, 0, buf, 0, buf.Length);
@@ -73,7 +84,8 @@ namespace ReMarkable.NET.Graphics
 
             for (var y = 0; y < _srcArea.Height; y++)
             {
-                var span = image.GetPixelRowSpan(y).ToArray();
+                //var span = image.GetPixelRowSpan(y).ToArray();
+                var span = image.DangerousGetPixelRowMemory(y).Span.ToArray();
 
                 for (var x = 0; x < _srcArea.Width; x++)
                 {
@@ -85,6 +97,11 @@ namespace ReMarkable.NET.Graphics
                 Buffer.BlockCopy(rgb565Buf, 0, buf, 0, buf.Length);
                 await stream.WriteAsync(buf, 0, buf.Length);
             }
+        }
+
+        public Task EncodeAsync<TPixel>(Image<TPixel> image, Stream stream, CancellationToken cancellationToken) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new NotImplementedException();
         }
     }
 }
