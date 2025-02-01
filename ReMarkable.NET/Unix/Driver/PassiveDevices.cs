@@ -38,24 +38,27 @@ namespace ReMarkable.NET.Unix.Driver
         /// </summary>
         static PassiveDevices()
         {
-#if DEBUG
-            // Load emulated input devices
-            var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
-            if (deviceContainer != null)
+            switch (DeviceType.GetDevice())
             {
-                deviceContainer.ReadStaticField("Performance", out Performance);
-                deviceContainer.ReadStaticField("Battery", out Battery);
-                deviceContainer.ReadStaticField("UsbPower", out UsbPower);
-                deviceContainer.ReadStaticField("Wireless", out Wireless);
-
-                return;
+                case Device.Emulator:
+                    // Load emulated input devices
+                    var deviceContainer = Type.GetType("RmEmulator.EmulatedDevices, RmEmulator");
+                    if (deviceContainer != null)
+                    {
+                        deviceContainer.ReadStaticField("Performance", out Performance);
+                        deviceContainer.ReadStaticField("Battery", out Battery);
+                        deviceContainer.ReadStaticField("UsbPower", out UsbPower);
+                        deviceContainer.ReadStaticField("Wireless", out Wireless);
+                    }
+                    break;
+                case Device.RM1:
+                case Device.RM2:
+                    Performance = new HardwarePeformanceMonitor();
+                    Battery = new HardwarePowerSupplyMonitor("/sys/class/power_supply/bq27441-0");
+                    UsbPower = new HardwarePowerSupplyMonitor("/sys/class/power_supply/imx_usb_charger");
+                    Wireless = new HardwareWirelessMonitor();
+                    break;
             }
-#endif
-
-            Performance = new HardwarePeformanceMonitor();
-            Battery = new HardwarePowerSupplyMonitor("/sys/class/power_supply/bq27441-0");
-            UsbPower = new HardwarePowerSupplyMonitor("/sys/class/power_supply/imx_usb_charger");
-            Wireless = new HardwareWirelessMonitor();
         }
     }
 }

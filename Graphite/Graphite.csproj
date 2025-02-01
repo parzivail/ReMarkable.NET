@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Configurations>Debug;Release;Genesis.Release</Configurations>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Genesis.Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\segoeui.ttf" />
     <None Remove="Resources\segoeuib.ttf" />
@@ -20,7 +20,6 @@
     <None Remove="Resources\segoeuisl.ttf" />
     <None Remove="Resources\seguisb.ttf" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Resources\segoeui.ttf" />
     <EmbeddedResource Include="Resources\segoeuib.ttf" />
@@ -28,17 +27,14 @@
     <EmbeddedResource Include="Resources\segoeuisl.ttf" />
     <EmbeddedResource Include="Resources\seguisb.ttf" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta0013" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.8" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0010" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.9" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Symbols\EmbeddedSymbols.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -51,7 +47,6 @@
       <DependentUpon>EmbeddedFonts.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Symbols\EmbeddedSymbols.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -62,5 +57,4 @@
       <LastGenOutput>EmbeddedFonts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

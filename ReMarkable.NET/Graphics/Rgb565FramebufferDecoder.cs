@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using ReMarkable.NET.Unix.Driver.Display.Framebuffer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -49,6 +51,16 @@ namespace ReMarkable.NET.Graphics
             return DecodeIntoImage(stream, image);
         }
 
+        public Image<TPixel> Decode<TPixel>(Configuration configuration, Stream stream, CancellationToken cancellationToken) where TPixel : unmanaged, IPixel<TPixel>
+        {
+            throw new NotImplementedException();
+        }
+
+        public Image Decode(Configuration configuration, Stream stream, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc />
         public Task<Image<TPixel>> DecodeAsync<TPixel>(Configuration configuration, Stream stream)
             where TPixel : unmanaged, IPixel<TPixel>
@@ -81,8 +93,12 @@ namespace ReMarkable.NET.Graphics
                 stream.Read(buf, 0, buf.Length);
                 Buffer.BlockCopy(buf, 0, rgb565Buf, 0, buf.Length);
 
-                var span = image.GetPixelRowSpan(y);
 
+
+                //var span = image.GetPixelRowSpan(y);                
+                //for (var x = 0; x < _area.Width; x++) span[x].FromRgb24(Rgb565.Unpack(rgb565Buf[x]));
+
+                var span = image.DangerousGetPixelRowMemory(y).Span;
                 for (var x = 0; x < _area.Width; x++) span[x].FromRgb24(Rgb565.Unpack(rgb565Buf[x]));
             }
 

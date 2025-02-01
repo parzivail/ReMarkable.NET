@@ -42,7 +42,7 @@ namespace Graphite.Symbols
 
         public SymbolAtlasPage(byte[] imagePage, int glyphSize)
         {
-            Page = Image.Load(imagePage);
+            Page = (Image<Rgba32>)Image.Load(imagePage);
             GlyphSize = glyphSize;
         }
     }

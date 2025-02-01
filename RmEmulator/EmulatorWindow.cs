@@ -37,8 +37,11 @@ namespace RmEmulator
 
         private Thread _appThread;
 
-        public EmulatorWindow() : base(GameWindowSettings.Default, NativeWindowSettings.Default)
+        private string _assemblyFileName;
+
+        public EmulatorWindow(string assemblyName) : base(GameWindowSettings.Default, NativeWindowSettings.Default)
         {
+            _assemblyFileName = assemblyName;
             Thread.CurrentThread.Name = "EmuWindow";
 
             Load += WindowLoad;
@@ -125,8 +128,8 @@ namespace RmEmulator
             
             _logger.Info("Loading application assembly");
 
-            var assemblyFile = "Sandbox.dll";
-            var appAssy = Assembly.LoadFrom(assemblyFile);
+            //var assemblyFile = "Sandbox.dll";
+            var appAssy = Assembly.LoadFrom(this._assemblyFileName);
 
             var appEntry = appAssy.EntryPoint;
 

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using SixLabors.Fonts;
 
 namespace Graphite.Typography
@@ -21,16 +22,16 @@ namespace Graphite.Typography
             InstallFont(fonts, EmbeddedFonts.segoeuisl); // Segoe UI Semilight
             InstallFont(fonts, EmbeddedFonts.seguisb); // Segoe UI Semibold
 
-            SegoeUi = fonts.Find("Segoe UI");
-            SegoeUiLight = fonts.Find("Segoe UI Light");
-            SegoeUiSemilight = fonts.Find("Segoe UI Semilight");
-            SegoeUiSemibold = fonts.Find("Segoe UI Semibold");
+SegoeUi = fonts.Get("Segoe UI");
+            SegoeUiLight = fonts.Get("Segoe UI Light");
+            SegoeUiSemilight = fonts.Get("Segoe UI Semilight");
+            SegoeUiSemibold = fonts.Get("Segoe UI Semibold");
         }
 
         private static void InstallFont(IFontCollection fonts, byte[] font)
         {
             using var ms = new MemoryStream(font);
-            fonts.Install(ms);
+            fonts.Add(ms);
         }
     }
 }
