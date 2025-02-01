@@ -3,6 +3,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TargetFramework>net8.0</TargetFramework>
+    <Configurations>Debug;Release;Genesis.Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,10 +11,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Genesis.Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.0.0-pre9.1" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)'=='Debug' ">
     <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)'=='Release' ">
+    <ProjectReference Include="..\ReMarkable.NET\ReMarkable.NET.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)'=='Genesis.Release' ">
+    <PackageReference Include="ReMarkable.NET.G" Version="[1.0.1,)" />
+  </ItemGroup>
+
 </Project>
